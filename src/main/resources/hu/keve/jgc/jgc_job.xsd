@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified"
+	elementFormDefault="qualified"
+	targetNamespace="http://www.gnucash.org/XML/job"
+	xmlns:owner="http://www.gnucash.org/XML/owner"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+	<xs:import schemaLocation="jgc.xsd" />
+
+	<xs:import schemaLocation="jgc_owner.xsd"
+		namespace="http://www.gnucash.org/XML/owner" />
+
+	<xs:complexType name="jobType">
+		<xs:complexContent>
+			<xs:extension base="guidType">
+				<xs:sequence>
+					<xs:element name="guid" type="idType" />
+					<xs:element name="id" type="xs:string" />
+					<xs:element name="name" type="xs:string" />
+					<xs:element name="owner" type="owner:ownerType" />
+					<xs:element name="active" type="bool01" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+</xs:schema>

@@ -1,0 +1,136 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>hu.keve.jgc</groupId>
+	<artifactId>jgc</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>10</maven.compiler.source>
+		<maven.compiler.target>10</maven.compiler.target>
+		<maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
+
+		<sqlite-jdbc.version>3.21.0.1</sqlite-jdbc.version>
+		<junit.version>5.2.0</junit.version>
+		<junit-launcher.version>1.2.0</junit-launcher.version>
+		<javax.activation.version>1.2.0</javax.activation.version>
+		<datanucleus.version>5.1.9</datanucleus.version>
+		<jvnet_jaxb2_commons.version>
+			0.11.1
+		</jvnet_jaxb2_commons.version>
+		<jvnet_jaxb2_plugin.version>
+			0.14.0-SNAPSHOT
+		</jvnet_jaxb2_plugin.version>
+		<!-- 0.13.3 -->
+
+	</properties>
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven-compiler-plugin.version}</version>
+			</plugin>
+			<plugin>
+				<groupId>org.jvnet.jaxb2.maven2</groupId>
+				<artifactId>maven-jaxb2-plugin</artifactId>
+				<version>${jvnet_jaxb2_plugin.version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<!-- <verbose>false</verbose> -->
+					<removeOldOutput>false</removeOldOutput>
+					<schemaDirectory>src/main/resources/hu/keve/jgc</schemaDirectory>					
+					<args>
+						<arg>-XtoString</arg>
+						<arg>-Xannotate</arg>
+						<arg>-XremoveAnnotation</arg>
+						<arg>-Xinheritance</arg>
+					</args>
+					<plugins>
+						<plugin>
+							<groupId>org.jvnet.jaxb2_commons</groupId>
+							<artifactId>jaxb2-basics</artifactId>
+							<version>${jvnet_jaxb2_commons.version}</version>
+						</plugin>
+						<plugin>
+							<groupId>org.jvnet.jaxb2_commons</groupId>
+							<artifactId>jaxb2-basics-annotate</artifactId>
+							<version>1.0.5-SNAPSHOT</version>
+						</plugin>
+					</plugins>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	<dependencies>
+		<dependency>
+			<groupId>org.jvnet.jaxb2_commons</groupId>
+			<artifactId>jaxb2-basics-runtime</artifactId>
+			<version>${jvnet_jaxb2_commons.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.glassfish.jaxb</groupId>
+			<artifactId>jaxb-runtime</artifactId>
+			<version>2.3.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.activation</groupId>
+			<artifactId>javax.activation</artifactId>
+			<version>${javax.activation.version}</version>
+		</dependency>
+
+
+
+		<dependency>
+			<groupId>org.xerial</groupId>
+			<artifactId>sqlite-jdbc</artifactId>
+			<version>${sqlite-jdbc.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-params</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.platform</groupId>
+			<artifactId>junit-platform-launcher</artifactId>
+			<version>${junit-launcher.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.datanucleus</groupId>
+			<artifactId>datanucleus-accessplatform-jdo-rdbms</artifactId>
+			<version>${datanucleus.version}</version>
+			<type>pom</type>
+		</dependency>
+		<dependency>
+			<groupId>org.datanucleus</groupId>
+			<artifactId>datanucleus-accessplatform-jdo-xml</artifactId>
+			<version>${datanucleus.version}</version>
+			<type>pom</type>
+			<exclusions>
+				<exclusion>
+					<groupId>com.sun.xml.bind</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
+
+		</dependency>
+	</dependencies>
+</project>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified"
+	elementFormDefault="qualified"
+	targetNamespace="http://www.gnucash.org/XML/bgt"
+	xmlns:gnc="http://www.gnucash.org/XML/gnc"
+	xmlns:recurrence="http://www.gnucash.org/XML/recurrence"
+	xmlns:slot="http://www.gnucash.org/XML/slot"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+	<xs:import schemaLocation="jgc.xsd" />
+	<xs:import namespace="http://www.gnucash.org/XML/gnc"
+		schemaLocation="jgc_gnc.xsd" />
+	<xs:import namespace="http://www.gnucash.org/XML/recurrence"
+		schemaLocation="jgc_recurrence.xsd" />
+	<xs:import namespace="http://www.gnucash.org/XML/slot"
+		schemaLocation="jgc_slot.xsd" />
+
+	<xs:complexType name="bgtType">
+		<xs:sequence>
+			<xs:element name="id" type="idType" />
+			<xs:element name="name" type="xs:string" />
+			<xs:element name="description" type="xs:string" />
+			<xs:element name="num-periods" type="xs:unsignedInt" />
+			<xs:element name="recurrence"
+				type="recurrence:recurrenceType" />
+
+			<!-- budgetAmounts?? -->
+			<xs:element name="slots" type="slot:slotsType" />
+		</xs:sequence>
+		<xs:attribute name="version" type="gnc:versionTypes"
+			use="required" />
+	</xs:complexType>
+</xs:schema>

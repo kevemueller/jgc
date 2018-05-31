@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified"
+	elementFormDefault="qualified"
+	targetNamespace="http://www.gnucash.org/XML/slot"
+	xmlns:slot="http://www.gnucash.org/XML/slot"
+	xmlns:ts="http://www.gnucash.org/XML/ts"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:import schemaLocation="jgc.xsd" />
+	<xs:import namespace="http://www.gnucash.org/XML/ts"
+		schemaLocation="jgc_ts.xsd" />
+
+	<xs:complexType name="slotsType">
+		<xs:sequence maxOccurs="unbounded">
+			<xs:element name="slot" type="slot:slotType"
+				form="unqualified" />
+		</xs:sequence>
+	</xs:complexType>
+
+
+	<xs:simpleType name="valueTypeEnum">
+		<xs:restriction base="xs:NCName">
+			<xs:enumeration value="integer" />
+			<xs:enumeration value="double" />
+			<xs:enumeration value="numeric" />
+			<xs:enumeration value="string" />
+			<xs:enumeration value="guid" />
+			<xs:enumeration value="timespec" />
+			<xs:enumeration value="list" />
+			<xs:enumeration value="frame" />
+			<xs:enumeration value="gdate" />
+			<xs:enumeration value="binary" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<!-- Co-Occurence constraints -->
+
+	<xs:element name="value">
+		<xs:complexType mixed="true">
+			<xs:sequence minOccurs="0" maxOccurs="unbounded">
+				<xs:element minOccurs="0" ref="gdate" />
+				<xs:element minOccurs="0" name="slot"
+					type="slot:slotType" form="unqualified" />
+				<xs:element minOccurs="0" ref="ts:date" />
+			</xs:sequence>
+			<xs:attribute name="type" type="slot:valueTypeEnum"
+				use="required" />
+		</xs:complexType>
+	</xs:element>
+
+	<xs:complexType name="intSlotValue">
+		<xs:simpleContent>
+			<xs:extension base="xs:int">
+				<xs:attribute name="type" type="xs:NCName"
+					use="required" fixed="integer" />
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	<xs:complexType name="doubleSlotValue">
+		<xs:simpleContent>
+			<xs:extension base="xs:double">
+				<xs:attribute name="type" type="xs:NCName"
+					use="required" fixed="double" />
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+
+	<xs:complexType name="frameSlotValue">
+		<xs:sequence>
+			<xs:element name="slot" type="slot:slotType"
+				form="unqualified" />
+		</xs:sequence>
+		<xs:attribute name="type" type="xs:NCName" use="required"
+			fixed="frame" />
+	</xs:complexType>
+
+
+	<xs:complexType name="slotType">
+		<xs:sequence>
+			<xs:element name="key" type="xs:string" />
+			<xs:element ref="slot:value" />
+		</xs:sequence>
+	</xs:complexType>
+
+</xs:schema>

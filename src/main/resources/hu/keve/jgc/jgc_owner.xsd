@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema 
+	attributeFormDefault="unqualified" elementFormDefault="qualified"
+	targetNamespace="http://www.gnucash.org/XML/owner"
+	xmlns:owner="http://www.gnucash.org/XML/owner"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+	<xs:import schemaLocation="jgc.xsd" />
+
+	<xs:simpleType name="ownerTypeEnum">
+		<xs:restriction base="xs:NCName">
+			<xs:enumeration value="gncCustomer" />
+			<xs:enumeration value="gncJob" />
+			<xs:enumeration value="gncVendor" />
+			<xs:enumeration value="gncEmployee" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:complexType name="ownerType">
+		<xs:sequence>
+			<xs:element name="type" type="owner:ownerTypeEnum" />
+			<xs:element name="id" type="idType" />
+		</xs:sequence>
+		<xs:attribute name="version" type="xs:string"
+			use="required" />
+	</xs:complexType>
+</xs:schema>

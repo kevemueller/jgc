@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified"
+	elementFormDefault="qualified"
+	targetNamespace="http://www.gnucash.org/XML/billterm"
+	xmlns:billterm="http://www.gnucash.org/XML/billterm"
+	xmlns:bt-days="http://www.gnucash.org/XML/bt-days"
+	xmlns:gnc="http://www.gnucash.org/XML/gnc"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+	<xs:import schemaLocation="jgc.xsd" />
+	<xs:import namespace="http://www.gnucash.org/XML/bt-days"
+		schemaLocation="jgc_bt-days.xsd" />
+	<xs:import namespace="http://www.gnucash.org/XML/gnc"
+		schemaLocation="jgc_gnc.xsd" />
+
+
+	<xs:complexType name="billtermRefType">
+		<xs:complexContent>
+			<xs:extension base="idRefType" />
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="billtermType">
+		<xs:sequence>
+			<xs:element name="guid" type="idType" />
+			<xs:element name="name" type="xs:string" />
+			<xs:element name="desc" type="xs:string" />
+			<xs:element name="refcount" type="xs:long" />
+			<xs:element name="invisible" type="bool01" />
+			<xs:element minOccurs="0" name="parent" type="billterm:billtermRefType" />
+			<!--  why child? -->
+			<xs:element minOccurs="0" name="child" type="billterm:billtermRefType" />
+			<xs:element name="days" type="bt-days:bt-daysType" />
+			<!--  cutoff? -->
+		</xs:sequence>
+		<xs:attribute name="version" type="gnc:versionTypes"
+			use="required" />
+	</xs:complexType>
+</xs:schema>

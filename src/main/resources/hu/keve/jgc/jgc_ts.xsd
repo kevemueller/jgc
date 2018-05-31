@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema 
+	attributeFormDefault="unqualified" elementFormDefault="qualified"
+	targetNamespace="http://www.gnucash.org/XML/ts"
+	xmlns:ts="http://www.gnucash.org/XML/ts"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+
+	<xs:simpleType name="dateType">
+		<xs:restriction base="xs:string" />
+	</xs:simpleType>
+
+	<xs:element name="date" type="ts:dateType" />
+
+	<xs:complexType name="tsType">
+		<xs:sequence>
+			<xs:element ref="ts:date" />
+			<xs:element minOccurs="0" name="ns" type="xs:unsignedInt"/>
+		</xs:sequence>
+	</xs:complexType>
+
+</xs:schema>

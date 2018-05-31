@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema 
+	attributeFormDefault="unqualified" elementFormDefault="qualified"
+	targetNamespace="http://www.gnucash.org/XML/cd"
+	xmlns:cd="http://www.gnucash.org/XML/cd"
+	xmlns:gnc="http://www.gnucash.org/XML/gnc"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+	<xs:simpleType name="cdTypes">
+		<xs:restriction base="xs:QName">
+			<xs:enumeration value="account" />
+			<xs:enumeration value="book" />
+			<xs:enumeration value="budget" />
+			<xs:enumeration value="commodity" />
+			<xs:enumeration value="price" />
+			<xs:enumeration value="schedxaction" />
+			<xs:enumeration value="transaction" />
+			<xs:enumeration value="gnc:GncBillTerm"/>
+			<xs:enumeration value="gnc:GncCustomer"/>
+			<xs:enumeration value="gnc:GncEmployee"/>
+			<xs:enumeration value="gnc:GncEntry" />
+			<xs:enumeration value="gnc:GncInvoice" />
+			<xs:enumeration value="gnc:GncJob"/>
+			<xs:enumeration value="gnc:GncOrder"/>
+			<xs:enumeration value="gnc:GncTaxTable" />
+			<xs:enumeration value="gnc:GncVendor" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:attribute name="type" type="cd:cdTypes" />
+</xs:schema>

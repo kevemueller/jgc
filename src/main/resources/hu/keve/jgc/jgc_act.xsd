@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified"
+	elementFormDefault="qualified"
+	targetNamespace="http://www.gnucash.org/XML/act"
+	xmlns:act="http://www.gnucash.org/XML/act"
+	xmlns:cmdty="http://www.gnucash.org/XML/cmdty"
+	xmlns:gnc="http://www.gnucash.org/XML/gnc"
+	xmlns:slot="http://www.gnucash.org/XML/slot"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:import schemaLocation="jgc.xsd" />
+	<xs:import schemaLocation="jgc_cmdty.xsd"
+		namespace="http://www.gnucash.org/XML/cmdty" />
+	<xs:import schemaLocation="jgc_gnc.xsd"
+		namespace="http://www.gnucash.org/XML/gnc" />
+	<xs:import schemaLocation="jgc_slot.xsd"
+		namespace="http://www.gnucash.org/XML/slot" />
+
+
+	<xs:complexType name="actRefType">
+		<xs:complexContent>
+			<xs:extension base="idRefType" />
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="actTypeFixedOrder">
+	</xs:complexType>
+
+	<xs:simpleType name="actTypeEnum">
+		<xs:restriction base="xs:NCName">
+			<xs:enumeration value="NONE" />
+			<xs:enumeration value="BANK" />
+			<xs:enumeration value="CASH" />
+			<xs:enumeration value="CREDIT" />
+			<xs:enumeration value="ASSET" />
+			<xs:enumeration value="LIABILITY" />
+			<xs:enumeration value="STOCK" />
+			<xs:enumeration value="MUTUAL" />
+			<xs:enumeration value="CURRENCY" />
+			<xs:enumeration value="INCOME" />
+			<xs:enumeration value="EXPENSE" />
+			<xs:enumeration value="EQUITY" />
+			<xs:enumeration value="RECEIVABLE" />
+			<xs:enumeration value="PAYABLE" />
+			<xs:enumeration value="ROOT" />
+			<xs:enumeration value="TRADING" />
+			<xs:enumeration value="CHECKING" />
+			<xs:enumeration value="SAVINGS" />
+			<xs:enumeration value="MONEYMRKT" />
+			<xs:enumeration value="CREDITLINE" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:complexType name="actType">
+		<xs:complexContent>
+			<xs:extension base="guidType">
+				<xs:all>
+					<xs:element name="name" type="xs:string" />
+					<xs:element name="id" type="idType" />
+
+					<xs:element name="type" type="act:actTypeEnum" />
+					<xs:element minOccurs="0" name="commodity"
+						type="cmdty:cmdtyRefType" />
+					<xs:element minOccurs="0" name="commodity-scu"
+						type="xs:unsignedInt" />
+					<xs:element minOccurs="0" name="non-standard-scu" type="xs:boolean" nillable="true" default="false"/> <!-- used as a tagger -->
+					<xs:element minOccurs="0" name="code" type="xs:string" />
+					<xs:element minOccurs="0" name="description"
+						type="xs:string" />
+
+					<!-- order mixup starts here -->
+					<xs:element minOccurs="0" name="slots"
+						type="slot:slotsType" />
+					<xs:element minOccurs="0" name="parent"
+						type="act:actRefType" />
+
+					<xs:element minOccurs="0" name="lots">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element maxOccurs="unbounded" ref="gnc:lot" />
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:all>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+</xs:schema>

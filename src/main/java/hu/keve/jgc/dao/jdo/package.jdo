@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<jdo xmlns="http://xmlns.jcp.org/xml/ns/jdo/jdo"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/jdo/jdo http://xmlns.jcp.org/xml/ns/jdo/jdo_3_1.xsd"
+	version="3.1">
+
+	<package name="hu.keve.jgc.dao.jdo">
+		<class name="BilltermJDO">
+			<field name="days" persistence-modifier="persistent">
+				<embedded>
+					<field name="dueDays" column="duedays" />
+					<field name="discountDays" column="discountdays" />
+					<field name="discount">
+						<embedded>
+							<field name="num" column="discount_num" />
+							<field name="denom" column="discount_denom" />
+						</embedded>
+					</field>
+				</embedded>
+			</field>
+		</class>
+
+		<class name="InvoiceJDO" table="invoices">
+			<field name="guid" persistent-modifier="persistent" primary-key="true" />
+			<field name="owner" persistent-modifier="persistent" default-fetch-group="true">
+				<embedded null-indicator-column="owner_type">
+					<field name="type" column="owner_type">
+						<extension vendor-name="datanucleus"
+							key="enum-value-getter" value="toIntValue" />
+					</field>
+					<field name="guid" column="owner_guid" />
+				</embedded>
+			</field>
+			<field name="billto" persistent-modifier="persistent" default-fetch-group="true">
+				<embedded null-indicator-column="billto_type">
+					<field name="type" column="billto_type">
+						<extension vendor-name="datanucleus"
+							key="enum-value-getter" value="toIntValue" />
+					</field>
+					<field name="guid" column="billto_guid" />
+				</embedded>
+			</field>
+			<field name="chargeAmt" default-fetch-group="true">
+				<embedded>
+					<field name="num" column="charge_amt_num" />
+					<field name="denom" column="charge_amt_denom" />
+				</embedded>
+			</field>
+			<field name="slots">
+				<element column="obj_guid" />
+			</field>
+		</class>
+	</package>
+</jdo>

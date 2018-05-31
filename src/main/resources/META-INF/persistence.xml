@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
+        http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
+	version="2.1">
+
+	<persistence-unit name="jgc">
+		<class>hu.keve.jgc.dao.jdo.AccountJDO</class>
+		<class>hu.keve.jgc.dao.jdo.AddressJDO</class>
+		<class>hu.keve.jgc.dao.jdo.BilltermJDO</class>
+		<class>hu.keve.jgc.dao.jdo.BookJDO</class>
+		<class>hu.keve.jgc.dao.jdo.BtDaysJDO</class>
+		<class>hu.keve.jgc.dao.jdo.BudgetAmountJDO</class>
+		<class>hu.keve.jgc.dao.jdo.BudgetJDO</class>
+		<class>hu.keve.jgc.dao.jdo.CommodityJDO</class>
+		<class>hu.keve.jgc.dao.jdo.CustomerJDO</class>
+		<class>hu.keve.jgc.dao.jdo.EmployeeJDO</class>
+		<class>hu.keve.jgc.dao.jdo.EntryJDO</class>
+		<class>hu.keve.jgc.dao.jdo.GuidTypeJDO</class>
+		<class>hu.keve.jgc.dao.jdo.InvoiceJDO</class>
+		<class>hu.keve.jgc.dao.jdo.JobJDO</class>
+		<class>hu.keve.jgc.dao.jdo.LotJDO</class>
+		<class>hu.keve.jgc.dao.jdo.OrderJDO</class>
+		<class>hu.keve.jgc.dao.jdo.OwnerJDO</class>
+		<class>hu.keve.jgc.dao.jdo.PriceJDO</class>
+		<class>hu.keve.jgc.dao.jdo.RecurrenceJDO</class>
+		<class>hu.keve.jgc.dao.jdo.SchedxactionJDO</class>
+		<class>hu.keve.jgc.dao.jdo.SlotJDO</class>
+		<class>hu.keve.jgc.dao.jdo.SplitJDO</class>
+		<class>hu.keve.jgc.dao.jdo.TaxtableEntryJDO</class>
+		<class>hu.keve.jgc.dao.jdo.TaxtableJDO</class>
+		<class>hu.keve.jgc.dao.jdo.TransactionJDO</class>
+		<class>hu.keve.jgc.dao.jdo.VendorJDO</class>
+		<class>hu.keve.jgc.dao.jdo.VersionJDO</class>
+
+		<class>hu.keve.jgc.util.Fraction</class>
+
+		<exclude-unlisted-classes />
+		<properties>
+			<property name="javax.jdo.option.ConnectionDriverName"
+				value="org.sqlite.JDBC" />
+			<property name="javax.jdo.option.Mapping" value="sqlite" />
+			<property name="datanucleus.identifierFactory"
+				value="datanucleus1" />
+			<property name="datanucleus.identifier.case"
+				value="lowercase" />
+		</properties>
+	</persistence-unit>
+</persistence>

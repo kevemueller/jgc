@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified"
+	elementFormDefault="qualified"
+	targetNamespace="http://www.gnucash.org/XML/recurrence"
+	xmlns:recurrence="http://www.gnucash.org/XML/recurrence"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:import schemaLocation="jgc.xsd" />
+
+	<xs:simpleType name="periodTypeEnum">
+		<xs:restriction base="xs:token">
+			<xs:enumeration value="once" />
+			<xs:enumeration value="day" />
+			<xs:enumeration value="week" />
+			<xs:enumeration value="month" />
+			<xs:enumeration value="end of month" />
+			<xs:enumeration value="nth weekday" />
+			<xs:enumeration value="last weekday" />
+			<xs:enumeration value="year" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="weekendAdjEnum">
+		<xs:restriction base="xs:NCName">
+			<xs:enumeration value="none" />
+			<xs:enumeration value="back" />
+			<xs:enumeration value="forward" />
+		</xs:restriction>
+	</xs:simpleType>
+
+
+	<xs:complexType name="recurrenceType">
+		<xs:sequence>
+			<xs:element name="mult" type="xs:unsignedByte" />
+			<xs:element name="period_type"
+				type="recurrence:periodTypeEnum" />
+			<xs:element name="start">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="gdate" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<!-- version 1.0.0 does not have it -->
+			<xs:element minOccurs="0" name="weekend_adj"
+				type="recurrence:weekendAdjEnum" />
+		</xs:sequence>
+		<xs:attribute name="version" type="xs:string"
+			use="required" />
+	</xs:complexType>
+
+</xs:schema>

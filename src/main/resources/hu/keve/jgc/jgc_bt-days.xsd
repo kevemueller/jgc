@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified"
+	elementFormDefault="qualified"
+	targetNamespace="http://www.gnucash.org/XML/bt-days"
+	xmlns:gnc="http://www.gnucash.org/XML/gnc"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+	<xs:import schemaLocation="jgc.xsd" />
+	
+	<xs:complexType name="bt-daysType">
+		<xs:sequence>
+			<xs:element name="due-days" type="xs:unsignedInt" />
+			<xs:element name="disc-days" type="xs:unsignedInt" />
+			<xs:element name="discount" type="numericType" />
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

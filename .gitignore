@@ -1,0 +1,16 @@
+/bin/
+/target/
+/.classpath
+/.project
+/.settings/
+/CJ.out.xml
+/CJ.sqlite3.gnucash
+/CJ.xml
+/PhA.out.xml
+/PhA.sqlite3.gnucash
+/PhA.xml
+/Simple.out.xml
+/Simple.xml
+/datanucleus.log
+/x/
+*.out.xml

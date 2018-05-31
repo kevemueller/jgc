@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema 
+	attributeFormDefault="unqualified" elementFormDefault="qualified"
+	targetNamespace="http://www.gnucash.org/XML/gnc-act"
+	xmlns:gnc="http://www.gnucash.org/XML/gnc"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+	<xs:import schemaLocation="jgc_gnc.xsd"
+		namespace="http://www.gnucash.org/XML/gnc" />
+
+	<xs:complexType name="accountExampleType">
+		<xs:sequence>
+			<xs:element name="title" type="xs:string" />
+			<xs:element name="short-description" type="xs:string" />
+			<xs:element minOccurs="0" name="long-description" type="xs:string" />
+			<xs:element minOccurs="0" name="exclude-from-select-all"
+				type="xs:unsignedByte" />
+			<xs:element minOccurs="0" name="start-selected"
+				type="xs:unsignedByte" />
+
+			<xs:element maxOccurs="unbounded" ref="gnc:account" />
+		</xs:sequence>
+	</xs:complexType>
+
+
+</xs:schema>

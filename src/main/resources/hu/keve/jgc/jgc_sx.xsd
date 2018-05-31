@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified"
+	elementFormDefault="qualified"
+	targetNamespace="http://www.gnucash.org/XML/sx"
+	xmlns:gnc="http://www.gnucash.org/XML/gnc"
+	xmlns:act="http://www.gnucash.org/XML/act"
+	xmlns:slot="http://www.gnucash.org/XML/slot"
+	xmlns:sx="http://www.gnucash.org/XML/sx"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:import schemaLocation="jgc.xsd" />
+	<xs:import schemaLocation="jgc_act.xsd"
+		namespace="http://www.gnucash.org/XML/act" />
+	<xs:import schemaLocation="jgc_gnc.xsd"
+		namespace="http://www.gnucash.org/XML/gnc" />
+	<xs:import schemaLocation="jgc_slot.xsd"
+		namespace="http://www.gnucash.org/XML/slot" />
+
+	<xs:complexType name="sxType">
+		<xs:complexContent>
+			<xs:extension base="guidType">
+				<xs:sequence>
+					<xs:element name="id" type="idType" />
+					<xs:element name="name" type="xs:string" />
+					<xs:element name="enabled" type="boolny" />
+					<xs:element name="autoCreate" type="boolny" />
+					<xs:element name="autoCreateNotify" type="boolny" />
+					<xs:element name="advanceCreateDays"
+						type="xs:unsignedByte" />
+					<xs:element name="advanceRemindDays"
+						type="xs:unsignedByte" />
+					<xs:element minOccurs="0" name="rem-occur" type="xs:int" /> <!-- here as well as in deferredInstance? -->
+					<xs:element name="instanceCount" type="xs:unsignedByte" /> <!-- here as well as in deferredInstance? -->
+					<xs:element name="start" type="gdateType" />
+					<xs:element minOccurs="0" name="end" type="gdateType" />
+					<xs:element minOccurs="0" name="last" type="gdateType" /> <!-- here as well as in deferredInstance? -->
+					<xs:element name="templ-acct" type="act:actRefType" />
+					<xs:element name="schedule" type="gnc:recurrencesType"/>
+					<xs:element minOccurs="0" name="slots"
+						type="slot:slotsType" />
+
+					<!-- TODO: where is this coming from? -->
+					<xs:element minOccurs="0" name="deferredInstance">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element minOccurs="0" name="last"
+									type="gdateType" />
+								<xs:element name="rem-occur" type="xs:int" />
+								<xs:element name="instanceCount" type="xs:int" />
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+</xs:schema>
