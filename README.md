@@ -25,7 +25,7 @@ The DB representation features containment of slots within slots that could not 
 
 ### JAXB
 Major obstacles were observed. The aim was to fully automate the DAO layer implementation classes based on the XML Schema defition.
-Some choices observed by GnuCash are hard to map with JAXB. JAXB as well as its code generator (xjc) also have severe shortfalls which 
+Some choices observed by GnuCash are hard to map with JAXB. JAXB as well as its code generator (xjc) also have severe shortcomings which 
 can only be partially worked around with existing tools [Maven jaxb2 plugin](https://github.com/highsource/maven-jaxb2-plugin).
 #### xjc can generate object tree references only for the built-in types xs:id/xs:idref
 As the references used in the document did not fit into the value space of xs:id, as custom type had to be used, hence  references had to be 
@@ -45,4 +45,11 @@ The documents feature unnecessary nesting which had to be removed manually with 
 
 ## Conclusion
 The proof of concept is successful. The library is principally useable with both underlying document representation formats.
-
+Due to the shortcomings of JAXB a different approach is adviseable.
+* Validation of the source XML
+* Transformation of the XML into a friendlier structure
+* Unmarshalling
+* manipulation
+* Marshalling
+* Transformation of the friendlier structure to the original XML
+* Optional re-validation
