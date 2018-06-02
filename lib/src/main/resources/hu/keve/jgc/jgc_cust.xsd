@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified"
+	elementFormDefault="qualified"
+	targetNamespace="http://www.gnucash.org/XML/cust"
+	xmlns:addr="http://www.gnucash.org/XML/addr"
+	xmlns:billterm="http://www.gnucash.org/XML/billterm"
+	xmlns:cmdty="http://www.gnucash.org/XML/cmdty"
+	xmlns:slot="http://www.gnucash.org/XML/slot"
+	xmlns:taxtable="http://www.gnucash.org/XML/taxtable"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:import schemaLocation="jgc.xsd" />
+	<xs:import schemaLocation="jgc_addr.xsd"
+		namespace="http://www.gnucash.org/XML/addr" />
+	<xs:import schemaLocation="jgc_billterm.xsd"
+		namespace="http://www.gnucash.org/XML/billterm" />
+	<xs:import schemaLocation="jgc_cmdty.xsd"
+		namespace="http://www.gnucash.org/XML/cmdty" />
+	<xs:import schemaLocation="jgc_slot.xsd"
+		namespace="http://www.gnucash.org/XML/slot" />
+	<xs:import schemaLocation="jgc_taxtable.xsd"
+		namespace="http://www.gnucash.org/XML/taxtable" />
+
+	<xs:complexType name="custType">
+		<xs:complexContent>
+			<xs:extension base="versionedGuidType">
+
+				<xs:sequence>
+					<xs:element name="guid" type="idType" />
+					<xs:element name="name" type="xs:string" />
+					<xs:element name="id" type="xs:string" />
+					<xs:element name="addr" type="addr:addrType" />
+					<xs:element name="shipaddr" type="addr:addrType" />
+					<xs:element name="notes" type="xs:string" />
+					<xs:element minOccurs="0" name="terms" type="billterm:billtermRefType" />
+					<xs:element name="taxincluded" type="taxIncludedEnum" />
+					<xs:element name="active" type="bool01" />
+					<xs:element name="discount" type="numericType" />
+					<xs:element name="credit" type="numericType" />
+					<xs:element name="currency" type="cmdty:cmdtyRefType" />
+					<xs:element name="use-tt" type="bool01" />
+					<xs:element minOccurs="0" name="taxtable"
+						type="taxtable:taxtableRefType" />
+					<xs:element minOccurs="0" name="slots" type="slot:slotsType" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+</xs:schema>

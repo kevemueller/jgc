@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified"
+	elementFormDefault="qualified"
+	targetNamespace="http://www.gnucash.org/XML/taxtable"
+	xmlns:gnc="http://www.gnucash.org/XML/gnc"
+	xmlns:taxtable="http://www.gnucash.org/XML/taxtable"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:import schemaLocation="jgc.xsd" />
+
+	<xs:import schemaLocation="jgc_gnc.xsd"
+		namespace="http://www.gnucash.org/XML/gnc" />
+
+	<xs:complexType name="taxtableRefType">
+		<xs:complexContent>
+			<xs:extension base="idRefType" />
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:complexType name="taxtableType">
+		<xs:complexContent>
+			<xs:extension base="versionedGuidType">
+				<xs:sequence>
+					<xs:element name="guid" type="idType" />
+					<xs:element name="name" type="xs:string" />
+					<xs:element name="refcount" type="xs:unsignedByte" />
+					<xs:element name="invisible" type="bool01" />
+					<xs:element minOccurs="0" name="parent"
+						type="taxtable:taxtableRefType" />
+					<!-- TODO: why is child here as well? -->
+					<xs:element minOccurs="0" name="child"
+						type="taxtable:taxtableRefType" />
+					<xs:element name="entries"
+						type="gnc:gncTaxTableEntriesType" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+</xs:schema>
