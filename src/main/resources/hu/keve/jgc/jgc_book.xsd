@@ -8,7 +8,7 @@
 	<xs:import namespace="http://www.gnucash.org/XML/slot"
 		schemaLocation="jgc_slot.xsd" />
 
-	<xs:complexType name="bookType">
+	<xs:complexType name="bookType" abstract="true">
 		<xs:sequence>
 			<xs:element name="id" type="idType" />
 			<xs:element minOccurs="0" name="slots"

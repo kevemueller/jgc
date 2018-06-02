@@ -168,8 +168,8 @@
 	</xs:complexType>
 
 	<xs:complexType name="gncV2Type">
-		<xs:sequence>
-			<xs:element ref="gnc:count-data" />
+		<xs:sequence> 
+			<xs:element maxOccurs="unbounded" ref="gnc:count-data" />
 			<xs:element name="book" type="gnc:gncV2BookType">
 				<xs:key name="pkAccount">
 					<xs:selector xpath="gnc:account/act:id" />

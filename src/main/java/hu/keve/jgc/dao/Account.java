@@ -20,7 +20,7 @@ public interface Account {
 
 	String getDescription();
 
-//	boolean isPlaceholder();
+	// boolean isPlaceholder();
 
 	Collection<? extends Slot> getSlots();
 

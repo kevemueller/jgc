@@ -66,8 +66,8 @@ public final class TestXMLValidate {
 	}
 
 	@ParameterizedTest(name = "{index} => file=''{0}''")
-	@ValueSource(strings = { "CJ.xml", "PhA.xml", "Simple.xml" })
-	// @ValueSource(strings = { "Simple.xml" })
+	//@ValueSource(strings = { "CJ.xml", "PhA.xml", "Simple.xml" })
+	@ValueSource(strings = { "Simple.xml" })
 	void jaxbLoadFile(String fileName) throws SAXException, IOException, JAXBException {
 		File file = new File(fileName);
 		assertTrue(file.exists());

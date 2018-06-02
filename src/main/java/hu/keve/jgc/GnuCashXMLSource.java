@@ -15,16 +15,19 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.Unmarshaller.Listener;
 import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
 
+import org.gnucash.xml.IdType;
 import org.xml.sax.SAXException;
 
 import com.sun.xml.bind.IDResolver;
 
 import hu.keve.jgc.dao.jaxb2.CmdtyRefTypeAdapter;
+import hu.keve.jgc.dao.jaxb2.GCDefaultXMLPrefixes;
 import hu.keve.jgc.util.CompoundIDResolver;
 
 public final class GnuCashXMLSource {
@@ -91,6 +94,17 @@ public final class GnuCashXMLSource {
 		CompoundIDResolver idResolver = new CompoundIDResolver("X%s//%s");
 		unmarshaller.setProperty(IDResolver.class.getName(), idResolver);
 		unmarshaller.setAdapter(new CmdtyRefTypeAdapter(idResolver));
+		Listener listener = new Listener() {
+			@Override
+			public void afterUnmarshal(Object target, Object parent) {
+				System.err.println("After: " + target + " -> " + parent);
+				if (target instanceof IdType) {
+					System.err.println("here");
+				}
+				super.afterUnmarshal(target, parent);
+			}
+		};
+		unmarshaller.setListener(listener);
 		return unmarshaller;
 	}
 
@@ -99,6 +113,8 @@ public final class GnuCashXMLSource {
 			jaxbContext = JAXBContext.newInstance("org.gnucash.xml:org.gnucash.xml.ts");
 		}
 		Marshaller marshaller = jaxbContext.createMarshaller();
+		marshaller.setProperty("com.sun.xml.bind.namespacePrefixMapper",
+				GCDefaultXMLPrefixes.getNamespacePrefixMapper());
 		marshaller.setAdapter(new CmdtyRefTypeAdapter(null));
 		return marshaller;
 	}

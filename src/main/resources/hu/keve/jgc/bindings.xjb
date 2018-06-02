@@ -147,7 +147,16 @@
 		</jaxb:bindings>
 	</jaxb:bindings>
 
-	<!-- TODO: book -->
+	<jaxb:bindings schemaLocation="jgc_book.xsd">
+		<jaxb:bindings node="//xs:complexType[@name='bookType']">
+			<inheritance:extends>hu.keve.jgc.dao.jaxb2.AbstractBookJAXB
+			</inheritance:extends>
+			<jaxb:bindings node="//xs:element[@name='slots']">
+				<jaxb:property name="wrappedSlots" />
+			</jaxb:bindings>
+		</jaxb:bindings>
+	</jaxb:bindings>
+
 
 	<jaxb:bindings schemaLocation="jgc_bt-days.xsd">
 		<jaxb:bindings
@@ -169,13 +178,13 @@
 		</jaxb:bindings>
 		<jaxb:bindings
 			node="//xs:complexType[@name='cmdtyType']//xs:element[@name='space']">
-			<annox:annotate target="field">@javax.xml.bind.annotation.XmlID
+			<annox:annotate target="field">@hu.keve.jgc.util.jaxb.XmlID2
 			</annox:annotate>
 			<jaxb:property name="namespace" />
 		</jaxb:bindings>
 		<jaxb:bindings
 			node="//xs:complexType[@name='cmdtyType']//xs:element[@name='id']">
-			<annox:annotate target="field">@javax.xml.bind.annotation.XmlID
+			<annox:annotate target="field">@hu.keve.jgc.util.jaxb.XmlID2
 			</annox:annotate>
 			<jaxb:property name="mnemonic" />
 		</jaxb:bindings>
@@ -246,7 +255,13 @@
 		</jaxb:bindings>
 	</jaxb:bindings>
 
-	<!-- todo gnc -->
+	<jaxb:bindings schemaLocation="jgc_gnc.xsd">
+		<jaxb:bindings
+			node="//xs:complexType[@name='gncV2Type']">
+			<inheritance:extends>hu.keve.jgc.dao.jaxb2.AbstractGnuCashJAXB
+			</inheritance:extends>
+		</jaxb:bindings>
+	</jaxb:bindings>
 
 	<jaxb:bindings schemaLocation="jgc_invoice.xsd">
 		<jaxb:bindings
@@ -270,7 +285,7 @@
 			<jaxb:bindings node="//xs:element[@name='postacc']">
 				<annox:removeAnnotation target="field"
 					class="javax.xml.bind.annotation.XmlElement" />
-				<annox:annotate target="field">@javax.xml.bind.annotation.XmlIDREF
+				<annox:annotate target="field">@hu.keve.jgc.util.jaxb.XmlIDREF2
 				</annox:annotate>
 				<jaxb:property name="postAcct">
 					<jaxb:baseType name="org.gnucash.xml.act.ActType" />
@@ -280,7 +295,7 @@
 			<jaxb:bindings node="//xs:element[@name='postlot']">
 				<annox:removeAnnotation target="field"
 					class="javax.xml.bind.annotation.XmlElement" />
-				<annox:annotate target="field">@javax.xml.bind.annotation.XmlIDREF
+				<annox:annotate target="field">@hu.keve.jgc.util.jaxb.XmlIDREF2
 				</annox:annotate>
 				<jaxb:property name="postLot">
 					<jaxb:baseType name="org.gnucash.xml.lot.LotType" />
@@ -289,7 +304,7 @@
 			<jaxb:bindings node="//xs:element[@name='posttxn']">
 				<annox:removeAnnotation target="field"
 					class="javax.xml.bind.annotation.XmlElement" />
-				<annox:annotate target="field">@javax.xml.bind.annotation.XmlIDREF
+				<annox:annotate target="field">@hu.keve.jgc.util.jaxb.XmlIDREF2
 				</annox:annotate>
 				<jaxb:property name="postTxn">
 					<jaxb:baseType name="org.gnucash.xml.trn.TrnType" />
@@ -319,7 +334,7 @@
 			<jaxb:bindings node="//xs:element[@name='guid']">
 				<annox:removeAnnotation target="field"
 					class="javax.xml.bind.annotation.XmlElement" />
-				<annox:annotate target="field">@javax.xml.bind.annotation.XmlID
+				<annox:annotate target="field">@hu.keve.jgc.util.jaxb.XmlID2
 				</annox:annotate>
 				<annox:annotate target="field">@javax.xml.bind.annotation.XmlElement(required
 					= true)
@@ -429,7 +444,7 @@
 
 				<annox:removeAnnotation target="field"
 					class="javax.xml.bind.annotation.XmlElement" />
-				<annox:annotate target="field">@javax.xml.bind.annotation.XmlIDREF
+				<annox:annotate target="field">@hu.keve.jgc.util.jaxb.XmlIDREF2
 				</annox:annotate>
 				<jaxb:property name="templateAccount">
 					<jaxb:baseType name="org.gnucash.xml.act.ActType" />
@@ -487,7 +502,7 @@
 				<!-- <jaxb:class ref="java.lang.String"/> -->
 				<annox:removeAnnotation target="field"
 					class="javax.xml.bind.annotation.XmlElement" />
-				<annox:annotate target="field">@javax.xml.bind.annotation.XmlID
+				<annox:annotate target="field">@hu.keve.jgc.util.jaxb.XmlID2
 				</annox:annotate>
 				<annox:annotate target="field">@javax.xml.bind.annotation.XmlElement(required
 					= true)
@@ -527,7 +542,7 @@
 			<jaxb:bindings node="//xs:element[@name='acct']">
 				<annox:removeAnnotation target="field"
 					class="javax.xml.bind.annotation.XmlElement" />
-				<annox:annotate target="field">@javax.xml.bind.annotation.XmlIDREF
+				<annox:annotate target="field">@hu.keve.jgc.util.jaxb.XmlIDREF2
 				</annox:annotate>
 				<jaxb:property name="account">
 					<jaxb:baseType name="org.gnucash.xml.act.ActType" />
@@ -560,9 +575,10 @@
 			<!-- <jaxb:class ref="java.lang.String"/> -->
 			<annox:removeAnnotation target="field"
 				class="javax.xml.bind.annotation.XmlElement" />
-			<annox:annotate target="field">@javax.xml.bind.annotation.XmlID
+			<annox:annotate target="field">@hu.keve.jgc.util.jaxb.XmlID2
 			</annox:annotate>
-			<annox:annotate target="field">@javax.xml.bind.annotation.XmlElement(required
+			<annox:annotate target="field">@javax.xml.bind.annotation.XmlElement(type=String.class,
+				required
 				= true)
 			</annox:annotate>
 			<jaxb:property>
@@ -577,7 +593,7 @@
 			<!-- <jaxb:class ref="java.lang.String"/> -->
 			<annox:removeAnnotation target="field"
 				class="javax.xml.bind.annotation.XmlElement" />
-			<annox:annotate target="field">@javax.xml.bind.annotation.XmlID
+			<annox:annotate target="field">@hu.keve.jgc.util.jaxb.XmlID2
 			</annox:annotate>
 			<annox:annotate target="field">@javax.xml.bind.annotation.XmlElement(required
 				= true)
@@ -594,7 +610,7 @@
 			<!-- <jaxb:class ref="java.lang.String"/> -->
 			<annox:removeAnnotation target="field"
 				class="javax.xml.bind.annotation.XmlElement" />
-			<annox:annotate target="field">@javax.xml.bind.annotation.XmlID
+			<annox:annotate target="field">@hu.keve.jgc.util.jaxb.XmlID2
 			</annox:annotate>
 			<annox:annotate target="field">@javax.xml.bind.annotation.XmlElement(required
 				= true)
@@ -611,7 +627,7 @@
 			<!-- <jaxb:class ref="java.lang.String"/> -->
 			<annox:removeAnnotation target="field"
 				class="javax.xml.bind.annotation.XmlElement" />
-			<annox:annotate target="field">@javax.xml.bind.annotation.XmlID
+			<annox:annotate target="field">@hu.keve.jgc.util.jaxb.XmlID2
 			</annox:annotate>
 			<annox:annotate target="field">@javax.xml.bind.annotation.XmlElement(required
 				= true)
@@ -627,7 +643,7 @@
 			<!-- <jaxb:class ref="java.lang.String"/> -->
 			<annox:removeAnnotation target="field"
 				class="javax.xml.bind.annotation.XmlElement" />
-			<annox:annotate target="field">@javax.xml.bind.annotation.XmlID
+			<annox:annotate target="field">@hu.keve.jgc.util.jaxb.XmlID2
 			</annox:annotate>
 			<annox:annotate target="field">@javax.xml.bind.annotation.XmlElement(required
 				= true)
@@ -643,7 +659,7 @@
 			<!-- <jaxb:class ref="java.lang.String"/> -->
 			<annox:removeAnnotation target="field"
 				class="javax.xml.bind.annotation.XmlElement" />
-			<annox:annotate target="field">@javax.xml.bind.annotation.XmlID
+			<annox:annotate target="field">@hu.keve.jgc.util.jaxb.XmlID2
 			</annox:annotate>
 			<annox:annotate target="field">@javax.xml.bind.annotation.XmlElement(required
 				= true)
@@ -667,7 +683,7 @@
 			node="//xs:element[@type='act:actRefType']">
 			<annox:removeAnnotation target="field"
 				class="javax.xml.bind.annotation.XmlElement" />
-			<annox:annotate target="field">@javax.xml.bind.annotation.XmlIDREF
+			<annox:annotate target="field">@hu.keve.jgc.util.jaxb.XmlIDREF2
 			</annox:annotate>
 			<jaxb:property>
 				<jaxb:baseType name="org.gnucash.xml.act.ActType" />
@@ -679,7 +695,7 @@
 			node="//xs:element[@type='act:actRefType']">
 			<annox:removeAnnotation target="field"
 				class="javax.xml.bind.annotation.XmlElement" />
-			<annox:annotate target="field">@javax.xml.bind.annotation.XmlIDREF
+			<annox:annotate target="field">@hu.keve.jgc.util.jaxb.XmlIDREF2
 			</annox:annotate>
 			<jaxb:property>
 				<jaxb:baseType name="org.gnucash.xml.act.ActType" />
@@ -692,7 +708,7 @@
 			node="//xs:element[@type='act:actRefType']">
 			<annox:removeAnnotation target="field"
 				class="javax.xml.bind.annotation.XmlElement" />
-			<annox:annotate target="field">@javax.xml.bind.annotation.XmlIDREF
+			<annox:annotate target="field">@hu.keve.jgc.util.jaxb.XmlIDREF2
 			</annox:annotate>
 			<jaxb:property>
 				<jaxb:baseType name="org.gnucash.xml.act.ActType" />
@@ -705,7 +721,7 @@
 			node="//xs:element[@type='act:actRefType']">
 			<annox:removeAnnotation target="field"
 				class="javax.xml.bind.annotation.XmlElement" />
-			<annox:annotate target="field">@javax.xml.bind.annotation.XmlIDREF
+			<annox:annotate target="field">@hu.keve.jgc.util.jaxb.XmlIDREF2
 			</annox:annotate>
 			<jaxb:property>
 				<jaxb:baseType name="org.gnucash.xml.act.ActType" />
@@ -804,7 +820,7 @@
 			node="//xs:element[@type='billterm:billtermRefType']">
 			<annox:removeAnnotation target="field"
 				class="javax.xml.bind.annotation.XmlElement" />
-			<annox:annotate target="field">@javax.xml.bind.annotation.XmlIDREF
+			<annox:annotate target="field">@hu.keve.jgc.util.jaxb.XmlIDREF2
 			</annox:annotate>
 			<jaxb:property>
 				<jaxb:baseType
@@ -817,7 +833,7 @@
 			node="//xs:element[@type='billterm:billtermRefType']">
 			<annox:removeAnnotation target="field"
 				class="javax.xml.bind.annotation.XmlElement" />
-			<annox:annotate target="field">@javax.xml.bind.annotation.XmlIDREF
+			<annox:annotate target="field">@hu.keve.jgc.util.jaxb.XmlIDREF2
 			</annox:annotate>
 			<jaxb:property>
 				<jaxb:baseType
@@ -830,7 +846,7 @@
 			node="//xs:element[@type='billterm:billtermRefType']">
 			<annox:removeAnnotation target="field"
 				class="javax.xml.bind.annotation.XmlElement" />
-			<annox:annotate target="field">@javax.xml.bind.annotation.XmlIDREF
+			<annox:annotate target="field">@hu.keve.jgc.util.jaxb.XmlIDREF2
 			</annox:annotate>
 			<jaxb:property>
 				<jaxb:baseType
@@ -843,7 +859,7 @@
 			node="//xs:element[@type='billterm:billtermRefType']">
 			<annox:removeAnnotation target="field"
 				class="javax.xml.bind.annotation.XmlElement" />
-			<annox:annotate target="field">@javax.xml.bind.annotation.XmlIDREF
+			<annox:annotate target="field">@hu.keve.jgc.util.jaxb.XmlIDREF2
 			</annox:annotate>
 			<jaxb:property>
 				<jaxb:baseType
@@ -858,7 +874,7 @@
 			node="//xs:element[@type='invoice:invoiceRefType']">
 			<annox:removeAnnotation target="field"
 				class="javax.xml.bind.annotation.XmlElement" />
-			<annox:annotate target="field">@javax.xml.bind.annotation.XmlIDREF
+			<annox:annotate target="field">@hu.keve.jgc.util.jaxb.XmlIDREF2
 			</annox:annotate>
 			<jaxb:property>
 				<jaxb:baseType
@@ -875,7 +891,7 @@
 			node="//xs:element[@type='lot:lotRefType']">
 			<annox:removeAnnotation target="field"
 				class="javax.xml.bind.annotation.XmlElement" />
-			<annox:annotate target="field">@javax.xml.bind.annotation.XmlIDREF
+			<annox:annotate target="field">@hu.keve.jgc.util.jaxb.XmlIDREF2
 			</annox:annotate>
 			<jaxb:property>
 				<jaxb:baseType name="org.gnucash.xml.lot.LotType" />
@@ -889,7 +905,7 @@
 			node="//xs:element[@type='order:orderRefType']">
 			<annox:removeAnnotation target="field"
 				class="javax.xml.bind.annotation.XmlElement" />
-			<annox:annotate target="field">@javax.xml.bind.annotation.XmlIDREF
+			<annox:annotate target="field">@hu.keve.jgc.util.jaxb.XmlIDREF2
 			</annox:annotate>
 			<jaxb:property>
 				<jaxb:baseType name="org.gnucash.xml.order.OrderType" />
@@ -903,7 +919,7 @@
 			node="//xs:element[@type='taxtable:taxtableRefType']">
 			<annox:removeAnnotation target="field"
 				class="javax.xml.bind.annotation.XmlElement" />
-			<annox:annotate target="field">@javax.xml.bind.annotation.XmlIDREF
+			<annox:annotate target="field">@hu.keve.jgc.util.jaxb.XmlIDREF2
 			</annox:annotate>
 			<jaxb:property>
 				<jaxb:baseType
@@ -916,7 +932,7 @@
 			node="//xs:element[@type='taxtable:taxtableRefType']">
 			<annox:removeAnnotation target="field"
 				class="javax.xml.bind.annotation.XmlElement" />
-			<annox:annotate target="field">@javax.xml.bind.annotation.XmlIDREF
+			<annox:annotate target="field">@hu.keve.jgc.util.jaxb.XmlIDREF2
 			</annox:annotate>
 			<jaxb:property>
 				<jaxb:baseType
@@ -929,7 +945,7 @@
 			node="//xs:element[@type='taxtable:taxtableRefType']">
 			<annox:removeAnnotation target="field"
 				class="javax.xml.bind.annotation.XmlElement" />
-			<annox:annotate target="field">@javax.xml.bind.annotation.XmlIDREF
+			<annox:annotate target="field">@hu.keve.jgc.util.jaxb.XmlIDREF2
 			</annox:annotate>
 			<jaxb:property>
 				<jaxb:baseType
@@ -942,7 +958,7 @@
 			node="//xs:element[@type='taxtable:taxtableRefType']">
 			<annox:removeAnnotation target="field"
 				class="javax.xml.bind.annotation.XmlElement" />
-			<annox:annotate target="field">@javax.xml.bind.annotation.XmlIDREF
+			<annox:annotate target="field">@hu.keve.jgc.util.jaxb.XmlIDREF2
 			</annox:annotate>
 			<jaxb:property>
 				<jaxb:baseType
