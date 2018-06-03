@@ -1,14 +1,15 @@
 package hu.keve.jgc.dao;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public interface Recurrence {
 
-	short getMult();
+	int getMult();
 
 	RecurrencePeriodTypes getPeriodType();
 
-	Date getPeriodStart();
+	LocalDate getPeriodStart();
 
 	WeekendAdjustTypes getWeekendAdjust();
 

@@ -2,31 +2,21 @@ package hu.keve.jgc.dao.jdo;
 
 import java.util.Collection;
 
-import javax.jdo.annotations.Column;
-import javax.jdo.annotations.Element;
-import javax.jdo.annotations.PersistenceCapable;
-
 import hu.keve.jgc.dao.Account;
 
-@PersistenceCapable(table = "accounts")
 public final class AccountJDO extends GuidTypeJDO implements Account {
 	String name;
 	AccountTypes accountType;
-	@Column(name = "commodity_guid")
 	CommodityJDO commodity;
-	long commodityScu;
+	int commodityScu;
 	boolean nonStdScu;
-	@Column(name = "parent_guid")
 	AccountJDO parent;
 	String code;
 	String description;
-	boolean hidden;
-	boolean placeholder;
+	Boolean hidden;
+	Boolean placeholder;
 
-	@Element(column = "obj_guid")
 	Collection<SlotJDO> slots;
-
-	@Element(column = "account_guid", mappedBy = "account")
 	Collection<LotJDO> lots;
 
 	/* (non-Javadoc)
@@ -58,7 +48,7 @@ public final class AccountJDO extends GuidTypeJDO implements Account {
 	 */
 	@Override
 	public Long getCommodityScu() {
-		return commodityScu;
+		return (long)commodityScu;
 	}
 
 	/* (non-Javadoc)

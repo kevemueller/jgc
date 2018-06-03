@@ -1,5 +1,6 @@
 package hu.keve.jgc.dao;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Date;
 
@@ -11,9 +12,9 @@ public interface Invoice {
 
 	String getId();
 
-	Date getDateOpened();
+	LocalDateTime getDateOpened();
 
-	Date getDatePosted();
+	LocalDateTime getDatePosted();
 
 //	String getNotes();
 

@@ -2,32 +2,24 @@ package hu.keve.jgc.dao.jdo;
 
 import java.util.Collection;
 
-import javax.jdo.annotations.Element;
 import javax.jdo.annotations.PersistenceCapable;
-import javax.jdo.annotations.PrimaryKey;
 
 import hu.keve.jgc.dao.Commodity;
 
-@PersistenceCapable(table = "commodities")
-public final class CommodityJDO implements Commodity  {
-	@PrimaryKey
-	String guid;
+@PersistenceCapable
+public final class CommodityJDO extends GuidTypeJDO implements Commodity  {
 	String namespace; // TODO: Enum
 	String mnemonic;
 	String fullname;
 	String cusip;
-	long fraction;
+	int fraction;
 	boolean quoteFlag;
 	String quoteSource;
 	String quoteTz;
 	
-	@Element(column="obj_guid")
 	Collection<SlotJDO> slots;
 
-	public String getGuid() {
-		return guid;
-	}
-
+	
 	/* (non-Javadoc)
 	 * @see hu.keve.jgc.dao.jdo.Commodity#getNamespace()
 	 */
@@ -61,7 +53,7 @@ public final class CommodityJDO implements Commodity  {
 	 */
 	@Override
 	public Long getFraction() {
-		return fraction;
+		return (long)fraction;
 	}
 
 	/* (non-Javadoc)

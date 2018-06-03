@@ -1,6 +1,25 @@
 package hu.keve.jgc.dao.jaxb;
 
-import hu.keve.jgc.dao.Order;
+import java.time.LocalDateTime;
 
-public interface OrderJAXB extends Order, GuidUnwrapper {	
+import org.gnucash.xml.ts.TsType;
+
+import hu.keve.jgc.dao.Order;
+import hu.keve.jgc.dao.jaxb.adapters.TsDateTypeUtil;
+
+public interface OrderJAXB extends Order, GuidUnwrapper {
+	TsType getWrappedDateOpened();
+
+	TsType getWrappedDateClosed();
+
+	@Override
+	default LocalDateTime getDateOpened() {
+		return TsDateTypeUtil.unwrap(getWrappedDateOpened());
+	}
+
+	@Override
+	default LocalDateTime getDateClosed() {
+		return TsDateTypeUtil.unwrap(getWrappedDateClosed());
+	}
+
 }

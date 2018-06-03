@@ -1,52 +1,37 @@
 package hu.keve.jgc.dao.jdo;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Collection;
-import java.util.Date;
 import java.util.Objects;
 
 import javax.jdo.PersistenceManager;
-import javax.jdo.annotations.Column;
-import javax.jdo.annotations.Convert;
-import javax.jdo.annotations.Embedded;
-import javax.jdo.annotations.Extension;
-import javax.jdo.annotations.PersistenceCapable;
-import javax.jdo.annotations.Persistent;
-import javax.jdo.annotations.PrimaryKey;
 
 import hu.keve.jgc.dao.Slot;
 import hu.keve.jgc.util.Fraction;
-import hu.keve.jgc.util.GCDateStringConverter;
 
-@PersistenceCapable(table = "slots")
-public class SlotJDO implements Slot {
-	@PrimaryKey
-	int id;
+public final class SlotJDO implements Slot {
+	//	int id;
 
-	String objGuid;
+	String obj;
 
-	@Extension(vendorName = "datanucleus", key = "enum-value-getter", value = "toIntValue")
 	SlotType slotType;
 
 	String name;
 	String stringVal;
 
 	String guidVal;
+
 	// @Element(column="obj_guid")
 	// @ForeignKey(members= {"guid_val"})
 	// Collection<Slot> slots;
 
-	@Column(name = "int64_val")
-	Integer int64Val;
+	Long int64Val;
 	Double doubleVal;
-	Date timespecVal;
-
-	@Persistent(defaultFetchGroup = "true")
-	@Embedded(members = { @Persistent(name = "num", column = "numeric_val_num"),
-			@Persistent(name = "denom", column = "numeric_val_denom") })
+	LocalDateTime timespecVal;
+	
 	Fraction numericVal;
-
-	@Convert(GCDateStringConverter.class)
-	Date gdateVal;
+	LocalDate gdateVal;
 
 	/* (non-Javadoc)
 	 * @see hu.keve.jgc.dao.jdo.Slot#getName()
@@ -89,7 +74,7 @@ public class SlotJDO implements Slot {
 	}
 
 	public Collection<SlotJDO> getSlots(PersistenceManager pm) {
-		return (Collection<SlotJDO>) pm.newQuery(SlotJDO.class, "objGuid == :guidVal").execute(guidVal);
+		return (Collection<SlotJDO>) pm.newQuery(SlotJDO.class, "obj == :guidVal").execute(guidVal);
 		// return slots;
 	}
 }

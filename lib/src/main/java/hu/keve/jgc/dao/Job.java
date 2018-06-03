@@ -12,8 +12,6 @@ public interface Job {
 
 	boolean isActive();
 
-	int getOwnerType();
-
 	Owner getOwner();
 
 }

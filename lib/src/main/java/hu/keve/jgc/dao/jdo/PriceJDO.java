@@ -1,40 +1,18 @@
 package hu.keve.jgc.dao.jdo;
 
-import java.util.Date;
-
-import javax.jdo.annotations.Column;
-import javax.jdo.annotations.Embedded;
-import javax.jdo.annotations.Extension;
-import javax.jdo.annotations.PersistenceCapable;
-import javax.jdo.annotations.Persistent;
-import javax.jdo.annotations.PrimaryKey;
+import java.time.LocalDateTime;
 
 import hu.keve.jgc.dao.Price;
 import hu.keve.jgc.util.Fraction;
 
-@PersistenceCapable(table = "prices")
-public final class PriceJDO implements Price {
-	@PrimaryKey
-	String guid;
-
-	@Column(name = "commodity_guid")
+public final class PriceJDO extends GuidTypeJDO implements Price {
 	CommodityJDO commodity;
-	@Column(name = "currency_guid")
 	CommodityJDO currency;
-	Date date;
+	LocalDateTime date;
 	String source;
 	
-	@Extension(vendorName = "datanucleus", key = "enum-value-getter", value = "toValue")
 	PriceTypes type;
-
-	@Persistent(defaultFetchGroup = "true")
-	@Embedded(members = { @Persistent(name = "num", column = "value_num"),
-			@Persistent(name = "denom", column = "value_denom") })
 	Fraction value;
-
-	public String getGuid() {
-		return guid;
-	}
 
 	/* (non-Javadoc)
 	 * @see hu.keve.jgc.dao.jdo.Price#getCommodity()
@@ -56,7 +34,7 @@ public final class PriceJDO implements Price {
 	 * @see hu.keve.jgc.dao.jdo.Price#getDate()
 	 */
 	@Override
-	public Date getDate() {
+	public LocalDateTime getDate() {
 		return date;
 	}
 

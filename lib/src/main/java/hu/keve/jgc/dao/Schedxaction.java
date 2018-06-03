@@ -1,5 +1,6 @@
 package hu.keve.jgc.dao;
 
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Date;
 
@@ -9,11 +10,11 @@ public interface Schedxaction {
 
 	Boolean isEnabled();
 
-	Date getStartDate();
+	LocalDate getStartDate();
 
-	Date getEndDate();
+	LocalDate getEndDate();
 
-	Date getLastOccur();
+	LocalDate getLastOccur();
 
 //	int getNumOccur();
 

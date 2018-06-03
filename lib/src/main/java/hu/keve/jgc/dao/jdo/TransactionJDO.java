@@ -1,38 +1,20 @@
 package hu.keve.jgc.dao.jdo;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
-import java.util.Date;
-
-import javax.jdo.annotations.Column;
-import javax.jdo.annotations.Element;
-import javax.jdo.annotations.PersistenceCapable;
-import javax.jdo.annotations.PrimaryKey;
 
 import hu.keve.jgc.dao.Transaction;
 
-@PersistenceCapable(table = "transactions")
-public class TransactionJDO implements Transaction {
-	@PrimaryKey
-	String guid;
-
-	@Column(name = "currency_guid")
+public final class TransactionJDO extends GuidTypeJDO implements Transaction {
 	CommodityJDO currency;
 	String num;
 
-	Date postDate;
-	Date enterDate;
+	LocalDateTime postDate;
+	LocalDateTime enterDate;
 	String description;
 
-	@Element(column = "obj_guid")
 	Collection<SlotJDO> slots;
-
-	@Element(column = "tx_guid", mappedBy = "tx")
 	Collection<SplitJDO> splits;
-
-	@Override
-	public String getGuid() {
-		return guid;
-	}
 
 	@Override
 	public CommodityJDO getCurrency() {
@@ -45,12 +27,12 @@ public class TransactionJDO implements Transaction {
 	}
 
 	@Override
-	public Date getDatePosted() {
+	public LocalDateTime getDatePosted() {
 		return postDate;
 	}
 
 	@Override
-	public Date getDateEntered() {
+	public LocalDateTime getDateEntered() {
 		return enterDate;
 	}
 

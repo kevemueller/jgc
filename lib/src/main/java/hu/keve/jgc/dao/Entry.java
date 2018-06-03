@@ -1,14 +1,14 @@
 package hu.keve.jgc.dao;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import hu.keve.jgc.util.Fraction;
 
 public interface Entry {
 
-	Date getDate();
+	LocalDateTime getDate();
 
-	Date getDateEntered();
+	LocalDateTime getDateEntered();
 
 	String getDescription();
 

@@ -3,8 +3,8 @@ package hu.keve.jgc.util;
 import java.util.Objects;
 
 public class Fraction {
-	int num;
-	int denom;
+	long num;
+	long denom;
 
 	public Fraction() {
 	}

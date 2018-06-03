@@ -1,70 +1,36 @@
 package hu.keve.jgc.dao.jdo;
 
-import java.util.Date;
-
-import javax.jdo.annotations.Column;
-import javax.jdo.annotations.Embedded;
-import javax.jdo.annotations.Extension;
-import javax.jdo.annotations.PersistenceCapable;
-import javax.jdo.annotations.Persistent;
-import javax.jdo.annotations.PrimaryKey;
+import java.time.LocalDateTime;
 
 import hu.keve.jgc.dao.Entry;
 import hu.keve.jgc.util.Fraction;
 
-@PersistenceCapable(table = "entries")
-public class EntryJDO implements Entry {
-	@PrimaryKey
-	String guid;
-
-	Date date;
-	Date dateEntered;
+public class EntryJDO extends GuidTypeJDO implements Entry {
+	LocalDateTime date;
+	LocalDateTime dateEntered;
 	String description;
 	String action;
 	String notes;
-	@Persistent(defaultFetchGroup = "true")
-	@Embedded(members = { @Persistent(name = "num", column = "quantity_num"),
-			@Persistent(name = "denom", column = "quantity_denom") })
 	Fraction quantity;
 	AccountJDO iAcct;
-	@Persistent(defaultFetchGroup = "true")
-	@Embedded(members = { @Persistent(name = "num", column = "i_price_num"),
-			@Persistent(name = "denom", column = "i_price_denom") })
 	Fraction iPrice;
-	@Persistent(defaultFetchGroup = "true")
-	@Embedded(members = { @Persistent(name = "num", column = "i_discount_num"),
-			@Persistent(name = "denom", column = "i_discount_denom") })
 	Fraction iDiscount;
 	InvoiceJDO invoice;
 	DiscTypes iDiscType;
 	DiscHowTypes iDiscHow;
-	boolean iTaxable;
-	boolean iTaxincluded;
+	Boolean iTaxable;
+	Boolean iTaxincluded;
 	TaxtableJDO iTaxtable;
 	AccountJDO bAcct;
-	@Persistent(defaultFetchGroup = "true")
-	@Embedded(members = { @Persistent(name = "num", column = "b_price_num"),
-			@Persistent(name = "denom", column = "b_price_denom") })
 	Fraction bPrice;
 	InvoiceJDO bill;
-	boolean bTaxable;
-	boolean bTaxincluded;
+	Boolean bTaxable;
+	Boolean bTaxincluded;
 	TaxtableJDO bTaxtable;
-	@Extension(vendorName = "datanucleus", key = "enum-value-getter", value = "toIntValue")
 	PayTypes bPaytype;
-	boolean billable;
-
-	@Persistent(defaultFetchGroup = "true")
-	@Embedded(members = { @Persistent(name = "type", column = "billto_type"),
-			@Persistent(name = "guid", column = "billto_guid") })
+	Boolean billable;
 	OwnerJDO billTo;
-
-	@Column(name = "order_guid")
 	OrderJDO order;
-
-	public String getGuid() {
-		return guid;
-	}
 
 	/*
 	 * (non-Javadoc)
@@ -72,7 +38,7 @@ public class EntryJDO implements Entry {
 	 * @see hu.keve.jgc.dao.jdo.Entry#getDate()
 	 */
 	@Override
-	public Date getDate() {
+	public LocalDateTime getDate() {
 		return date;
 	}
 
@@ -82,7 +48,7 @@ public class EntryJDO implements Entry {
 	 * @see hu.keve.jgc.dao.jdo.Entry#getDateEntered()
 	 */
 	@Override
-	public Date getDateEntered() {
+	public LocalDateTime getDateEntered() {
 		return dateEntered;
 	}
 

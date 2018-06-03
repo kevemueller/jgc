@@ -1,37 +1,17 @@
 package hu.keve.jgc.dao.jdo;
 
-import javax.jdo.annotations.PersistenceCapable;
-import javax.jdo.annotations.Persistent;
-import javax.jdo.annotations.PrimaryKey;
-
 import hu.keve.jgc.dao.Billterm;
 
-@PersistenceCapable(table = "billterms")
-public class BilltermJDO implements Billterm {
-	@PrimaryKey
-	String guid;
-
+public class BilltermJDO extends GuidTypeJDO implements Billterm {	
 	String name;
 	String description;
-	long refcount;
+	int refcount;
 	boolean invisible;
 	BilltermJDO parent;
 	String type;
 
-	// this is mapped in Billterm.jdo
-	@Persistent(defaultFetchGroup = "true")
 	BtDaysJDO days;
-	int cutoff;
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see hu.keve.jgc.dao.jdo.Billterm#getGuid()
-	 */
-	@Override
-	public String getGuid() {
-		return guid;
-	}
+	Integer cutoff;
 
 	/*
 	 * (non-Javadoc)

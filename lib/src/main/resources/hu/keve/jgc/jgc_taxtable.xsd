@@ -22,7 +22,7 @@
 				<xs:sequence>
 					<xs:element name="guid" type="idType" />
 					<xs:element name="name" type="xs:string" />
-					<xs:element name="refcount" type="xs:unsignedByte" />
+					<xs:element name="refcount" type="xs:long" />
 					<xs:element name="invisible" type="bool01" />
 					<xs:element minOccurs="0" name="parent"
 						type="taxtable:taxtableRefType" />

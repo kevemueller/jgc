@@ -31,19 +31,19 @@ public final class TestXMLValidateRegression {
 	}
 
 	@ParameterizedTest(name = "{index}{0}")
-	@FilesSource(path = "C:/Users/keve/git/gnucash/data/accounts", regexp = ".*\\.gnucash-xea$")
+	@FilesSource(path = "lib/Gnucash/data/accounts", regexp = ".*\\.gnucash-xea$")
 	void validateDataAccounts(Path path) throws SAXException, IOException {
 		doValidate(path);
 	}
 
 	@ParameterizedTest(name = "{index}{0}")
-	@FilesSource(path = "C:/Users/keve/git/gnucash/doc/examples", regexp = ".*\\.gnucash$")
+	@FilesSource(path = "lib/Gnucash/doc/examples", regexp = ".*\\.gnucash$")
 	void expandDocExamples(Path path) throws SAXException, IOException {
 		doCopy(path);
 	}
 
 	@ParameterizedTest(name = "{index}{0}")
-	@FilesSource(path = "C:/Users/keve/git/gnucash/doc/examples", regexp = ".*\\.gnucash$")
+	@FilesSource(path = "lib/Gnucash/doc/examples", regexp = ".*\\.gnucash$")
 	void validateDocExamples(Path path) throws SAXException, IOException {
 		doValidate(path);
 	}

@@ -8,7 +8,7 @@ public interface Taxtable {
 
 	String getName();
 
-	short getRefcount();
+	long getRefcount();
 
 	boolean isInvisible();
 

@@ -1,5 +1,6 @@
 package hu.keve.jgc.dao;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import hu.keve.jgc.util.Fraction;
@@ -12,7 +13,7 @@ public interface Price {
 
 	Commodity getCurrency();
 
-	Date getDate();
+	LocalDateTime getDate();
 
 	String getSource();
 

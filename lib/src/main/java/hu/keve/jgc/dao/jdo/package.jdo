@@ -1,54 +1,170 @@
-<?xml version="1.0" encoding="UTF-8" ?>
 <jdo xmlns="http://xmlns.jcp.org/xml/ns/jdo/jdo"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/jdo/jdo http://xmlns.jcp.org/xml/ns/jdo/jdo_3_1.xsd"
-	version="3.1">
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/jdo/jdo" version="3.1">
 
 	<package name="hu.keve.jgc.dao.jdo">
-		<class name="BilltermJDO">
-			<field name="days" persistence-modifier="persistent">
-				<embedded>
-					<field name="dueDays" column="duedays" />
-					<field name="discountDays" column="discountdays" />
-					<field name="discount">
-						<embedded>
-							<field name="num" column="discount_num" />
-							<field name="denom" column="discount_denom" />
-						</embedded>
-					</field>
-				</embedded>
+		<class name="AccountJDO">
+			<field name="slots">
+				<element />
+			</field>
+			<field name="lots">
+				<element mapped-by="account" />
 			</field>
 		</class>
-
-		<class name="InvoiceJDO" table="invoices">
-			<field name="guid" persistent-modifier="persistent" primary-key="true" />
-			<field name="owner" persistent-modifier="persistent" default-fetch-group="true">
-				<embedded null-indicator-column="owner_type">
-					<field name="type" column="owner_type">
-						<extension vendor-name="datanucleus"
-							key="enum-value-getter" value="toIntValue" />
-					</field>
-					<field name="guid" column="owner_guid" />
-				</embedded>
+		<class name="AddressJDO" embedded-only="true" />
+		<class name="BilltermJDO">
+			<field name="days" default-fetch-group="true" />
+		</class>
+		<class name="BookJDO">
+			<field name="slots">
+				<element />
 			</field>
-			<field name="billto" persistent-modifier="persistent" default-fetch-group="true">
-				<embedded null-indicator-column="billto_type">
-					<field name="type" column="billto_type">
-						<extension vendor-name="datanucleus"
-							key="enum-value-getter" value="toIntValue" />
-					</field>
-					<field name="guid" column="billto_guid" />
-				</embedded>
+		</class>
+		<class name="BtDaysJDO" embedded-only="true">
+			<field name="discount" default-fetch-group="true" />
+		</class>
+		<class name="BudgetAmountJDO">
+			<field name="amount" default-fetch-group="true" />
+		</class>
+		<class name="BudgetJDO">
+			<field name="recurrences">
+				<element />
 			</field>
-			<field name="chargeAmt" default-fetch-group="true">
-				<embedded>
-					<field name="num" column="charge_amt_num" />
-					<field name="denom" column="charge_amt_denom" />
-				</embedded>
+			<field name="budgetAmounts">
+				<element mapped-by="budget" />
 			</field>
 			<field name="slots">
-				<element column="obj_guid" />
+				<element />
 			</field>
+		</class>
+		<class name="CommodityJDO">
+			<field name="slots">
+				<element />
+			</field>
+		</class>
+		<class name="CustomerJDO">
+			<field name="discount" default-fetch-group="true" />
+			<field name="credit" default-fetch-group="true" />
+		</class>
+		<class name="EmployeeJDO">
+			<field name="workday" default-fetch-group="true" />
+			<field name="rate" default-fetch-group="true" />
+			<field name="slots">
+				<element />
+			</field>
+		</class>
+		<class name="EntryJDO">
+			<field name="quantity" default-fetch-group="true" />
+			<field name="iPrice" default-fetch-group="true" />
+			<field name="iDiscount" default-fetch-group="true" />
+			<field name="bPrice" default-fetch-group="true" />
+			<field name="bPaytype">
+				<extension vendor-name="datanucleus"
+					key="enum-value-getter" value="toIntValue" />
+			</field>
+			<field name="billTo" default-fetch-group="true" />
+		</class>
+		<class name="GncLockJDO" identity-type="nondurable">
+			<field name="hostname" default-fetch-group="true" />
+		</class>
+		<class name="GuidTypeJDO" identity-type="application">
+			<inheritance strategy="complete-table" />
+			<field name="guid" primary-key="true" />
+		</class>
+		<class name="InvoiceJDO">
+			<field name="owner" default-fetch-group="true" />
+			<field name="billto" default-fetch-group="true" />
+			<field name="chargeAmt" default-fetch-group="true" />
+			<field name="slots">
+				<element />
+			</field>
+		</class>
+		<class name="JobJDO" />
+		<class name="LotJDO">
+			<field name="slots">
+				<element />
+			</field>
+		</class>
+		<class name="OrderJDO">
+			<field name="owner" default-fetch-group="true" />
+		</class>
+		<class name="OwnerJDO" embedded-only="true">
+			<field name="type">
+				<extension vendor-name="datanucleus"
+					key="enum-value-getter" value="toIntValue" />
+			</field>
+		</class>
+		<class name="PriceJDO">
+			<field name="value" default-fetch-group="true" />
+		</class>
+		<class name="RecurrenceJDO">
+			<field name="periodType">
+				<extension vendor-name="datanucleus"
+					key="enum-value-getter" value="toValue" />
+			</field>
+			<field name="periodStart" />
+			<field name="weekendAdjust">
+				<extension vendor-name="datanucleus"
+					key="enum-value-getter" value="toValue" />
+			</field>
+		</class>
+		<class name="SchedxactionJDO">
+			<field name="startDate" />
+			<field name="endDate" />
+			<field name="lastOccur" />
+			<field name="recurrences">
+				<element />
+			</field>
+			<field name="slots">
+				<element />
+			</field>
+		</class>
+		<class name="SlotJDO">
+			<field name="slotType">
+				<extension vendor-name="datanucleus"
+					key="enum-value-getter" value="toIntValue" />
+			</field>
+			<field name="numericVal" default-fetch-group="true" />
+			<field name="gdateVal" />
+		</class>
+		<class name="SplitJDO">
+			<field name="reconcileState">
+				<extension vendor-name="datanucleus"
+					key="enum-value-getter" value="toValue" />
+			</field>
+			<field name="value" default-fetch-group="true" />
+			<field name="quantity" default-fetch-group="true" />
+			<field name="slots">
+				<element />
+			</field>
+		</class>
+		<class name="TaxtableEntryJDO">
+			<field name="amount" default-fetch-group="true" />
+			<field name="type">
+				<extension vendor-name="datanucleus"
+					key="enum-value-getter" value="toIntValue" />
+			</field>
+		</class>
+		<class name="TaxtableJDO">
+			<field name="entries">
+				<element mapped-by="taxtable" />
+			</field>
+		</class>
+		<class name="TransactionJDO">
+			<field name="slots">
+				<element />
+			</field>
+			<field name="splits">
+				<element mapped-by="tx" />
+			</field>
+		</class>
+		<class name="VendorJDO">
+			<field name="slots">
+				<element />
+			</field>
+		</class>
+		<class name="VersionJDO" identity-type="application">
+			<field name="tableName" primary-key="true" />
 		</class>
 	</package>
 </jdo>

@@ -1,35 +1,17 @@
 package hu.keve.jgc.dao.jdo;
 
-import java.util.Date;
-
-import javax.jdo.annotations.Column;
-import javax.jdo.annotations.Convert;
-import javax.jdo.annotations.Extension;
-import javax.jdo.annotations.PersistenceCapable;
-import javax.jdo.annotations.PrimaryKey;
+import java.time.LocalDate;
 
 import hu.keve.jgc.dao.Recurrence;
-import hu.keve.jgc.util.GCDateStringConverter;
 
-@PersistenceCapable(table = "recurrences")
 public final class RecurrenceJDO implements Recurrence {
-	@PrimaryKey
-	int id;
+//	int id;
 
-	String objGuid;
-	@Column(name="recurrence_mult")
-	short mult;
+	String obj;
+	int mult;
 
-	@Column(name="recurrence_period_type")
-	@Extension(vendorName = "datanucleus", key = "enum-value-getter", value = "toValue")
-	RecurrencePeriodTypes periodType;
-	
-	@Column(name="recurrence_period_start")
-	@Convert(GCDateStringConverter.class)
-	Date periodStart;
-	
-	@Column(name="recurrence_weekend_adjust")
-	@Extension(vendorName = "datanucleus", key = "enum-value-getter", value = "toValue")
+	RecurrencePeriodTypes periodType;	
+	LocalDate periodStart;	
 	WeekendAdjustTypes weekendAdjust;
 
 
@@ -37,7 +19,7 @@ public final class RecurrenceJDO implements Recurrence {
 	 * @see hu.keve.jgc.dao.jdo.Recurrence#getRecurrenceMult()
 	 */
 	@Override
-	public short getMult() {
+	public int getMult() {
 		return mult;
 	}
 
@@ -53,7 +35,7 @@ public final class RecurrenceJDO implements Recurrence {
 	 * @see hu.keve.jgc.dao.jdo.Recurrence#getRecurrencePeriodStart()
 	 */
 	@Override
-	public Date getPeriodStart() {
+	public LocalDate getPeriodStart() {
 		return periodStart;
 	}
 

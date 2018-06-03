@@ -2,21 +2,10 @@ package hu.keve.jgc.dao.jdo;
 
 import java.util.Collection;
 
-import javax.jdo.annotations.Column;
-import javax.jdo.annotations.Element;
-import javax.jdo.annotations.Embedded;
-import javax.jdo.annotations.PersistenceCapable;
-import javax.jdo.annotations.Persistent;
-import javax.jdo.annotations.PrimaryKey;
-
 import hu.keve.jgc.dao.Employee;
 import hu.keve.jgc.util.Fraction;
 
-@PersistenceCapable(table = "employees")
-public class EmployeeJDO implements Employee {
-	@PrimaryKey
-	String guid;
-
+public final class EmployeeJDO extends GuidTypeJDO implements Employee {
 	String username;
 	String id;
 	String language;
@@ -24,36 +13,15 @@ public class EmployeeJDO implements Employee {
 	boolean active;
 
 	CommodityJDO currency;
-	@Column(name = "ccard_guid")
 	AccountJDO ccard;
 
-	@Persistent(defaultFetchGroup = "true")
-	@Embedded(members = { @Persistent(name = "num", column = "workday_num"),
-			@Persistent(name = "denom", column = "workday_denom") })
 	Fraction workday;
-
-	@Persistent(defaultFetchGroup = "true")
-	@Embedded(members = { @Persistent(name = "num", column = "rate_num"),
-			@Persistent(name = "denom", column = "rate_denom") })
 	Fraction rate;
 
-	@Embedded(members = { @Persistent(name = "name", column = "addr_name"),
-			@Persistent(name = "addr1", column = "addr_addr1"), @Persistent(name = "addr2", column = "addr_addr2"),
-			@Persistent(name = "addr3", column = "addr_addr3"), @Persistent(name = "addr4", column = "addr_addr4"),
-			@Persistent(name = "addrPhone", column = "addr_phone"), @Persistent(name = "addrFax", column = "addr_fax"),
-			@Persistent(name = "addrEmail", column = "addr_email") })
 	AddressJDO addr;
 
-	@Element(column = "obj_guid")
 	Collection<SlotJDO> slots;
 
-	/* (non-Javadoc)
-	 * @see hu.keve.jgc.dao.jdo.Employee#getGuid()
-	 */
-	@Override
-	public String getGuid() {
-		return guid;
-	}
 
 	/* (non-Javadoc)
 	 * @see hu.keve.jgc.dao.jdo.Employee#getUsername()

@@ -1,52 +1,31 @@
 package hu.keve.jgc.dao.jdo;
 
+import java.time.LocalDate;
 import java.util.Collection;
-import java.util.Date;
-
-import javax.jdo.annotations.Column;
-import javax.jdo.annotations.Convert;
-import javax.jdo.annotations.Element;
-import javax.jdo.annotations.PersistenceCapable;
-import javax.jdo.annotations.PrimaryKey;
 
 import hu.keve.jgc.dao.Schedxaction;
-import hu.keve.jgc.util.GCDateStringConverter;
 
-@PersistenceCapable(table = "schedxactions")
-public final class SchedxactionJDO implements Schedxaction {
-	@PrimaryKey
-	String guid;
-
+public final class SchedxactionJDO extends GuidTypeJDO implements Schedxaction {
 	String name;
 	boolean enabled;
 
-	@Convert(GCDateStringConverter.class)
-	Date startDate;
-	@Convert(GCDateStringConverter.class)
-	Date endDate;
-	@Convert(GCDateStringConverter.class)
-	Date lastOccur;
+	LocalDate startDate;
+	LocalDate endDate;
+	LocalDate lastOccur;
 	int numOccur;
 	int remOccur;
 	boolean autoCreate;
 	boolean autoNotify;
-	@Column(name="adv_creation")
 	short advanceCreateDays;
-	@Column(name="adv_notify")
 	short advanceRemindDays;
 	short instanceCount;
-	@Column(name = "template_act_guid")
 	AccountJDO templateAccount;
-	@Element(column = "obj_guid")
 	Collection<RecurrenceJDO> recurrences;
-	@Element(column = "obj_guid")
 	Collection<SlotJDO> slots;
 
-	public String getGuid() {
-		return guid;
-	}
-
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see hu.keve.jgc.dao.jdo.Schedxaction#getName()
 	 */
 	@Override
@@ -54,7 +33,9 @@ public final class SchedxactionJDO implements Schedxaction {
 		return name;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see hu.keve.jgc.dao.jdo.Schedxaction#isEnabled()
 	 */
 	@Override
@@ -62,27 +43,33 @@ public final class SchedxactionJDO implements Schedxaction {
 		return enabled;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see hu.keve.jgc.dao.jdo.Schedxaction#getStartDate()
 	 */
 	@Override
-	public Date getStartDate() {
+	public LocalDate getStartDate() {
 		return startDate;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see hu.keve.jgc.dao.jdo.Schedxaction#getEndDate()
 	 */
 	@Override
-	public Date getEndDate() {
+	public LocalDate getEndDate() {
 		return endDate;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see hu.keve.jgc.dao.jdo.Schedxaction#getLastOccur()
 	 */
 	@Override
-	public Date getLastOccur() {
+	public LocalDate getLastOccur() {
 		return lastOccur;
 	}
 
@@ -90,7 +77,9 @@ public final class SchedxactionJDO implements Schedxaction {
 		return numOccur;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see hu.keve.jgc.dao.jdo.Schedxaction#getRemOccur()
 	 */
 	@Override
@@ -98,7 +87,9 @@ public final class SchedxactionJDO implements Schedxaction {
 		return remOccur;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see hu.keve.jgc.dao.jdo.Schedxaction#isAutoCreate()
 	 */
 	@Override
@@ -106,7 +97,9 @@ public final class SchedxactionJDO implements Schedxaction {
 		return autoCreate;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see hu.keve.jgc.dao.jdo.Schedxaction#isAutoNotify()
 	 */
 	@Override
@@ -114,7 +107,9 @@ public final class SchedxactionJDO implements Schedxaction {
 		return autoNotify;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see hu.keve.jgc.dao.jdo.Schedxaction#getAdvCreation()
 	 */
 	@Override
@@ -122,7 +117,9 @@ public final class SchedxactionJDO implements Schedxaction {
 		return advanceCreateDays;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see hu.keve.jgc.dao.jdo.Schedxaction#getAdvNotify()
 	 */
 	@Override
@@ -130,7 +127,9 @@ public final class SchedxactionJDO implements Schedxaction {
 		return advanceRemindDays;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see hu.keve.jgc.dao.jdo.Schedxaction#getInstanceCount()
 	 */
 	@Override
@@ -138,7 +137,9 @@ public final class SchedxactionJDO implements Schedxaction {
 		return instanceCount;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see hu.keve.jgc.dao.jdo.Schedxaction#getTemplateAct()
 	 */
 	@Override
@@ -146,7 +147,9 @@ public final class SchedxactionJDO implements Schedxaction {
 		return templateAccount;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see hu.keve.jgc.dao.jdo.Schedxaction#getRecurrences()
 	 */
 	@Override

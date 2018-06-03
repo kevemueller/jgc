@@ -1,5 +1,6 @@
 package hu.keve.jgc.dao;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public interface Order {
@@ -11,9 +12,9 @@ public interface Order {
 
 	boolean isActive();
 
-	Date getDateOpened();
+	LocalDateTime getDateOpened();
 
-	Date getDateClosed();
+	LocalDateTime getDateClosed();
 
 	Owner getOwner();
 

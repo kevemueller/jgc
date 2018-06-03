@@ -1,51 +1,22 @@
 package hu.keve.jgc.dao.jdo;
 
-import javax.jdo.annotations.Embedded;
-import javax.jdo.annotations.PersistenceCapable;
-import javax.jdo.annotations.Persistent;
-import javax.jdo.annotations.PrimaryKey;
-
 import hu.keve.jgc.dao.Customer;
 import hu.keve.jgc.dao.TaxIncludedTypes;
 import hu.keve.jgc.util.Fraction;
 
-@PersistenceCapable(table = "customers")
-public class CustomerJDO implements Customer {
-	@PrimaryKey
-	String guid;
-
+public class CustomerJDO extends GuidTypeJDO implements Customer {
 	String name;
 	String id;
 	String notes;
 	boolean active;
 	
-	@Persistent(defaultFetchGroup = "true")
-	@Embedded(members = { @Persistent(name = "num", column = "discount_num"),
-			@Persistent(name = "denom", column = "discount_denom") })
 	Fraction discount;	
-
-	@Persistent(defaultFetchGroup = "true")
-	@Embedded(members = { @Persistent(name = "num", column = "credit_num"),
-			@Persistent(name = "denom", column = "credit_denom") })
 	Fraction credit;	
 	
 	CommodityJDO currency;
 	boolean taxOverride;
-	@Embedded(members = { @Persistent(name = "name", column = "addr_name"),
-			@Persistent(name = "addr1", column = "addr_addr1"), @Persistent(name = "addr2", column = "addr_addr2"),
-			@Persistent(name = "addr3", column = "addr_addr3"), @Persistent(name = "addr4", column = "addr_addr4"),
-			@Persistent(name = "addrPhone", column = "addr_phone"), @Persistent(name = "addrFax", column = "addr_fax"),
-			@Persistent(name = "addrEmail", column = "addr_email") })
-	AddressJDO addr;
 
-	@Embedded(members = { @Persistent(name = "name", column = "shipaddr_name"),
-			@Persistent(name = "addr1", column = "shipaddr_addr1"),
-			@Persistent(name = "addr2", column = "shipaddr_addr2"),
-			@Persistent(name = "addr3", column = "shipaddr_addr3"),
-			@Persistent(name = "addr4", column = "shipaddr_addr4"),
-			@Persistent(name = "addrPhone", column = "shipaddr_phone"),
-			@Persistent(name = "addrFax", column = "shipaddr_fax"),
-			@Persistent(name = "addrEmail", column = "shipaddr_email") })
+	AddressJDO addr;
 	AddressJDO shipaddr;
 
 	BilltermJDO terms;
@@ -53,9 +24,6 @@ public class CustomerJDO implements Customer {
 	TaxtableJDO taxtable;
 	
 	
-	public String getGuid() {
-		return guid;
-	}
 	/* (non-Javadoc)
 	 * @see hu.keve.jgc.dao.jdo.Customer#getName()
 	 */

@@ -2,34 +2,16 @@ package hu.keve.jgc.dao.jdo;
 
 import java.util.Collection;
 
-import javax.jdo.annotations.Column;
-import javax.jdo.annotations.Element;
-import javax.jdo.annotations.PersistenceCapable;
-import javax.jdo.annotations.PrimaryKey;
-
 import hu.keve.jgc.dao.Taxtable;
 
-@PersistenceCapable(table = "taxtables")
-public class TaxtableJDO implements Taxtable {
-	@PrimaryKey
-	String guid;
-
+public class TaxtableJDO extends GuidTypeJDO implements Taxtable {
 	String name;
-	short refcount;
+	long refcount;
 	boolean invisible;
 	TaxtableJDO parent;
 	
-	@Column(name="taxtable_entries")
-	@Element(column="taxtable")
 	Collection<TaxtableEntryJDO> entries;
 
-	/* (non-Javadoc)
-	 * @see hu.keve.jgc.dao.jdo.Taxtable#getGuid()
-	 */
-	@Override
-	public String getGuid() {
-		return guid;
-	}
 
 	/* (non-Javadoc)
 	 * @see hu.keve.jgc.dao.jdo.Taxtable#getName()
@@ -43,7 +25,7 @@ public class TaxtableJDO implements Taxtable {
 	 * @see hu.keve.jgc.dao.jdo.Taxtable#getRefcount()
 	 */
 	@Override
-	public short getRefcount() {
+	public long getRefcount() {
 		return refcount;
 	}
 

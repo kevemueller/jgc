@@ -57,7 +57,13 @@
 
 
 	<xs:element name="price" type="price:priceType" />
-	<xs:element name="gdate" type="xs:date" />
+
+	<xs:simpleType name="gdateV">
+		<xs:restriction base="xs:date">
+			<xs:pattern value="\d{4}-\d{2}-\d{2}"></xs:pattern>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:element name="gdate" type="gdateV" />
 
 	<xs:complexType name="gdateType">
 		<xs:sequence>
@@ -109,7 +115,7 @@
 	</xs:complexType>
 
 
-	<xs:complexType name="guidType"/>
+	<xs:complexType name="guidType" />
 
 	<xs:complexType name="versionedGuidType">
 		<xs:complexContent>

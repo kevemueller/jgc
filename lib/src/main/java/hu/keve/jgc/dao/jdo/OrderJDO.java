@@ -1,35 +1,18 @@
 package hu.keve.jgc.dao.jdo;
 
-import java.util.Date;
-
-import javax.jdo.annotations.Embedded;
-import javax.jdo.annotations.PersistenceCapable;
-import javax.jdo.annotations.Persistent;
-import javax.jdo.annotations.PrimaryKey;
+import java.time.LocalDateTime;
 
 import hu.keve.jgc.dao.Order;
 
-@PersistenceCapable(table = "orders")
-public class OrderJDO implements Order {
-	@PrimaryKey
-	String guid;
-
+public class OrderJDO extends GuidTypeJDO implements Order {
 	String id;
 	String notes;
 	String reference;
 	boolean active;
-	Date dateOpened;
-	Date dateClosed;
-
-	@Persistent(defaultFetchGroup = "true")
-	@Embedded(members = { @Persistent(name = "type", column = "owner_type"),
-			@Persistent(name = "guid", column = "owner_guid") })
+	LocalDateTime dateOpened;
+	LocalDateTime dateClosed;
 	OwnerJDO owner;
 
-
-	public String getGuid() {
-		return guid;
-	}
 
 	/*
 	 * (non-Javadoc)
@@ -77,7 +60,7 @@ public class OrderJDO implements Order {
 	 * @see hu.keve.jgc.dao.jdo.Order#getDateOpened()
 	 */
 	@Override
-	public Date getDateOpened() {
+	public LocalDateTime getDateOpened() {
 		return dateOpened;
 	}
 
@@ -87,7 +70,7 @@ public class OrderJDO implements Order {
 	 * @see hu.keve.jgc.dao.jdo.Order#getDateClosed()
 	 */
 	@Override
-	public Date getDateClosed() {
+	public LocalDateTime getDateClosed() {
 		return dateClosed;
 	}
 

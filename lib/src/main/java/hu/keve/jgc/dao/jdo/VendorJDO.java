@@ -2,46 +2,23 @@ package hu.keve.jgc.dao.jdo;
 
 import java.util.Collection;
 
-import javax.jdo.annotations.Column;
-import javax.jdo.annotations.Element;
-import javax.jdo.annotations.Embedded;
-import javax.jdo.annotations.PersistenceCapable;
-import javax.jdo.annotations.Persistent;
-import javax.jdo.annotations.PrimaryKey;
-
 import hu.keve.jgc.dao.TaxIncludedTypes;
 import hu.keve.jgc.dao.Vendor;
 
-@PersistenceCapable(table = "vendors")
-public class VendorJDO implements Vendor {
-	@PrimaryKey
-	String guid;
-
+public final class VendorJDO extends GuidTypeJDO implements Vendor {
 	String name;
 	String id;
 	String notes;
 	CommodityJDO currency;
 	boolean active;
 	boolean taxOverride;
-	@Embedded(members = { @Persistent(name = "name", column = "addr_name"),
-			@Persistent(name = "addr1", column = "addr_addr1"), @Persistent(name = "addr2", column = "addr_addr2"),
-			@Persistent(name = "addr3", column = "addr_addr3"), @Persistent(name = "addr4", column = "addr_addr4"),
-			@Persistent(name = "addrPhone", column = "addr_phone"), @Persistent(name = "addrFax", column = "addr_fax"),
-			@Persistent(name = "addrEmail", column = "addr_email") })
 	AddressJDO addr;
 	BilltermJDO terms;
-	@Column(name="tax_included")
 	TaxIncludedTypes taxIncluded;
-	@Column(name="tax_table")
 	TaxtableJDO taxtable;
-	@Element(column = "obj_guid")
 	Collection<SlotJDO> slots;
 	
 	
-
-	public String getGuid() {
-		return guid;
-	}
 	/* (non-Javadoc)
 	 * @see hu.keve.jgc.dao.jdo.Vendor#getName()
 	 */

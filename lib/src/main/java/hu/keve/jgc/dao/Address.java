@@ -12,10 +12,10 @@ public interface Address {
 
 	String getAddr4();
 
-	String getAddrPhone();
+	String getPhone();
 
-	String getAddrFax();
+	String getFax();
 
-	String getAddrEmail();
+	String getEmail();
 
 }

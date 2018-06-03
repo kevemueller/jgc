@@ -15,6 +15,14 @@
 	jaxb:extensionBindingPrefixes="xjc annox inheritance" version="2.1">
 
 	<jaxb:globalBindings>
+		<jaxb:javaType name="java.time.LocalDate"
+			xmlType="gdateV" parseMethod="java.time.LocalDate.parse"
+			printMethod="java.lang.String.valueOf" />
+
+		<jaxb:javaType name="java.time.LocalDateTime"
+			xmlType="ts:dateType" parseMethod="hu.keve.jgc.dao.jaxb.adapters.TsDateTypeUtil.parse"
+			printMethod="hu.keve.jgc.dao.jaxb.adapters.TsDateTypeUtil.print" />
+
 		<!-- Our JDO interface defines enumerations for us, use them! -->
 		<jaxb:javaType
 			name="hu.keve.jgc.dao.Account.AccountTypes" xmlType="act:actTypeEnum"
@@ -123,18 +131,6 @@
 			<inheritance:implements>hu.keve.jgc.dao.Address
 			</inheritance:implements>
 		</jaxb:bindings>
-		<jaxb:bindings
-			node="//xs:complexType[@name='addrType']//xs:element[@name='phone']">
-			<jaxb:property name="addrPhone" />
-		</jaxb:bindings>
-		<jaxb:bindings
-			node="//xs:complexType[@name='addrType']//xs:element[@name='fax']">
-			<jaxb:property name="addrFax" />
-		</jaxb:bindings>
-		<jaxb:bindings
-			node="//xs:complexType[@name='addrType']//xs:element[@name='email']">
-			<jaxb:property name="addrEmail" />
-		</jaxb:bindings>
 	</jaxb:bindings>
 
 	<!-- TODO: bgt -->
@@ -242,22 +238,14 @@
 	<jaxb:bindings schemaLocation="jgc_entry.xsd">
 		<jaxb:bindings
 			node="//xs:complexType[@name='entryType']">
-			<inheritance:implements>hu.keve.jgc.dao.Entry
+			<inheritance:implements>hu.keve.jgc.dao.jaxb.EntryJAXB
 			</inheritance:implements>
 
 			<jaxb:bindings node="//xs:element[@name='date']">
-				<annox:annotate target="field">@javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter(hu.keve.jgc.dao.jaxb.adapters.TsTypeAdapter.class)
-				</annox:annotate>
-				<jaxb:property>
-					<jaxb:baseType name="java.util.Date" />
-				</jaxb:property>
+				<jaxb:property name="wrappedDate"/>
 			</jaxb:bindings>
 			<jaxb:bindings node="//xs:element[@name='entered']">
-				<annox:annotate target="field">@javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter(hu.keve.jgc.dao.jaxb.adapters.TsTypeAdapter.class)
-				</annox:annotate>
-				<jaxb:property name="dateEntered">
-					<jaxb:baseType name="java.util.Date" />
-				</jaxb:property>
+				<jaxb:property name="wrappedDateEntered"/>
 			</jaxb:bindings>
 			<jaxb:bindings node="//xs:element[@name='qty']">
 				<jaxb:property name="quantity" />
@@ -285,18 +273,10 @@
 				<jaxb:property name="wrappedGuid" />
 			</jaxb:bindings>
 			<jaxb:bindings node="//xs:element[@name='opened']">
-				<annox:annotate target="field">@javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter(hu.keve.jgc.dao.jaxb.adapters.TsTypeAdapter.class)
-				</annox:annotate>
-				<jaxb:property name="dateOpened">
-					<jaxb:baseType name="java.util.Date" />
-				</jaxb:property>
+				<jaxb:property name="wrappedDateOpened"/>
 			</jaxb:bindings>
 			<jaxb:bindings node="//xs:element[@name='posted']">
-				<annox:annotate target="field">@javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter(hu.keve.jgc.dao.jaxb.adapters.TsTypeAdapter.class)
-				</annox:annotate>
-				<jaxb:property name="datePosted">
-					<jaxb:baseType name="java.util.Date" />
-				</jaxb:property>
+				<jaxb:property name="wrappedDatePosted"/>
 			</jaxb:bindings>
 			<jaxb:bindings node="//xs:element[@name='postacc']">
 				<annox:annotate target="field">@hu.keve.jgc.util.jaxb.XmlIDREF2
@@ -368,18 +348,10 @@
 				<jaxb:property name="wrappedGuid" />
 			</jaxb:bindings>
 			<jaxb:bindings node="//xs:element[@name='opened']">
-				<annox:annotate target="field">@javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter(hu.keve.jgc.dao.jaxb.adapters.TsTypeAdapter.class)
-				</annox:annotate>
-				<jaxb:property name="dateOpened">
-					<jaxb:baseType name="java.util.Date" />
-				</jaxb:property>
+				<jaxb:property name="wrappedDateOpened"/>
 			</jaxb:bindings>
 			<jaxb:bindings node="//xs:element[@name='closed']">
-				<annox:annotate target="field">@javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter(hu.keve.jgc.dao.jaxb.adapters.TsTypeAdapter.class)
-				</annox:annotate>
-				<jaxb:property name="dateClosed">
-					<jaxb:baseType name="java.util.Date" />
-				</jaxb:property>
+				<jaxb:property name="wrappedDateClosed"/>
 			</jaxb:bindings>
 		</jaxb:bindings>
 	</jaxb:bindings>
@@ -401,11 +373,7 @@
 				<jaxb:property name="wrappedGuid" />
 			</jaxb:bindings>
 			<jaxb:bindings node=".//xs:element[@name='time']">
-				<annox:annotate target="field">@javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter(hu.keve.jgc.dao.jaxb.adapters.TsTypeAdapter.class)
-				</annox:annotate>
-				<jaxb:property name="date">
-					<jaxb:baseType name="java.util.Date" />
-				</jaxb:property>
+				<jaxb:property name="wrappedDate"/>
 			</jaxb:bindings>
 		</jaxb:bindings>
 	</jaxb:bindings>
@@ -413,14 +381,10 @@
 	<jaxb:bindings schemaLocation="jgc_recurrence.xsd">
 		<jaxb:bindings
 			node="//xs:complexType[@name='recurrenceType']">
-			<inheritance:implements>hu.keve.jgc.dao.Recurrence
+			<inheritance:implements>hu.keve.jgc.dao.jaxb.RecurrenceJAXB
 			</inheritance:implements>
 			<jaxb:bindings node="//xs:element[@name='start']">
-				<annox:annotate target="field">@javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter(hu.keve.jgc.dao.jaxb.adapters.TsTypeAdapter.class)
-				</annox:annotate>
-				<jaxb:property name="periodStart">
-					<jaxb:baseType name="java.util.Date" />
-				</jaxb:property>
+				<jaxb:property name="wrappedPeriodStart"/>
 			</jaxb:bindings>
 			<jaxb:bindings node="//xs:element[@name='weekend_adj']">
 				<jaxb:property name="weekendAdjust" />
@@ -445,18 +409,14 @@
 			</inheritance:implements>
 			<jaxb:bindings node=".//xs:element[@name='id']">
 				<jaxb:property name="wrappedGuid" />
-			</jaxb:bindings>			
+			</jaxb:bindings>
 			<jaxb:bindings
 				node="//xs:element[@name='reconciled-state']">
 				<jaxb:property name="reconcileState" />
 			</jaxb:bindings>
 			<jaxb:bindings
 				node="//xs:element[@name='reconcile-date']">
-				<annox:annotate target="field">@javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter(hu.keve.jgc.dao.jaxb.adapters.TsTypeAdapter.class)
-				</annox:annotate>
-				<jaxb:property>
-					<jaxb:baseType name="java.util.Date" />
-				</jaxb:property>
+				<jaxb:property name="wrappedDate"/>
 			</jaxb:bindings>
 			<jaxb:bindings node="//xs:element[@name='slots']">
 				<jaxb:property name="wrappedSlots" />
@@ -478,26 +438,14 @@
 				</jaxb:property>
 			</jaxb:bindings>
 			<jaxb:bindings node="//xs:element[@name='start']">
-				<annox:annotate target="field">@javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter(hu.keve.jgc.dao.jaxb.adapters.GdateTypeAdapter.class)
-				</annox:annotate>
-				<jaxb:property name="startDate">
-					<jaxb:baseType name="java.util.Date" />
-				</jaxb:property>
+				<jaxb:property name="wrappedStartDate"/>
 			</jaxb:bindings>
 			<jaxb:bindings node="//xs:element[@name='end']">
-				<annox:annotate target="field">@javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter(hu.keve.jgc.dao.jaxb.adapters.GdateTypeAdapter.class)
-				</annox:annotate>
-				<jaxb:property name="endDate">
-					<jaxb:baseType name="java.util.Date" />
-				</jaxb:property>
+				<jaxb:property name="wrappedEndDate" />
 			</jaxb:bindings>
 			<jaxb:bindings multiple="true"
 				node="//xs:element[@name='last']">
-				<annox:annotate target="field">@javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter(hu.keve.jgc.dao.jaxb.adapters.GdateTypeAdapter.class)
-				</annox:annotate>
-				<jaxb:property name="lastOccur">
-					<jaxb:baseType name="java.util.Date" />
-				</jaxb:property>
+				<jaxb:property name="wrappedLastOccur" />
 			</jaxb:bindings>
 			<jaxb:bindings node="//xs:element[@name='schedule']">
 				<jaxb:property name="wrappedRecurrences" />
@@ -533,18 +481,10 @@
 			</jaxb:bindings>
 			<jaxb:bindings
 				node="//xs:element[@name='date-entered']">
-				<annox:annotate target="field">@javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter(hu.keve.jgc.dao.jaxb.adapters.TsTypeAdapter.class)
-				</annox:annotate>
-				<jaxb:property name="dateEntered">
-					<jaxb:baseType name="java.util.Date" />
-				</jaxb:property>
+				<jaxb:property name="wrappedDateEntered"/>
 			</jaxb:bindings>
 			<jaxb:bindings node="//xs:element[@name='date-posted']">
-				<annox:annotate target="field">@javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter(hu.keve.jgc.dao.jaxb.adapters.TsTypeAdapter.class)
-				</annox:annotate>
-				<jaxb:property name="datePosted">
-					<jaxb:baseType name="java.util.Date" />
-				</jaxb:property>
+				<jaxb:property name="wrappedDatePosted"/>
 			</jaxb:bindings>
 			<jaxb:bindings node="//xs:element[@name='splits']">
 				<jaxb:property name="wrappedSplits" />

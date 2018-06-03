@@ -1,21 +1,20 @@
 package hu.keve.jgc.dao.jdo;
 
-import javax.jdo.annotations.PersistenceCapable;
-
 import hu.keve.jgc.dao.Address;
 
-@PersistenceCapable(embeddedOnly = "true")
 public class AddressJDO implements Address {
 	String name;
 	String addr1;
 	String addr2;
 	String addr3;
 	String addr4;
-	String addrPhone;
-	String addrFax;
-	String addrEmail;
+	String phone;
+	String fax;
+	String email;
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see hu.keve.jgc.dao.jdo.Address#getName()
 	 */
 	@Override
@@ -23,7 +22,9 @@ public class AddressJDO implements Address {
 		return name;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see hu.keve.jgc.dao.jdo.Address#getAddr1()
 	 */
 	@Override
@@ -31,7 +32,9 @@ public class AddressJDO implements Address {
 		return addr1;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see hu.keve.jgc.dao.jdo.Address#getAddr2()
 	 */
 	@Override
@@ -39,7 +42,9 @@ public class AddressJDO implements Address {
 		return addr2;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see hu.keve.jgc.dao.jdo.Address#getAddr3()
 	 */
 	@Override
@@ -47,7 +52,9 @@ public class AddressJDO implements Address {
 		return addr3;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see hu.keve.jgc.dao.jdo.Address#getAddr4()
 	 */
 	@Override
@@ -55,28 +62,34 @@ public class AddressJDO implements Address {
 		return addr4;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see hu.keve.jgc.dao.jdo.Address#getAddrPhone()
 	 */
 	@Override
-	public String getAddrPhone() {
-		return addrPhone;
+	public String getPhone() {
+		return phone;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see hu.keve.jgc.dao.jdo.Address#getAddrFax()
 	 */
 	@Override
-	public String getAddrFax() {
-		return addrFax;
+	public String getFax() {
+		return fax;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see hu.keve.jgc.dao.jdo.Address#getAddrEmail()
 	 */
 	@Override
-	public String getAddrEmail() {
-		return addrEmail;
+	public String getEmail() {
+		return email;
 	}
 
 }

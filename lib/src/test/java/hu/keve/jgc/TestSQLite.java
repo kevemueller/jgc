@@ -4,8 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.sql.SQLException;
+import java.util.Properties;
 
 import javax.jdo.Extent;
+import javax.jdo.JDOHelper;
 import javax.jdo.PersistenceManager;
 import javax.jdo.PersistenceManagerFactory;
 
@@ -21,6 +23,23 @@ class TestSQLite {
 	public TestSQLite() throws SQLException {
 	}
 
+	
+	@Test
+	void testJDOCreate() {
+		File file = new File("test.db");
+		if (file.exists()) {
+			file.delete();
+		}
+		Properties properties = new Properties();
+		String url = "jdbc:sqlite:" + file.toString();
+		properties.setProperty("javax.jdo.option.ConnectionURL", url);
+		properties.setProperty("datanucleus.generateSchema.database.mode", "drop-and-create");
+		properties.setProperty("datanucleus.rdbms.allowColumnReuse", "true");
+
+		PersistenceManagerFactory pmf = JDOHelper.getPersistenceManagerFactory(properties, "jgc");
+	}
+	
+	
 	/**
 	 * Open SQLite database file and go through all of the extents, throws Exception
 	 * if DAO maps incorrectly to the DB tables.
@@ -52,13 +71,13 @@ class TestSQLite {
 
 	@Test
 	void testJDOSlot() throws SQLException {
-		File file = new File("CJ.sqlite3.gnucash");
+		File file = new File("src/test/resources/Full.sqlite3.gnucash");
 		// properties.setProperty("datanucleus.rdbms.allowColumnReuse", "true");
 		PersistenceManagerFactory pmf = GnuCashDBSource.openSQLite3(file);
 
 		PersistenceManager pm = pmf.getPersistenceManager();
 
-		SlotJDO slot = pm.getObjectById(SlotJDO.class, 581);
+		SlotJDO slot = pm.getObjectById(SlotJDO.class, 1);
 		System.out.println(slot);
 		for (SlotJDO x : slot.getSlots(pm)) {
 			System.out.println(x);

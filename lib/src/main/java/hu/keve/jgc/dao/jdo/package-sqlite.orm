@@ -1,0 +1,1042 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<orm xmlns="http://xmlns.jcp.org/xml/ns/jdo/orm"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/jdo/orm http://xmlns.jcp.org/xml/ns/jdo/orm_3_0.xsd"
+	version="3.0">
+
+	<package name="hu.keve.jgc.dao.jdo">
+		<class name="GuidTypeJDO">
+			<field name="guid">
+				<column length="32" position="0" />
+			</field>
+		</class>
+
+		<class name="AccountJDO" table="accounts">
+			<field name="name">
+				<column length="2048" allows-null="false" position="1" />
+			</field>
+			<field name="accountType">
+				<column length="2048" allows-null="false" position="2" />
+			</field>
+			<field name="commodity">
+				<column name="commodity_guid" position="3" />
+			</field>
+			<field name="commodityScu">
+				<column position="4" />
+			</field>
+			<field name="nonStdScu">
+				<column position="5" />
+			</field>
+			<field name="parent">
+				<column name="parent_guid" position="6" />
+			</field>
+			<field name="code">
+				<column length="2048" position="7" />
+			</field>
+			<field name="description">
+				<column length="2048" position="8" />
+			</field>
+			<field name="hidden">
+				<column position="9" />
+			</field>
+			<field name="placeholder">
+				<column position="10" />
+			</field>
+			<field name="slots">
+				<element column="obj_guid" />
+			</field>
+		</class>
+
+		<class name="AddressJDO">
+			<field name="name">
+				<column length="1024" />
+			</field>
+			<field name="addr1">
+				<column length="1024" />
+			</field>
+			<field name="addr2">
+				<column length="1024" />
+			</field>
+			<field name="addr3">
+				<column length="1024" />
+			</field>
+			<field name="addr4">
+				<column length="1024" />
+			</field>
+			<field name="phone">
+				<column length="128" />
+			</field>
+			<field name="fax">
+				<column length="128" />
+			</field>
+			<field name="email">
+				<column length="256" />
+			</field>
+		</class>
+
+		<class name="BilltermJDO" table="billterms">
+			<field name="name">
+				<column length="2048" allows-null="false" position="1" />
+			</field>
+			<field name="description">
+				<column length="2048" allows-null="false" position="2" />
+			</field>
+			<field name="refcount">
+				<column position="3" />
+			</field>
+			<field name="invisible">
+				<column position="4" />
+			</field>
+			<field name="parent">
+				<column name="parent" position="5" />
+			</field>
+			<field name="type">
+				<column length="2048" allows-null="false" position="6" />
+			</field>
+			<field name="days">
+				<embedded>
+					<field name="dueDays">
+						<column name="duedays" position="7" />
+					</field>
+					<field name="discountDays">
+						<column name="discountdays" position="8" />
+					</field>
+					<field name="discount">
+						<embedded>
+							<field name="num">
+								<column name="discount_num" position="9" />
+							</field>
+							<field name="denom">
+								<column name="discount_denom" position="10" />
+							</field>
+						</embedded>
+					</field>
+				</embedded>
+			</field>
+			<field name="cutoff">
+				<column position="11" />
+			</field>
+		</class>
+
+
+		<class name="BudgetAmountJDO" table="budget_amounts">
+			<datastore-identity strategy="identity">
+				<column name="id" position="0" />
+			</datastore-identity>
+			<field name="budget">
+				<column name="budget_guid" allows-null="false" position="1" />
+			</field>
+			<field name="account">
+				<column name="account_guid" allows-null="false" position="2" />
+			</field>
+			<field name="periodNum">
+				<column allows-null="false" position="3" />
+			</field>
+			<field name="amount">
+				<embedded>
+					<field name="num">
+						<column name="amount_num" allows-null="false" position="4" />
+					</field>
+					<field name="denom">
+						<column name="amount_denom" allows-null="false"
+							position="5" />
+					</field>
+				</embedded>
+			</field>
+		</class>
+
+		<class name="BudgetJDO" table="budgets">
+			<field name="name">
+				<column allows-null="false" length="2048" position="1" />
+			</field>
+			<field name="description">
+				<column length="2048" position="2" />
+			</field>
+			<field name="numPeriods">
+				<column allows-null="false" position="3" />
+			</field>
+			<field name="recurrences">
+				<element column="obj_guid" />
+			</field>
+			<field name="slots">
+				<element column="obj_guid" />
+			</field>
+
+		</class>
+
+
+		<class name="BookJDO" table="books">
+			<field name="rootAccount">
+				<column name="root_account_guid" allows-null="false"
+					position="1" />
+			</field>
+			<field name="rootTemplate">
+				<column name="root_template_guid" allows-null="false"
+					position="2" />
+			</field>
+			<field name="slots">
+				<element column="obj_guid" />
+			</field>
+		</class>
+
+		<class name="BudgetJDO" table="budgets">
+			<field name="name">
+				<column length="2048" allows-null="false" position="1" />
+			</field>
+			<field name="description">
+				<column length="2048" position="2" />
+			</field>
+			<field name="numPeriods">
+				<column position="3	" />
+			</field>
+			<field name="recurrence">
+				<element column="obj_guid" />
+			</field>
+			<field name="slots">
+				<element column="obj_guid" />
+			</field>
+		</class>
+
+		<class name="CommodityJDO" table="commodities">
+			<field name="namespace">
+				<column length="2048" allows-null="false" position="1" />
+			</field>
+			<field name="mnemonic">
+				<column length="2048" allows-null="false" position="2" />
+			</field>
+			<field name="fullname">
+				<column length="2048" position="3" />
+			</field>
+			<field name="cusip">
+				<column length="2048" position="4" />
+			</field>
+			<field name="fraction">
+				<column position="5" />
+			</field>
+			<field name="quoteFlag">
+				<column allows-null="false" position="6" />
+			</field>
+			<field name="quoteSource">
+				<column length="2048" position="7" />
+			</field>
+			<field name="quoteTz">
+				<column length="2048" position="8" />
+			</field>
+			<field name="slots">
+				<element column="obj_guid" />
+			</field>
+		</class>
+
+		<class name="CustomerJDO" table="customers">
+			<field name="name">
+				<column length="2048" allows-null="false" position="1" />
+			</field>
+			<field name="id">
+				<column length="2048" allows-null="false" position="2" />
+			</field>
+			<field name="notes">
+				<column length="2048" allows-null="false" position="3" />
+			</field>
+			<field name="active">
+				<column position="4" />
+			</field>
+			<field name="discount">
+				<embedded>
+					<field name="num">
+						<column name="discount_num" allows-null="false"
+							position="5" />
+					</field>
+					<field name="denom">
+						<column name="discount_denom" allows-null="false"
+							position="6" />
+					</field>
+				</embedded>
+			</field>
+			<field name="credit">
+				<embedded>
+					<field name="num">
+						<column name="credit_num" allows-null="false" position="7" />
+					</field>
+					<field name="denom">
+						<column name="credit_denom" allows-null="false"
+							position="8" />
+					</field>
+				</embedded>
+			</field>
+			<field name="currency">
+				<column name="currency" allows-null="false" position="9" />
+			</field>
+			<field name="taxOverride">
+				<column position="10" />
+			</field>
+			<field name="addr">
+				<embedded>
+					<field name="name">
+						<column name="addr_name" position="11" />
+					</field>
+					<field name="addr1">
+						<column name="addr_addr1" position="12" />
+					</field>
+					<field name="addr2">
+						<column name="addr_addr2" position="13" />
+					</field>
+					<field name="addr3">
+						<column name="addr_addr3" position="14" />
+					</field>
+					<field name="addr4">
+						<column name="addr_addr4" position="15" />
+					</field>
+					<field name="phone">
+						<column name="addr_phone" position="16" />
+					</field>
+					<field name="fax">
+						<column name="addr_fax" position="17" />
+					</field>
+					<field name="email">
+						<column name="addr_email" position="18" />
+					</field>
+				</embedded>
+			</field>
+			<field name="shipaddr">
+				<embedded>
+					<field name="name">
+						<column name="shipaddr_name" position="19" />
+					</field>
+					<field name="addr1">
+						<column name="shipaddr_addr1" position="20" />
+					</field>
+					<field name="addr2">
+						<column name="shipaddr_addr2" position="21" />
+					</field>
+					<field name="addr3">
+						<column name="shipaddr_addr3" position="22" />
+					</field>
+					<field name="addr4">
+						<column name="shipaddr_addr4" position="23" />
+					</field>
+					<field name="phone">
+						<column name="shipaddr_phone" position="24" />
+					</field>
+					<field name="fax">
+						<column name="shipaddr_fax" position="25" />
+					</field>
+					<field name="email">
+						<column name="shipaddr_email" position="26" />
+					</field>
+				</embedded>
+			</field>
+			<field name="terms">
+				<column name="terms" position="27" />
+			</field>
+			<field name="taxIncluded">
+				<extension vendor-name="datanucleus"
+					key="enum-value-getter" value="toIntValue" />
+				<column jdbc-type="INTEGER" position="28" />
+			</field>
+			<field name="taxtable">
+				<column name="taxtable" position="29" />
+			</field>
+		</class>
+
+
+		<class name="EmployeeJDO" table="employees">
+			<field name="username">
+				<column length="2048" allows-null="false" position="1" />
+			</field>
+			<field name="id">
+				<column length="2048" allows-null="false" position="2" />
+			</field>
+			<field name="language">
+				<column length="2048" allows-null="false" position="3" />
+			</field>
+			<field name="acl">
+				<column length="2048" allows-null="false" position="4" />
+			</field>
+			<field name="active">
+				<column position="5" />
+			</field>
+			<field name="currency">
+				<column name="currency" allows-null="false" position="6" />
+			</field>
+			<field name="ccard">
+				<column name="ccard_guid" position="7" />
+			</field>
+			<field name="workday">
+				<embedded>
+					<field name="num">
+						<column name="workday_num" allows-null="false" position="8" />
+					</field>
+					<field name="denom">
+						<column name="workday_denom" allows-null="false"
+							position="9" />
+					</field>
+				</embedded>
+			</field>
+			<field name="rate">
+				<embedded>
+					<field name="num">
+						<column name="rate_num" allows-null="false" position="10" />
+					</field>
+					<field name="denom">
+						<column name="rate_denom" allows-null="false" position="11" />
+					</field>
+				</embedded>
+			</field>
+			<field name="addr">
+				<embedded>
+					<field name="name">
+						<column name="addr_name" position="12" />
+					</field>
+					<field name="addr1">
+						<column name="addr_addr1" position="13" />
+					</field>
+					<field name="addr2">
+						<column name="addr_addr2" position="14" />
+					</field>
+					<field name="addr3">
+						<column name="addr_addr3" position="15" />
+					</field>
+					<field name="addr4">
+						<column name="addr_addr4" position="16" />
+					</field>
+					<field name="phone">
+						<column name="addr_phone" position="17" />
+					</field>
+					<field name="fax">
+						<column name="addr_fax" position="18" />
+					</field>
+					<field name="email">
+						<column name="addr_email" position="19" />
+					</field>
+				</embedded>
+			</field>
+			<field name="slots">
+				<element column="obj_guid" />
+			</field>
+		</class>
+
+		<class name="EntryJDO" table="entries">
+			<field name="date"
+				converter="hu.keve.jgc.util.GCDateTimeLocalDateTimeConverter">
+				<column jdbc-type="varchar" length="19" allows-null="false"
+					position="1" />
+			</field>
+			<field name="dateEntered"
+				converter="hu.keve.jgc.util.GCDateTimeLocalDateTimeConverter">
+				<column jdbc-type="varchar" length="19" position="2" />
+			</field>
+			<field name="description">
+				<column length="2048" position="3" />
+			</field>
+			<field name="action">
+				<column length="2048" position="4" />
+			</field>
+			<field name="notes">
+				<column length="2048" position="5" />
+			</field>
+			<field name="quantity">
+				<embedded null-indicator-column="quantity_num">
+					<field name="num">
+						<column name="quantity_num" position="6" />
+					</field>
+					<field name="denom">
+						<column name="quantity_denom" position="7" />
+					</field>
+				</embedded>
+			</field>
+			<field name="iAcct">
+				<column name="i_acct" position="8" />
+			</field>
+			<field name="iPrice">
+				<embedded null-indicator-column="i_price_num">
+					<field name="num">
+						<column name="i_price_num" position="9" />
+					</field>
+					<field name="denom">
+						<column name="i_price_denom" position="10" />
+					</field>
+				</embedded>
+			</field>
+			<field name="iDiscount">
+				<embedded null-indicator-column="i_discount_num">
+					<field name="num">
+						<column name="i_discount_num" position="11" />
+					</field>
+					<field name="denom">
+						<column name="i_discount_denom" position="12" />
+					</field>
+				</embedded>
+			</field>
+			<field name="invoice">
+				<column name="invoice" position="13" />
+			</field>
+			<field name="iDiscType">
+				<column length="2048" position="14" />
+			</field>
+			<field name="iDiscHow">
+				<column length="2048" position="15" />
+			</field>
+			<field name="iTaxable">
+				<column position="16" />
+			</field>
+			<field name="iTaxincluded">
+				<column position="17" />
+			</field>
+			<field name="iTaxtable">
+				<column name="i_taxtable" position="18" />
+			</field>
+
+			<field name="bAcct">
+				<column name="b_acct" position="19" />
+			</field>
+			<field name="bPrice">
+				<embedded null-indicator-column="b_price_num">
+					<field name="num">
+						<column name="b_price_num" position="20" />
+					</field>
+					<field name="denom">
+						<column name="b_price_denom" position="21" />
+					</field>
+				</embedded>
+			</field>
+			<field name="bill">
+				<column name="bill" position="22" />
+			</field>
+			<field name="bTaxable">
+				<column position="23" />
+			</field>
+			<field name="bTaxincluded">
+				<column position="24" />
+			</field>
+			<field name="bTaxtable">
+				<column name="b_taxtable" position="25" />
+			</field>
+			<field name="bPaytype">
+				<column position="26" />
+			</field>
+			<field name="billable">
+				<column position="27" />
+			</field>
+			<field name="billTo">
+				<embedded>
+					<field name="type">
+						<column jdbc-type="INTEGER" name="billto_type"
+							position="28" />
+					</field>
+					<field name="guid">
+						<column name="billto_guid" position="29" />
+					</field>
+				</embedded>
+			</field>
+			<field name="order">
+				<column name="order_guid" position="30" />
+			</field>
+		</class>
+
+		<class name="GncLockJDO" table="gnclock">
+			<field name="hostname">
+				<column name="Hostname" length="255" position="0" />
+			</field>
+			<field name="pid">
+				<column name="PID" position="1" />
+			</field>
+		</class>
+
+
+		<class name="InvoiceJDO" table="invoices">
+			<field name="id">
+				<column length="2048" allows-null="false" position="1" />
+			</field>
+			<field name="dateOpened"
+				converter="hu.keve.jgc.util.GCDateTimeLocalDateTimeConverter">
+				<column jdbc-type="VARCHAR" length="19" position="2" />
+			</field>
+			<field name="datePosted"
+				converter="hu.keve.jgc.util.GCDateTimeLocalDateTimeConverter">
+				<column jdbc-type="VARCHAR" length="19" position="3" />
+			</field>
+			<field name="notes">
+				<column length="2048" allows-null="false" position="4" />
+			</field>
+			<field name="active">
+				<column position="5" />
+			</field>
+			<field name="currency">
+				<column name="currency" allows-null="false" position="6" />
+			</field>
+
+			<field name="owner" default-fetch-group="true">
+				<embedded null-indicator-column="owner_type">
+					<field name="type">
+						<extension vendor-name="datanucleus"
+							key="enum-value-getter" value="toIntValue" />
+						<column name="owner_type" position="7" />
+					</field>
+					<field name="guid">
+						<column name="owner_guid" position="8" />
+					</field>
+				</embedded>
+			</field>
+			<field name="terms">
+				<column name="terms" position="9" />
+			</field>
+			<field name="billingId">
+				<column length="2048" position="10" />
+			</field>
+			<field name="postTransaction">
+				<column name="post_txn" position="11" />
+			</field>
+			<field name="postLot">
+				<column name="post_lot" position="12" />
+			</field>
+			<field name="postAccount">
+				<column name="post_acc" position="13" />
+			</field>
+			<field name="billto" default-fetch-group="true">
+				<embedded null-indicator-column="billto_type">
+					<field name="type">
+						<extension vendor-name="datanucleus"
+							key="enum-value-getter" value="toIntValue" />
+						<column name="billto_type" position="14" />
+					</field>
+					<field name="guid">
+						<column name="billto_guid" position="15" />
+					</field>
+				</embedded>
+			</field>
+			<field name="chargeAmt" default-fetch-group="true">
+				<embedded null-indicator-column="charge_amt_num">
+					<field name="num">
+						<column name="charge_amt_num" position="16" />
+					</field>
+					<field name="denom">
+						<column name="charge_amt_denom" position="17" />
+					</field>
+				</embedded>
+			</field>
+			<field name="slots">
+				<element column="obj_guid" />
+			</field>
+		</class>
+
+		<class name="JobJDO" table="jobs">
+			<field name="id">
+				<column length="2048" allows-null="false" position="1" />
+			</field>
+			<field name="name">
+				<column length="2048" allows-null="false" position="2" />
+			</field>
+			<field name="reference">
+				<column length="2048" allows-null="false" position="3" />
+			</field>
+			<field name="active">
+				<column position="4" />
+			</field>
+			<field name="owner">
+				<embedded>
+					<field name="type">
+						<column jdbc-type="INTEGER" name="owner_type" position="5" />
+					</field>
+					<field name="guid">
+						<column name="owner_guid" position="6" />
+					</field>
+				</embedded>
+			</field>
+		</class>
+
+		<class name="LotJDO" table="lots">
+			<field name="account">
+				<column name="account_guid" position="1" />
+			</field>
+			<field name="isClosed">
+				<column position="2" />
+			</field>
+			<field name="slots">
+				<element column="obj_guid" />
+			</field>
+		</class>
+
+		<class name="OrderJDO" table="orders">
+			<field name="id">
+				<column length="2048" allows-null="false" position="1" />
+			</field>
+			<field name="notes">
+				<column length="2048" allows-null="false" position="2" />
+			</field>
+			<field name="reference">
+				<column length="2048" allows-null="false" position="3" />
+			</field>
+			<field name="active">
+				<column position="4" />
+			</field>
+			<field name="dateOpened"
+				converter="hu.keve.jgc.util.GCDateTimeLocalDateTimeConverter">
+				<column jdbc-type="VARCHAR" length="19" allows-null="false"
+					position="5" />
+			</field>
+			<field name="dateClosed"
+				converter="hu.keve.jgc.util.GCDateTimeLocalDateTimeConverter">
+				<column jdbc-type="VARCHAR" length="19" allows-null="false"
+					position="6" />
+			</field>
+			<field name="owner">
+				<embedded>
+					<field name="type">
+						<column name="owner_type" position="7" />
+					</field>
+					<field name="guid">
+						<column name="owner_guid" position="8" />
+					</field>
+				</embedded>
+			</field>
+		</class>
+
+		<class name="PriceJDO" table="prices">
+			<field name="commodity">
+				<column name="commodity_guid" allows-null="false"
+					position="1" />
+			</field>
+			<field name="currency">
+				<column name="currency_guid" allows-null="false" position="2" />
+			</field>
+			<field name="date"
+				converter="hu.keve.jgc.util.GCDateTimeLocalDateTimeConverter">
+				<column jdbc-type="VARCHAR" length="19" allows-null="false"
+					position="3" />
+			</field>
+			<field name="source">
+				<column length="2048" position="4" />
+			</field>
+			<field name="type">
+				<extension vendor-name="datanucleus"
+					key="enum-value-getter" value="toValue" />
+				<column length="2048" position="5" />
+			</field>
+			<field name="value">
+				<embedded>
+					<field name="num">
+						<column name="value_num" allows-null="false" position="6" />
+					</field>
+					<field name="denom">
+						<column name="value_denom" allows-null="false" position="7" />
+					</field>
+				</embedded>
+			</field>
+		</class>
+
+		<class name="RecurrenceJDO" table="recurrences">
+			<datastore-identity strategy="identity">
+				<column name="id" allows-null="false" position="0" />
+			</datastore-identity>
+			<field name="obj">
+				<column name="obj_guid" allows-null="false" position="1" />
+			</field>
+			<field name="mult">
+				<column name="recurrence_mult" allows-null="false"
+					position="2" />
+			</field>
+			<field name="periodType">
+				<column name="recurrence_period_type" length="2048"
+					allows-null="false" position="3" />
+			</field>
+			<field name="periodStart"
+				converter="hu.keve.jgc.util.GCDateLocalDateConverter">
+				<column name="recurrence_period_start" length="8"
+					allows-null="false" position="4" />
+			</field>
+			<field name="weekendAdjust">
+				<column name="recurrence_weekend_adjust" length="2048"
+					allows-null="false" position="5" />
+			</field>
+		</class>
+
+		<class name="SchedxactionJDO" table="schedxactions">
+			<field name="name">
+				<column length="2048" position="1" />
+			</field>
+			<field name="enabled">
+				<column position="2" />
+			</field>
+			<field name="startDate"
+				converter="hu.keve.jgc.util.GCDateLocalDateConverter">
+				<column length="8" position="3" />
+			</field>
+			<field name="endDate"
+				converter="hu.keve.jgc.util.GCDateLocalDateConverter">
+				<column length="8" position="4" />
+			</field>
+			<field name="lastOccur"
+				converter="hu.keve.jgc.util.GCDateLocalDateConverter">
+				<column length="8" position="5" />
+			</field>
+			<field name="numOccur">
+				<column position="6" />
+			</field>
+			<field name="remOccur">
+				<column position="7" />
+			</field>
+			<field name="autoCreate">
+				<column position="8" />
+			</field>
+			<field name="autoNotify">
+				<column position="9" />
+			</field>
+			<field name="advanceCreateDays">
+				<column name="adv_creation" position="10" />
+			</field>
+			<field name="advanceRemindDays">
+				<column name="adv_notify" position="11" />
+			</field>
+			<field name="instanceCount">
+				<column position="12" />
+			</field>
+			<field name="templateAccount">
+				<column name="template_act_guid" allows-null="false"
+					position="13" />
+			</field>
+			<field name="recurrences">
+				<element column="obj_guid" />
+			</field>
+			<field name="slots">
+				<element column="obj_guid" />
+			</field>
+		</class>
+
+		<class name="SlotJDO" table="slots">
+			<datastore-identity strategy="identity">
+				<column name="id" position="0" />
+			</datastore-identity>
+			<field name="obj">
+				<index name="slots_guid_index" unique="false" />
+				<column name="obj_guid" allows-null="false" position="1" />
+			</field>
+			<field name="name">
+				<column length="4096" allows-null="false" position="2" />
+			</field>
+			<field name="slotType">
+				<column allows-null="false" position="3" />
+			</field>
+			<field name="int64Val">
+				<column name="int64_val" position="4" />
+			</field>
+			<field name="stringVal">
+				<column length="4096" position="5" />
+			</field>
+			<field name="doubleVal">
+				<column position="6" />
+			</field>
+			<field name="timespecVal"
+				converter="hu.keve.jgc.util.GCDateTimeLocalDateTimeConverter">
+				<column jdbc-type="varchar" length="19" position="7" />
+			</field>
+			<field name="guidVal">
+				<column position="8" />
+			</field>
+			<field name="numericVal">
+				<embedded null-indicator-column="numeric_val_num">
+					<field name="num">
+						<column name="numeric_val_num" position="9" />
+					</field>
+					<field name="denom">
+						<column name="numeric_val_denom" position="10" />
+					</field>
+				</embedded>
+			</field>
+			<field name="gdateVal"
+				converter="hu.keve.jgc.util.GCDateLocalDateConverter">
+				<column length="8" position="11" />
+			</field>
+		</class>
+
+
+		<class name="SplitJDO" table="splits">
+			<field name="tx">
+				<column name="tx_guid" allows-null="false" position="1" />
+				<index name="splits_tx_guid_index" unique="false" />
+			</field>
+			<field name="account">
+				<column name="account_guid" allows-null="false" position="2" />
+				<index name="splits_account_guid_index" unique="false" />
+			</field>
+			<field name="memo">
+				<column length="2048" allows-null="false" position="3" />
+			</field>
+			<field name="action">
+				<column length="2048" allows-null="false" position="4" />
+			</field>
+			<field name="reconcileState">
+				<column length="1" allows-null="false" position="5" />
+			</field>
+			<field name="reconcileDate"
+				converter="hu.keve.jgc.util.GCDateTimeLocalDateTimeConverter">
+				<column jdbc-type="VARCHAR" length="19" position="6" />
+			</field>
+			<field name="value">
+				<embedded>
+					<field name="num">
+						<column name="value_num" allows-null="false" position="7" />
+					</field>
+					<field name="denom">
+						<column name="value_denom" allows-null="false" position="8" />
+					</field>
+				</embedded>
+			</field>
+			<field name="quantity">
+				<embedded>
+					<field name="num">
+						<column name="quantity_num" allows-null="false"
+							position="9" />
+					</field>
+					<field name="denom">
+						<column name="quantity_denom" allows-null="false"
+							position="10" />
+					</field>
+				</embedded>
+			</field>
+			<field name="slots">
+				<element column="obj_guid" />
+			</field>
+			<field name="lot">
+				<column name="lot_guid" position="11" />
+			</field>
+		</class>
+
+		<class name="TaxtableEntryJDO" table="taxtable_entries">
+			<datastore-identity strategy="identity">
+				<column name="id" allows-null="false" position="0" />
+			</datastore-identity>
+			<field name="taxtable">
+				<column name="taxtable" allows-null="false" position="1" />
+			</field>
+			<field name="account">
+				<column name="account" allows-null="false" position="2" />
+			</field>
+			<field name="amount">
+				<embedded>
+					<field name="num">
+						<column name="amount_num" position="3" />
+					</field>
+					<field name="denom">
+						<column name="amount_denom" position="4" />
+					</field>
+				</embedded>
+			</field>
+			<field name="type">
+				<column allows-null="false" position="5" />
+			</field>
+		</class>
+
+
+		<class name="TaxtableJDO" table="taxtables">
+			<field name="name">
+				<column length="50" allows-null="false" position="1" />
+			</field>
+			<field name="refcount">
+				<column position="2" />
+			</field>
+			<field name="invisible">
+				<column position="3" />
+			</field>
+			<field name="parent">
+				<column name="parent" position="4" />
+			</field>
+		</class>
+
+		<class name="TransactionJDO" table="transactions">
+			<field name="currency">
+				<column name="currency_guid" allows-null="false" position="1" />
+			</field>
+			<field name="num">
+				<column length="2048" allows-null="false" position="2" />
+			</field>
+			<field name="postDate"
+				converter="hu.keve.jgc.util.GCDateTimeLocalDateTimeConverter">
+				<index name="tx_post_date_index" unique="false" />
+				<column jdbc-type="VARCHAR" length="19" position="3" />
+			</field>
+			<field name="enterDate"
+				converter="hu.keve.jgc.util.GCDateTimeLocalDateTimeConverter">
+				<column jdbc-type="VARCHAR" length="19" position="4" />
+			</field>
+			<field name="description">
+				<column length="2048" position="5" />
+			</field>
+			<field name="slots">
+				<element column="obj_guid" />
+			</field>
+		</class>
+
+		<class name="VendorJDO" table="vendors">
+			<field name="name">
+				<column length="2048" allows-null="false" position="1" />
+			</field>
+			<field name="id">
+				<column length="2048" allows-null="false" position="2" />
+			</field>
+			<field name="notes">
+				<column length="2048" allows-null="false" position="3" />
+			</field>
+			<field name="currency">
+				<column name="currency" allows-null="false" position="4" />
+			</field>
+			<field name="active">
+				<column position="5" />
+			</field>
+			<field name="taxOverride">
+				<column position="6" />
+			</field>
+			<field name="addr">
+				<embedded>
+					<field name="name">
+						<column name="addr_name" position="7" />
+					</field>
+					<field name="addr1">
+						<column name="addr_addr1" position="8" />
+					</field>
+					<field name="addr2">
+						<column name="addr_addr2" position="9" />
+					</field>
+					<field name="addr3">
+						<column name="addr_addr3" position="10" />
+					</field>
+					<field name="addr4">
+						<column name="addr_addr4" position="11" />
+					</field>
+					<field name="phone">
+						<column name="addr_phone" position="12" />
+					</field>
+					<field name="fax">
+						<column name="addr_fax" position="13" />
+					</field>
+					<field name="email">
+						<column name="addr_email" position="14" />
+					</field>
+				</embedded>
+			</field>
+			<field name="terms">
+				<column name="terms" position="15" />
+			</field>
+			<field name="taxIncluded">
+				<column name="tax_inc" length="2048" position="16" />
+			</field>
+			<field name="taxtable">
+				<column name="tax_table" position="17" />
+			</field>
+			<field name="slots">
+				<element column="obj_guid" />
+			</field>
+		</class>
+
+
+		<class name="VersionJDO" table="versions">
+			<field name="tableName">
+				<column length="50" position="0" />
+			</field>
+			<field name="tableVersion">
+				<column allow-null="false" position="1" />
+			</field>
+		</class>
+
+	</package>
+
+</orm>

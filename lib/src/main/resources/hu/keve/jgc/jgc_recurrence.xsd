@@ -30,16 +30,10 @@
 
 	<xs:complexType name="recurrenceType">
 		<xs:sequence>
-			<xs:element name="mult" type="xs:unsignedByte" />
+			<xs:element name="mult" type="xs:unsignedShort" />
 			<xs:element name="period_type"
 				type="recurrence:periodTypeEnum" />
-			<xs:element name="start">
-				<xs:complexType>
-					<xs:sequence>
-						<xs:element ref="gdate" />
-					</xs:sequence>
-				</xs:complexType>
-			</xs:element>
+			<xs:element name="start" type="gdateType"/>
 			<!-- version 1.0.0 does not have it -->
 			<xs:element minOccurs="0" name="weekend_adj"
 				type="recurrence:weekendAdjEnum" />

@@ -1,7 +1,7 @@
 package hu.keve.jgc.dao;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
-import java.util.Date;
 
 public interface Transaction {
 	public String getGuid();
@@ -10,9 +10,9 @@ public interface Transaction {
 
 	public String getNum();
 
-	public Date getDatePosted();
+	public LocalDateTime getDatePosted();
 
-	public Date getDateEntered();
+	public LocalDateTime getDateEntered();
 
 	public String getDescription();
 

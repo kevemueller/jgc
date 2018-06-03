@@ -1,64 +1,32 @@
 package hu.keve.jgc.dao.jdo;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
-import java.util.Date;
 
 import hu.keve.jgc.dao.Invoice;
 import hu.keve.jgc.util.Fraction;
 
-// JDO mapping in package.jdo due to problem with embedded enum-value-getter
-//@PersistenceCapable(table = "invoices")
-public class InvoiceJDO implements Invoice {
-	// @PrimaryKey
-	String guid;
-
+public final class InvoiceJDO extends GuidTypeJDO implements Invoice {
 	String id;
 
-	Date dateOpened;
-	Date datePosted;
+	LocalDateTime dateOpened;
+	LocalDateTime datePosted;
 	String notes;
 	boolean active;
 	CommodityJDO currency;
 
-	// @Persistent(defaultFetchGroup = "true")
-	// @Embedded(members = {
-	// @Persistent(name = "type", column = "owner_type", extensions = {
-	// @Extension(vendorName = "datanucleus", key = "enum-value-getter", value =
-	// "toIntValue") }),
-	// @Persistent(name = "guid", column = "owner_guid") })
 	OwnerJDO owner;
 
 	BilltermJDO terms;
 	String billingId;
-	TransactionJDO postTxn;
+	TransactionJDO postTransaction;
 	LotJDO postLot;
-	AccountJDO postAcct;
-
-	// @Persistent(defaultFetchGroup = "true")
-	// @Embedded(members = {
-	// @Persistent(name = "type", column = "billto_type", extensions = {
-	// @Extension(vendorName = "datanucleus", key = "enum-value-getter", value =
-	// "toIntValue") }),
-	// @Persistent(name = "guid", column = "billto_guid") })
+	AccountJDO postAccount;
 	OwnerJDO billto;
 
-	// @Persistent(defaultFetchGroup = "true")
-	// @Embedded(members = { @Persistent(name = "num", column = "charge_amt_num"),
-	// @Persistent(name = "denom", column = "charge_amt_denom") })
 	Fraction chargeAmt;
 
-	// @Element(column = "obj_guid")
 	Collection<SlotJDO> slots;
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see hu.keve.jgc.dao.jdo.Invoice#getGuid()
-	 */
-	@Override
-	public String getGuid() {
-		return guid;
-	}
 
 	/*
 	 * (non-Javadoc)
@@ -76,7 +44,7 @@ public class InvoiceJDO implements Invoice {
 	 * @see hu.keve.jgc.dao.jdo.Invoice#getDateOpened()
 	 */
 	@Override
-	public Date getDateOpened() {
+	public LocalDateTime getDateOpened() {
 		return dateOpened;
 	}
 
@@ -86,7 +54,7 @@ public class InvoiceJDO implements Invoice {
 	 * @see hu.keve.jgc.dao.jdo.Invoice#getDatePosted()
 	 */
 	@Override
-	public Date getDatePosted() {
+	public LocalDateTime getDatePosted() {
 		return datePosted;
 	}
 
@@ -151,7 +119,7 @@ public class InvoiceJDO implements Invoice {
 	 */
 	@Override
 	public TransactionJDO getPostTxn() {
-		return postTxn;
+		return postTransaction;
 	}
 
 	/*
@@ -171,7 +139,7 @@ public class InvoiceJDO implements Invoice {
 	 */
 	@Override
 	public AccountJDO getPostAcct() {
-		return postAcct;
+		return postAccount;
 	}
 
 	/*
