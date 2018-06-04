@@ -7,31 +7,32 @@ import java.util.Objects;
 
 import javax.jdo.PersistenceManager;
 
+import org.datanucleus.enhancement.Persistable;
+
 import hu.keve.jgc.dao.Slot;
 import hu.keve.jgc.util.Fraction;
 
 public final class SlotJDO implements Slot {
-	//	int id;
+	static final String NAME = "slots";
+	static final int VERSION = 4;
 
-	String obj;
+	//	int id;
+	GuidTypeJDO obj;
 
 	SlotType slotType;
 
 	String name;
 	String stringVal;
-
 	String guidVal;
-
-	// @Element(column="obj_guid")
-	// @ForeignKey(members= {"guid_val"})
-	// Collection<Slot> slots;
-
 	Long int64Val;
 	Double doubleVal;
-	LocalDateTime timespecVal;
-	
+	LocalDateTime timespecVal;	
 	Fraction numericVal;
 	LocalDate gdateVal;
+	
+	
+//	Collection<SlotJDO> slotVal;
+
 
 	/* (non-Javadoc)
 	 * @see hu.keve.jgc.dao.jdo.Slot#getName()
@@ -73,8 +74,8 @@ public final class SlotJDO implements Slot {
 		return "Slot[" + slotType + "]:" + name + " = " + value;
 	}
 
-	public Collection<SlotJDO> getSlots(PersistenceManager pm) {
-		return (Collection<SlotJDO>) pm.newQuery(SlotJDO.class, "obj == :guidVal").execute(guidVal);
-		// return slots;
+	public Collection<SlotJDO> getSlots() {
+		PersistenceManager pm = (PersistenceManager) ((Persistable)(Object)this).dnGetExecutionContext().getOwner();
+		return (Collection<SlotJDO>) pm.newQuery(SlotJDO.class, "obj.guid == :guidVal").execute(guidVal);
 	}
 }

@@ -80,4 +80,11 @@ public final class CommodityJDO extends GuidTypeJDO implements Commodity  {
 		return quoteTz;
 	}
 	
+	
+	void setNamespace(String namespace) {
+		this.namespace = namespace;
+	}
+	void setMnemonic(String mnemonic) {
+		this.mnemonic = mnemonic;
+	}
 }

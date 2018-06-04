@@ -315,7 +315,7 @@
 
 	<jaxb:bindings schemaLocation="jgc_job.xsd">
 		<jaxb:bindings node="//xs:complexType[@name='jobType']">
-			<inheritance:implements>hu.keve.jgc.dao.Job
+			<inheritance:implements>hu.keve.jgc.dao.jaxb.JobJAXB
 			</inheritance:implements>
 			<jaxb:bindings node="//xs:element[@name='guid']">
 				<jaxb:property name="wrappedGuid" />
@@ -394,7 +394,7 @@
 
 	<jaxb:bindings schemaLocation="jgc_slot.xsd">
 		<jaxb:bindings node="//xs:complexType[@name='slotType']">
-			<inheritance:implements>hu.keve.jgc.dao.Slot</inheritance:implements>
+			<inheritance:implements>hu.keve.jgc.dao.jaxb.SlotJAXB</inheritance:implements>
 			<jaxb:bindings node="//xs:element[@name='key']">
 				<jaxb:property name="name" />
 			</jaxb:bindings>

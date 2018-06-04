@@ -2,10 +2,7 @@ package hu.keve.jgc.dao;
 
 import java.util.Collection;
 
-public interface Account {
-
-	String getGuid();
-	
+public interface Account extends GuidType {
 	String getName();
 
 	AccountTypes getAccountType();

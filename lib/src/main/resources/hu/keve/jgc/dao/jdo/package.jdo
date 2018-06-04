@@ -5,7 +5,7 @@
 	<package name="hu.keve.jgc.dao.jdo">
 		<class name="AccountJDO">
 			<field name="slots">
-				<element />
+				<element mapped-by="obj" />
 			</field>
 			<field name="lots">
 				<element mapped-by="account" />
@@ -17,7 +17,7 @@
 		</class>
 		<class name="BookJDO">
 			<field name="slots">
-				<element />
+				<element mapped-by="obj" />
 			</field>
 		</class>
 		<class name="BtDaysJDO" embedded-only="true">
@@ -34,12 +34,12 @@
 				<element mapped-by="budget" />
 			</field>
 			<field name="slots">
-				<element />
+				<element mapped-by="obj" />
 			</field>
 		</class>
 		<class name="CommodityJDO">
 			<field name="slots">
-				<element />
+				<element mapped-by="obj" />
 			</field>
 		</class>
 		<class name="CustomerJDO">
@@ -50,7 +50,7 @@
 			<field name="workday" default-fetch-group="true" />
 			<field name="rate" default-fetch-group="true" />
 			<field name="slots">
-				<element />
+				<element mapped-by="obj" />
 			</field>
 		</class>
 		<class name="EntryJDO">
@@ -76,13 +76,13 @@
 			<field name="billto" default-fetch-group="true" />
 			<field name="chargeAmt" default-fetch-group="true" />
 			<field name="slots">
-				<element />
+				<element mapped-by="obj" />
 			</field>
 		</class>
 		<class name="JobJDO" />
 		<class name="LotJDO">
 			<field name="slots">
-				<element />
+				<element mapped-by="obj" />
 			</field>
 		</class>
 		<class name="OrderJDO">
@@ -116,7 +116,7 @@
 				<element />
 			</field>
 			<field name="slots">
-				<element />
+				<element mapped-by="obj" />
 			</field>
 		</class>
 		<class name="SlotJDO">
@@ -124,6 +124,7 @@
 				<extension vendor-name="datanucleus"
 					key="enum-value-getter" value="toIntValue" />
 			</field>
+			<field name="obj" indexed="true" unique="false" />
 			<field name="numericVal" default-fetch-group="true" />
 			<field name="gdateVal" />
 		</class>
@@ -135,7 +136,7 @@
 			<field name="value" default-fetch-group="true" />
 			<field name="quantity" default-fetch-group="true" />
 			<field name="slots">
-				<element />
+				<element mapped-by="obj" />
 			</field>
 		</class>
 		<class name="TaxtableEntryJDO">
@@ -152,7 +153,7 @@
 		</class>
 		<class name="TransactionJDO">
 			<field name="slots">
-				<element />
+				<element mapped-by="obj" />
 			</field>
 			<field name="splits">
 				<element mapped-by="tx" />
@@ -160,7 +161,7 @@
 		</class>
 		<class name="VendorJDO">
 			<field name="slots">
-				<element />
+				<element mapped-by="obj" />
 			</field>
 		</class>
 		<class name="VersionJDO" identity-type="application">

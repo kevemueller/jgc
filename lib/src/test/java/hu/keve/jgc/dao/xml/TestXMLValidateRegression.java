@@ -1,4 +1,4 @@
-package hu.keve.jgc;
+package hu.keve.jgc.dao.xml;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,6 +21,7 @@ import org.xml.sax.helpers.XMLFilterImpl;
 import org.xml.sax.helpers.XMLReaderFactory;
 
 import hu.keve.jgc.util.junit.FilesSource;
+import hu.keve.jgc.xml.GnuCashXMLSource;
 
 public final class TestXMLValidateRegression {
 	private static Schema schema;

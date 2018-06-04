@@ -807,8 +807,9 @@
 				<column name="id" position="0" />
 			</datastore-identity>
 			<field name="obj">
-				<index name="slots_guid_index" unique="false" />
-				<column name="obj_guid" allows-null="false" position="1" />
+				<!-- <index name="slots_guid_index" unique="false" /> -->
+				<column name="obj_guid" length="32" allows-null="false"
+					position="1" />
 			</field>
 			<field name="name">
 				<column length="4096" allows-null="false" position="2" />
@@ -830,7 +831,7 @@
 				<column jdbc-type="varchar" length="19" position="7" />
 			</field>
 			<field name="guidVal">
-				<column position="8" />
+				<column name="guid_val" length="32" position="8" />
 			</field>
 			<field name="numericVal">
 				<embedded null-indicator-column="numeric_val_num">

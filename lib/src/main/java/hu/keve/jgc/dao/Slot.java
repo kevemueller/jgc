@@ -1,9 +1,13 @@
 package hu.keve.jgc.dao;
 
+import java.util.Collection;
+
 public interface Slot {
 
 	String getName();
 
+	
+	Collection<? extends Slot> getSlots();
 	
 	public static enum SlotType {
 		INTEGER(1), DOUBLE(2), NUMERIC(3), STRING(4), GUID(5), TIMESPEC(6), LIST(-7), FRAME(9), GDATE(10), BINARY(-11);

@@ -1,22 +1,39 @@
 package hu.keve.jgc.dao.jaxb;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.xml.bind.JAXBElement;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.annotation.XmlTransient;
+
+import org.gnucash.xml.ObjectFactory;
 import org.gnucash.xml.cmdty.CmdtyType;
 import org.gnucash.xml.gnc.CountData;
 import org.gnucash.xml.gnc.GncV2BookType;
+import org.gnucash.xml.gnc.GncV2Type;
 
+import hu.keve.jgc.GnuCash;
 import hu.keve.jgc.dao.Account.AccountTypes;
+import hu.keve.jgc.xml.GnuCashXMLSource;
 import hu.keve.jgc.dao.Book;
-import hu.keve.jgc.dao.GnuCashDAO;
 
-public abstract class AbstractGnuCashJAXB implements GnuCashDAO {
+public abstract class AbstractGnuCashJAXB implements GnuCash {
 	protected abstract void setBook(GncV2BookType value);
 
 	public abstract List<CountData> getCountData();
 
+	@XmlTransient
+	protected File file;
+	@XmlTransient
+	protected boolean readOnly;
+	@XmlTransient
 	private Map<String, AbstractGuidType> guidMap = new HashMap<String, AbstractGuidType>();
 
 	@Override
@@ -51,4 +68,39 @@ public abstract class AbstractGnuCashJAXB implements GnuCashDAO {
 		return (T) guidMap.get(guid);
 	}
 
+	@Override
+	public void close() throws Exception {
+		// TODO: remove lock file
+	}
+
+	@Override
+	public void commit() throws JAXBException {
+		if (readOnly) {
+			throw new IllegalArgumentException();
+		}
+		Marshaller marshaller = GCUtilJAXB.getMarshaller();
+		JAXBElement<GncV2Type> element = new ObjectFactory().createGncV2((GncV2Type) this);
+		marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+		marshaller.marshal(element, file);
+	}
+
+	@Override
+	public <T> T getById(Class<T> idType, Object id) {
+		return resolve((String) id, idType);
+	}
+
+	@SuppressWarnings("unchecked")
+	public static GnuCash fromFile(File file, boolean readOnly, boolean create) throws IOException, JAXBException {
+		GncV2Type gncv2;
+		if (create) {
+			gncv2 = new GncV2Type();
+		} else {
+			InputStream in = GnuCashXMLSource.openStream(file);
+			Unmarshaller unmarshaller = GCUtilJAXB.getUnmarshaller();
+			gncv2 = ((JAXBElement<GncV2Type>) unmarshaller.unmarshal(in)).getValue();
+		}
+		gncv2.file = file;
+		gncv2.readOnly = readOnly;
+		return gncv2;
+	}
 }

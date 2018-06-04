@@ -5,6 +5,9 @@ import java.util.Collection;
 import hu.keve.jgc.dao.Account;
 
 public final class AccountJDO extends GuidTypeJDO implements Account {
+	static final String NAME = "accounts";
+	static final int VERSION = 1;
+	
 	String name;
 	AccountTypes accountType;
 	CommodityJDO commodity;
@@ -19,7 +22,9 @@ public final class AccountJDO extends GuidTypeJDO implements Account {
 	Collection<SlotJDO> slots;
 	Collection<LotJDO> lots;
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see hu.keve.jgc.dao.jdo.Account#getName()
 	 */
 	@Override
@@ -27,7 +32,9 @@ public final class AccountJDO extends GuidTypeJDO implements Account {
 		return name;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see hu.keve.jgc.dao.jdo.Account#getAccountType()
 	 */
 	@Override
@@ -35,7 +42,9 @@ public final class AccountJDO extends GuidTypeJDO implements Account {
 		return accountType;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see hu.keve.jgc.dao.jdo.Account#getCommodity()
 	 */
 	@Override
@@ -43,15 +52,19 @@ public final class AccountJDO extends GuidTypeJDO implements Account {
 		return commodity;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see hu.keve.jgc.dao.jdo.Account#getCommodityScu()
 	 */
 	@Override
 	public Long getCommodityScu() {
-		return (long)commodityScu;
+		return (long) commodityScu;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see hu.keve.jgc.dao.jdo.Account#isNonStdScu()
 	 */
 	@Override
@@ -59,7 +72,9 @@ public final class AccountJDO extends GuidTypeJDO implements Account {
 		return nonStdScu;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see hu.keve.jgc.dao.jdo.Account#getParent()
 	 */
 	@Override
@@ -67,7 +82,9 @@ public final class AccountJDO extends GuidTypeJDO implements Account {
 		return parent;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see hu.keve.jgc.dao.jdo.Account#getCode()
 	 */
 	@Override
@@ -75,7 +92,9 @@ public final class AccountJDO extends GuidTypeJDO implements Account {
 		return code;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see hu.keve.jgc.dao.jdo.Account#getDescription()
 	 */
 	@Override
@@ -91,11 +110,32 @@ public final class AccountJDO extends GuidTypeJDO implements Account {
 		return placeholder;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see hu.keve.jgc.dao.jdo.Account#getSlots()
 	 */
 	@Override
 	public Collection<SlotJDO> getSlots() {
 		return slots;
+	}
+
+/*** Setters ***/	
+	
+	
+	void setParent(AccountJDO parent) {
+		this.parent = parent;
+	}
+
+	void setName(String name) {
+		this.name = name;
+	}
+
+	void setAccountType(AccountTypes accountType) {
+		this.accountType = accountType;
+	}
+	
+	void setCommodity(CommodityJDO commodity) {
+		this.commodity = commodity;
 	}
 }

@@ -2,8 +2,8 @@ package hu.keve.jgc.dao;
 
 import java.util.UUID;
 
-public final class GnuCashUtil {
-	private GnuCashUtil() {
+public final class DaoUtil {
+	private DaoUtil() {
 
 	}
 	

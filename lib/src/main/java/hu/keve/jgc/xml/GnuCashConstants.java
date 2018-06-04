@@ -1,4 +1,4 @@
-package hu.keve.jgc;
+package hu.keve.jgc.xml;
 
 public final class GnuCashConstants {
 	public static final String GNC_NS_URI = "http://www.gnucash.org/XML/gnc";
@@ -18,8 +18,8 @@ public final class GnuCashConstants {
 	public static final String LOT_NS_URI = "http://www.gnucash.org/XML/lot";
 	public static final String ADDR_NS_URI = "http://www.gnucash.org/XML/addr";
 	public static final String BILLTERM_NS_URI = "http://www.gnucash.org/XML/billterm";
-	public static final String BT_DAYS_NS_URI="http://www.gnucash.org/XML/bt-days";
-	public static final String BT_PROX_NS_URI="http://www.gnucash.org/XML/bt-prox";
+	public static final String BT_DAYS_NS_URI = "http://www.gnucash.org/XML/bt-days";
+	public static final String BT_PROX_NS_URI = "http://www.gnucash.org/XML/bt-prox";
 	public static final String CUST_NS_URI = "http://www.gnucash.org/XML/cust";
 	public static final String EMPLOYEE_NS_URI = "http://www.gnucash.org/XML/employee";
 	public static final String ENTRY_NS_URI = "http://www.gnucash.org/XML/entry";
@@ -30,4 +30,35 @@ public final class GnuCashConstants {
 	public static final String TAXTABLE_NS_URI = "http://www.gnucash.org/XML/taxtable";
 	public static final String TTE_NS_URI = "http://www.gnucash.org/XML/tte";
 	public static final String VENDOR_NS_URI = "http://www.gnucash.org/XML/vendor";
+
+	public static final String GNC_NS_PREFIX = "gnc";
+	public static final String ACT_NS_PREFIX = "act";
+	public static final String BOOK_NS_PREFIX = "book";
+	public static final String CD_NS_PREFIX = "cd";
+	public static final String CMDTY_NS_PREFIX = "cmdty";
+	public static final String PRICE_NS_PREFIX = "price";
+	public static final String SLOT_NS_PREFIX = "slot";
+	public static final String SPLIT_NS_PREFIX = "split";
+	public static final String SX_NS_PREFIX = "sx";
+	public static final String TRN_NS_PREFIX = "trn";
+	public static final String TS_NS_PREFIX = "ts";
+	public static final String FS_NS_PREFIX = "fs";
+	public static final String BGT_NS_PREFIX = "bgt";
+	public static final String RECURRENCE_NS_PREFIX = "recurrence";
+	public static final String LOT_NS_PREFIX = "lot";
+	public static final String ADDR_NS_PREFIX = "addr";
+	public static final String BILLTERM_NS_PREFIX = "billterm";
+	public static final String BT_DAYS_NS_PREFIX = "bt-days";
+	public static final String BT_PROX_NS_PREFIX = "bt-prox";
+	public static final String CUST_NS_PREFIX = "cust";
+	public static final String EMPLOYEE_NS_PREFIX = "employee";
+	public static final String ENTRY_NS_PREFIX = "entry";
+	public static final String INVOICE_NS_PREFIX = "invoice";
+	public static final String JOB_NS_PREFIX = "job";
+	public static final String ORDER_NS_PREFIX = "order";
+	public static final String OWNER_NS_PREFIX = "owner";
+	public static final String TAXTABLE_NS_PREFIX = "taxtable";
+	public static final String TTE_NS_PREFIX = "tte";
+	public static final String VENDOR_NS_PREFIX = "vendor";
+
 }

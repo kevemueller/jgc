@@ -7,20 +7,18 @@
 
 	<persistence-unit name="jgc">
 		<mapping-file>/hu/keve/jgc/dao/jdo/package.jdo</mapping-file>
-
 		<class>hu.keve.jgc.util.Fraction</class>
 
 		<exclude-unlisted-classes />
 		<properties>
-			<property name="javax.jdo.option.ConnectionDriverName"
-				value="org.sqlite.JDBC" />
-			<property name="javax.jdo.option.Mapping" value="sqlite" />
 			<property name="datanucleus.identifierFactory"
 				value="datanucleus1" />
 			<property name="datanucleus.identifier.case"
 				value="lowercase" />
 			<property name="datanucleus.rdbms.allowColumnReuse"
 				value="true" />
-		</properties>
+		</properties>			
 	</persistence-unit>
+	
+	
 </persistence>
