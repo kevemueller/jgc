@@ -3,6 +3,8 @@ package hu.keve.jgc.dao.jaxb;
 import java.time.LocalDateTime;
 
 import hu.keve.jgc.dao.Price;
+import hu.keve.jgc.dao.jaxb.unwrapper.DateUnwrapper;
+import hu.keve.jgc.dao.jaxb.unwrapper.GuidUnwrapper;
 
 public interface PriceJAXB extends Price, GuidUnwrapper, DateUnwrapper {
 	@Override

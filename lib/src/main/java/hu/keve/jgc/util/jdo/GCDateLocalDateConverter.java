@@ -1,4 +1,4 @@
-package hu.keve.jgc.util;
+package hu.keve.jgc.util.jdo;
 
 import static java.time.temporal.ChronoField.DAY_OF_MONTH;
 import static java.time.temporal.ChronoField.MONTH_OF_YEAR;

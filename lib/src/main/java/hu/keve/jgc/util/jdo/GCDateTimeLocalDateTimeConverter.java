@@ -1,4 +1,4 @@
-package hu.keve.jgc.util;
+package hu.keve.jgc.util.jdo;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

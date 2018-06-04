@@ -42,7 +42,7 @@
 				<configuration>
 					<!-- <verbose>false</verbose> -->
 					<removeOldOutput>false</removeOldOutput>
-					<schemaDirectory>src/main/resources/hu/keve/jgc</schemaDirectory>
+					<schemaDirectory>src/main/resources/hu/keve/jgc/xml</schemaDirectory>
 					<args>
 						<arg>-XtoString</arg>
 						<arg>-Xannotate</arg>

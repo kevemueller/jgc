@@ -3,6 +3,7 @@ package hu.keve.jgc.dao.jaxb;
 import org.gnucash.xml.IdType;
 
 import hu.keve.jgc.dao.Commodity;
+import hu.keve.jgc.dao.jaxb.unwrapper.GuidUnwrapper;
 
 public interface CmdtyJAXB extends Commodity, GWG, GuidUnwrapper {
 	AbstractGnuCashJAXB getGuidRoot();

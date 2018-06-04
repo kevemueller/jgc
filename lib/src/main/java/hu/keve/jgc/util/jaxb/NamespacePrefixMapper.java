@@ -1,9 +1,8 @@
-package hu.keve.jgc.dao.jaxb;
+package hu.keve.jgc.util.jaxb;
 
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 public class NamespacePrefixMapper extends com.sun.xml.bind.marshaller.NamespacePrefixMapper {

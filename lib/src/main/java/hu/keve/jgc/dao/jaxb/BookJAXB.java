@@ -10,6 +10,8 @@ import org.gnucash.xml.slot.SlotType;
 
 import hu.keve.jgc.dao.Account;
 import hu.keve.jgc.dao.Account.AccountTypes;
+import hu.keve.jgc.dao.jaxb.unwrapper.GuidUnwrapper;
+import hu.keve.jgc.dao.jaxb.unwrapper.SlotsUnwrapper;
 import hu.keve.jgc.dao.Book;
 import hu.keve.jgc.dao.Commodity;
 

@@ -8,6 +8,8 @@ import org.gnucash.xml.ts.TsType;
 
 import hu.keve.jgc.dao.Invoice;
 import hu.keve.jgc.dao.jaxb.adapters.TsDateTypeUtil;
+import hu.keve.jgc.dao.jaxb.unwrapper.GuidUnwrapper;
+import hu.keve.jgc.dao.jaxb.unwrapper.SlotsUnwrapper;
 
 public interface InvoiceJAXB extends Invoice, GuidUnwrapper, SlotsUnwrapper {
 	@Override

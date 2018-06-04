@@ -19,6 +19,7 @@
 					<xs:element name="name" type="xs:string" />
 					<xs:element name="owner" type="owner:ownerType" />
 					<xs:element name="active" type="bool01" />
+					<xs:element name="reference" type="xs:string" />
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>

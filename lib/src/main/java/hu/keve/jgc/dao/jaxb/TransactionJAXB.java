@@ -9,6 +9,9 @@ import org.gnucash.xml.ts.TsType;
 
 import hu.keve.jgc.dao.Transaction;
 import hu.keve.jgc.dao.jaxb.adapters.TsDateTypeUtil;
+import hu.keve.jgc.dao.jaxb.unwrapper.GuidUnwrapper;
+import hu.keve.jgc.dao.jaxb.unwrapper.SlotsUnwrapper;
+import hu.keve.jgc.dao.jaxb.unwrapper.SplitsUnwrapper;
 
 public interface TransactionJAXB extends Transaction, GuidUnwrapper, SlotsUnwrapper, SplitsUnwrapper {
 	@Override

@@ -6,6 +6,7 @@ import org.gnucash.xml.ts.TsType;
 
 import hu.keve.jgc.dao.Order;
 import hu.keve.jgc.dao.jaxb.adapters.TsDateTypeUtil;
+import hu.keve.jgc.dao.jaxb.unwrapper.GuidUnwrapper;
 
 public interface OrderJAXB extends Order, GuidUnwrapper {
 	TsType getWrappedDateOpened();

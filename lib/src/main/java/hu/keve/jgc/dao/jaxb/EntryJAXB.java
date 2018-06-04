@@ -6,6 +6,7 @@ import org.gnucash.xml.ts.TsType;
 
 import hu.keve.jgc.dao.Entry;
 import hu.keve.jgc.dao.jaxb.adapters.TsDateTypeUtil;
+import hu.keve.jgc.dao.jaxb.unwrapper.DateUnwrapper;
 
 public interface EntryJAXB extends Entry, DateUnwrapper {
 	TsType getWrappedDateEntered();

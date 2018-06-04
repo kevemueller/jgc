@@ -7,6 +7,7 @@ import org.gnucash.xml.GdateType;
 import org.gnucash.xml.recurrence.RecurrenceType;
 
 import hu.keve.jgc.dao.Schedxaction;
+import hu.keve.jgc.dao.jaxb.unwrapper.RecurrencesUnwrapper;
 
 public interface SchedxactionJAXB extends Schedxaction, RecurrencesUnwrapper {
     GdateType getWrappedStartDate();

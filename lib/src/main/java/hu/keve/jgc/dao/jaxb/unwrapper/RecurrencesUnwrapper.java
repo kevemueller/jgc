@@ -1,4 +1,4 @@
-package hu.keve.jgc.dao.jaxb;
+package hu.keve.jgc.dao.jaxb.unwrapper;
 
 import java.util.List;
 
