@@ -2,41 +2,25 @@ package hu.keve.jgc.util.junit;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.function.BiFunction;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 import org.junit.jupiter.api.extension.ExtensionContext;
-import org.junit.jupiter.params.converter.DefaultArgumentConverter;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.ArgumentsProvider;
 import org.junit.jupiter.params.support.AnnotationConsumer;
 
-/**
- * @since 5.0
- */
-class FilesArgumentsProvider implements ArgumentsProvider, AnnotationConsumer<FilesSource> {
-	private final BiFunction<Class<?>, String, InputStream> inputStreamProvider;
-
+class PathsArgumentsProvider implements ArgumentsProvider, AnnotationConsumer<PathsSource> {
 	private Path path;
 	private int maxDepth;
 	private boolean dirs;
 
 	private Pattern regexp;
 
-	FilesArgumentsProvider() {
-		this(Class::getResourceAsStream);
-	}
-
-	FilesArgumentsProvider(BiFunction<Class<?>, String, InputStream> inputStreamProvider) {
-		this.inputStreamProvider = inputStreamProvider;
-	}
-
 	@Override
-	public void accept(FilesSource annotation) {
+	public void accept(PathsSource annotation) {
 		path = new File(annotation.path()).toPath();
 		maxDepth = annotation.maxDepth();
 		dirs = annotation.dirs();

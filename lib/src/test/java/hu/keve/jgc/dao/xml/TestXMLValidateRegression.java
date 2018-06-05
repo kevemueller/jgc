@@ -20,7 +20,7 @@ import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.XMLFilterImpl;
 import org.xml.sax.helpers.XMLReaderFactory;
 
-import hu.keve.jgc.util.junit.FilesSource;
+import hu.keve.jgc.util.junit.PathsSource;
 import hu.keve.jgc.xml.GnuCashXMLSource;
 
 public final class TestXMLValidateRegression {
@@ -32,31 +32,31 @@ public final class TestXMLValidateRegression {
 	}
 
 	@ParameterizedTest(name = "{index}{0}")
-	@FilesSource(path = "lib/Gnucash/data/accounts", regexp = ".*\\.gnucash-xea$")
+	@PathsSource(path = "lib/Gnucash/data/accounts", regexp = ".*\\.gnucash-xea$")
 	void validateDataAccounts(Path path) throws SAXException, IOException {
 		doValidate(path);
 	}
 
 	@ParameterizedTest(name = "{index}{0}")
-	@FilesSource(path = "lib/Gnucash/doc/examples", regexp = ".*\\.gnucash$")
+	@PathsSource(path = "lib/Gnucash/doc/examples", regexp = ".*\\.gnucash$")
 	void expandDocExamples(Path path) throws SAXException, IOException {
 		doCopy(path);
 	}
 
 	@ParameterizedTest(name = "{index}{0}")
-	@FilesSource(path = "lib/Gnucash/doc/examples", regexp = ".*\\.gnucash$")
+	@PathsSource(path = "lib/Gnucash/doc/examples", regexp = ".*\\.gnucash$")
 	void validateDocExamples(Path path) throws SAXException, IOException {
 		doValidate(path);
 	}
 
 	@ParameterizedTest(name = "{index}{0}")
-	@FilesSource(path = "src/test/resources", regexp = ".*xml\\.gnucash$")
+	@PathsSource(path = "src/test/resources", regexp = ".*xml\\.gnucash$")
 	void validateResources(Path path) throws SAXException, IOException {
 		doValidate(path);
 	}
 
 	@ParameterizedTest(name = "{index}{0}")
-	@FilesSource(path = "src/test/resources", regexp = ".*xml\\.gnucash$")
+	@PathsSource(path = "src/test/resources", regexp = ".*xml\\.gnucash$")
 	void expandResources(Path path) throws SAXException, IOException {
 		doCopy(path);
 	}

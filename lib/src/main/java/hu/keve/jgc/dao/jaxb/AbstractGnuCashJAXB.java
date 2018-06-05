@@ -21,14 +21,17 @@ import org.gnucash.xml.gnc.GncV2Type;
 
 import hu.keve.jgc.GnuCash;
 import hu.keve.jgc.dao.Account.AccountTypes;
-import hu.keve.jgc.xml.GnuCashXMLSource;
 import hu.keve.jgc.dao.Book;
+import hu.keve.jgc.xml.GnuCashXMLSource;
 
 public abstract class AbstractGnuCashJAXB implements GnuCash {
 	protected abstract void setBook(GncV2BookType value);
 
 	public abstract List<CountData> getCountData();
-
+	
+	@Override
+	public abstract BookJAXB getBook();
+	
 	@XmlTransient
 	protected File file;
 	@XmlTransient

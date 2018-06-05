@@ -4,7 +4,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 import org.gnucash.xml.IdType;
 
-public abstract class AbstractGuidType implements GWG {
+public abstract class AbstractGuidType implements GWG, BookRef {
 	protected AbstractGnuCashJAXB root;
 	private IdType internalGuid = GCUtilJAXB.createGuid();
 	
@@ -21,4 +21,10 @@ public abstract class AbstractGuidType implements GWG {
 		assert(null==this.root || this.root==root);
 		this.root = root;
 	}			
+
+
+	@Override
+	public BookJAXB getBook() {
+		return root.getBook();
+	}
 }

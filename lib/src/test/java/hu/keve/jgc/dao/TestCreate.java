@@ -19,11 +19,6 @@ import hu.keve.jgc.dao.jaxb.AbstractGnuCashJAXB;
 import hu.keve.jgc.dao.jdo.GnuCashJDO;
 
 class TestCreate {
-
-	static enum Modes {
-		XMLFILE, SQLITEFILE// PGSQLDB;
-	}
-
 	File file;
 
 	@BeforeEach
@@ -34,11 +29,11 @@ class TestCreate {
 		}
 	}
 
-	GnuCash create(Modes mode) throws IOException, JAXBException {
+	GnuCash create(GnuCash.Backends mode) throws IOException, JAXBException {
 		switch (mode) {
-		case XMLFILE:
+		case XML:
 			return AbstractGnuCashJAXB.fromFile(file, false, true);
-		case SQLITEFILE:
+		case SQLITE:
 			return GnuCashJDO.fromFile(file, false, true);
 		default:
 			throw new IllegalArgumentException();
@@ -46,8 +41,8 @@ class TestCreate {
 	}
 
 	@ParameterizedTest
-	@EnumSource(Modes.class)
-	void testSimpleBook(Modes mode) throws Exception {
+	@EnumSource(GnuCash.Backends.class)
+	void testSimpleBook(GnuCash.Backends mode) throws Exception {
 		try (GnuCash gc = create(mode)) {
 			Book book = gc.createBook("CURRENCY", "JPY");
 			gc.commit();
@@ -56,8 +51,8 @@ class TestCreate {
 	}
 
 	@ParameterizedTest
-	@EnumSource(Modes.class)
-	void testNoBook(Modes mode) throws Exception {
+	@EnumSource(GnuCash.Backends.class)
+	void testNoBook(GnuCash.Backends mode) throws Exception {
 		Throwable ex = assertThrows(IllegalArgumentException.class, () -> {
 			try (GnuCash gc = create(mode)) {
 			}
@@ -67,8 +62,8 @@ class TestCreate {
 	}
 
 	@ParameterizedTest
-	@EnumSource(Modes.class)
-	void testOneBook(Modes mode) throws Exception {
+	@EnumSource(GnuCash.Backends.class)
+	void testOneBook(GnuCash.Backends mode) throws Exception {
 		Throwable ex = assertThrows(IllegalArgumentException.class, () -> {
 			try (GnuCash gc = create(mode)) {
 				Book book = gc.createBook("CURRENCY", "JPY");
@@ -81,8 +76,8 @@ class TestCreate {
 	}
 
 	@ParameterizedTest
-	@EnumSource(Modes.class)
-	void testDedup(Modes mode) throws Exception {
+	@EnumSource(GnuCash.Backends.class)
+	void testDedup(GnuCash.Backends mode) throws Exception {
 		try (GnuCash gc = create(mode)) {
 			Book book = gc.createBook("CURRENCY", "EUR");
 			Commodity xtsCommodity = book.createCommodity("CURRENCY", "XTS");

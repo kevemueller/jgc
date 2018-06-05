@@ -47,7 +47,7 @@ public class TestJaxb {
 		GncV2Type gncv2 = ((JAXBElement<GncV2Type>) unmarshaller.unmarshal(in)).getValue();
 
 		GncV2BookType book = gncv2.getBook();
-		for (ActType act : book.getAccount()) {
+		for (ActType act : book.getAllAccounts()) {
 			System.out.println(act.getName() + " " + act.getGuid() + " "
 					+ (null == act.getParent() ? "" : act.getParent().getName()) + act.getCommodity());
 		}

@@ -417,12 +417,12 @@
 
 		<class name="EntryJDO" table="entries">
 			<field name="date"
-				converter="hu.keve.jgc.util.GCDateTimeLocalDateTimeConverter">
+				converter="hu.keve.jgc.util.jdo.GCDateTimeLocalDateTimeConverter">
 				<column jdbc-type="varchar" length="19" allows-null="false"
 					position="1" />
 			</field>
 			<field name="dateEntered"
-				converter="hu.keve.jgc.util.GCDateTimeLocalDateTimeConverter">
+				converter="hu.keve.jgc.util.jdo.GCDateTimeLocalDateTimeConverter">
 				<column jdbc-type="varchar" length="19" position="2" />
 			</field>
 			<field name="description">
@@ -548,11 +548,11 @@
 				<column length="2048" allows-null="false" position="1" />
 			</field>
 			<field name="dateOpened"
-				converter="hu.keve.jgc.util.GCDateTimeLocalDateTimeConverter">
+				converter="hu.keve.jgc.util.jdo.GCDateTimeLocalDateTimeConverter">
 				<column jdbc-type="VARCHAR" length="19" position="2" />
 			</field>
 			<field name="datePosted"
-				converter="hu.keve.jgc.util.GCDateTimeLocalDateTimeConverter">
+				converter="hu.keve.jgc.util.jdo.GCDateTimeLocalDateTimeConverter">
 				<column jdbc-type="VARCHAR" length="19" position="3" />
 			</field>
 			<field name="notes">
@@ -670,12 +670,12 @@
 				<column position="4" />
 			</field>
 			<field name="dateOpened"
-				converter="hu.keve.jgc.util.GCDateTimeLocalDateTimeConverter">
+				converter="hu.keve.jgc.util.jdo.GCDateTimeLocalDateTimeConverter">
 				<column jdbc-type="VARCHAR" length="19" allows-null="false"
 					position="5" />
 			</field>
 			<field name="dateClosed"
-				converter="hu.keve.jgc.util.GCDateTimeLocalDateTimeConverter">
+				converter="hu.keve.jgc.util.jdo.GCDateTimeLocalDateTimeConverter">
 				<column jdbc-type="VARCHAR" length="19" allows-null="false"
 					position="6" />
 			</field>
@@ -700,7 +700,7 @@
 				<column name="currency_guid" allows-null="false" position="2" />
 			</field>
 			<field name="date"
-				converter="hu.keve.jgc.util.GCDateTimeLocalDateTimeConverter">
+				converter="hu.keve.jgc.util.jdo.GCDateTimeLocalDateTimeConverter">
 				<column jdbc-type="VARCHAR" length="19" allows-null="false"
 					position="3" />
 			</field>
@@ -740,7 +740,7 @@
 					allows-null="false" position="3" />
 			</field>
 			<field name="periodStart"
-				converter="hu.keve.jgc.util.GCDateLocalDateConverter">
+				converter="hu.keve.jgc.util.jdo.GCDateLocalDateConverter">
 				<column name="recurrence_period_start" length="8"
 					allows-null="false" position="4" />
 			</field>
@@ -758,15 +758,15 @@
 				<column position="2" />
 			</field>
 			<field name="startDate"
-				converter="hu.keve.jgc.util.GCDateLocalDateConverter">
+				converter="hu.keve.jgc.util.jdo.GCDateLocalDateConverter">
 				<column length="8" position="3" />
 			</field>
 			<field name="endDate"
-				converter="hu.keve.jgc.util.GCDateLocalDateConverter">
+				converter="hu.keve.jgc.util.jdo.GCDateLocalDateConverter">
 				<column length="8" position="4" />
 			</field>
 			<field name="lastOccur"
-				converter="hu.keve.jgc.util.GCDateLocalDateConverter">
+				converter="hu.keve.jgc.util.jdo.GCDateLocalDateConverter">
 				<column length="8" position="5" />
 			</field>
 			<field name="numOccur">
@@ -827,7 +827,7 @@
 				<column position="6" />
 			</field>
 			<field name="timespecVal"
-				converter="hu.keve.jgc.util.GCDateTimeLocalDateTimeConverter">
+				converter="hu.keve.jgc.util.jdo.GCDateTimeLocalDateTimeConverter">
 				<column jdbc-type="varchar" length="19" position="7" />
 			</field>
 			<field name="guidVal">
@@ -844,7 +844,7 @@
 				</embedded>
 			</field>
 			<field name="gdateVal"
-				converter="hu.keve.jgc.util.GCDateLocalDateConverter">
+				converter="hu.keve.jgc.util.jdo.GCDateLocalDateConverter">
 				<column length="8" position="11" />
 			</field>
 		</class>
@@ -869,7 +869,7 @@
 				<column length="1" allows-null="false" position="5" />
 			</field>
 			<field name="reconcileDate"
-				converter="hu.keve.jgc.util.GCDateTimeLocalDateTimeConverter">
+				converter="hu.keve.jgc.util.jdo.GCDateTimeLocalDateTimeConverter">
 				<column jdbc-type="VARCHAR" length="19" position="6" />
 			</field>
 			<field name="value">
@@ -951,12 +951,12 @@
 				<column length="2048" allows-null="false" position="2" />
 			</field>
 			<field name="postDate"
-				converter="hu.keve.jgc.util.GCDateTimeLocalDateTimeConverter">
+				converter="hu.keve.jgc.util.jdo.GCDateTimeLocalDateTimeConverter">
 				<index name="tx_post_date_index" unique="false" />
 				<column jdbc-type="VARCHAR" length="19" position="3" />
 			</field>
 			<field name="enterDate"
-				converter="hu.keve.jgc.util.GCDateTimeLocalDateTimeConverter">
+				converter="hu.keve.jgc.util.jdo.GCDateTimeLocalDateTimeConverter">
 				<column jdbc-type="VARCHAR" length="19" position="4" />
 			</field>
 			<field name="description">

@@ -16,36 +16,34 @@ public final class BookJDO extends GuidTypeJDO implements Book {
 
 	Collection<SlotJDO> slots;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see hu.keve.jgc.dao.jdo.BookI#getRootAccount()
-	 */
 	@Override
 	public AccountJDO getRootAccount() {
 		return rootAccount;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see hu.keve.jgc.dao.jdo.BookI#getRootTemplate()
-	 */
 	@Override
 	public AccountJDO getRootTemplate() {
 		return rootTemplate;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see hu.keve.jgc.dao.jdo.BookI#getSlots()
-	 */
 	@Override
 	public Collection<SlotJDO> getSlots() {
 		return slots;
 	}
 
+	
+	@Override
+	public Iterable<? extends Account> getAllAccounts() {
+		return getPersistenceManager().getExtent(AccountJDO.class);
+	}
+	
+	@Override
+	public Iterable<? extends Commodity> getAllCommodities() {
+		return getPersistenceManager().getExtent(CommodityJDO.class);
+	}
+	
+/** special setters **/
+		
 	void setRootAccount(AccountJDO rootAccount) {
 		this.rootAccount = rootAccount;
 	}
@@ -54,6 +52,8 @@ public final class BookJDO extends GuidTypeJDO implements Book {
 		this.rootTemplate = rootTemplate;
 	}
 
+/** creators **/	
+	
 	@Override
 	public CommodityJDO createCommodity(String namespace, String mnemonic) {
 		PersistenceManager pm = getPersistenceManager();

@@ -20,6 +20,8 @@ public interface Account extends GuidType {
 	String getDescription();
 
 	// boolean isPlaceholder();
+	
+	Iterable<? extends Account> getChildren();
 
 	Collection<? extends Slot> getSlots();
 

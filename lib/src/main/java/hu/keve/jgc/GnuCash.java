@@ -8,6 +8,10 @@ public interface GnuCash extends AutoCloseable {
 	};
 	
 	
+	default void visit(JgcVisitor visitor, Object context) {
+		getBook().visit(visitor, context);
+	}
+	
 	Book getBook();
 
 	Book createBook(String rootCommoditySpace, String rootCommodityMnemonic);

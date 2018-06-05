@@ -10,10 +10,10 @@ import org.gnucash.xml.slot.SlotType;
 
 import hu.keve.jgc.dao.Account;
 import hu.keve.jgc.dao.Account.AccountTypes;
-import hu.keve.jgc.dao.jaxb.unwrapper.GuidUnwrapper;
-import hu.keve.jgc.dao.jaxb.unwrapper.SlotsUnwrapper;
 import hu.keve.jgc.dao.Book;
 import hu.keve.jgc.dao.Commodity;
+import hu.keve.jgc.dao.jaxb.unwrapper.GuidUnwrapper;
+import hu.keve.jgc.dao.jaxb.unwrapper.SlotsUnwrapper;
 
 public interface BookJAXB extends Book, GuidUnwrapper, SlotsUnwrapper {
 	AbstractGnuCashJAXB getGuidRoot();
@@ -28,9 +28,11 @@ public interface BookJAXB extends Book, GuidUnwrapper, SlotsUnwrapper {
 		return SlotsUnwrapper.super.getSlots();
 	}
 
-	List<ActType> getAccount();
+	@Override
+	List<ActType> getAllAccounts();
 
-	List<CmdtyType> getCommodity();
+	@Override
+	List<CmdtyType> getAllCommodities();
 
 	List<CountData> getCountData();
 
@@ -42,7 +44,7 @@ public interface BookJAXB extends Book, GuidUnwrapper, SlotsUnwrapper {
 		if (null != cmdty) {
 			return cmdty;
 		}
-		for (CmdtyType existingCmdty : getCommodity()) {
+		for (CmdtyType existingCmdty : getAllCommodities()) {
 			if (existingCmdty.equalsUnique(commodity)) {
 				// merge
 				return existingCmdty;
@@ -56,7 +58,7 @@ public interface BookJAXB extends Book, GuidUnwrapper, SlotsUnwrapper {
 			;
 			cmdty.copy(commodity);
 		}
-		getCommodity().add(cmdty);
+		getAllCommodities().add(cmdty);
 		GCUtilJAXB.increment(getCountData(), GCUtilJAXB.GC_CD_COMMODITY);
 		getGuidRoot().register(cmdty);
 		return cmdty;
@@ -78,13 +80,13 @@ public interface BookJAXB extends Book, GuidUnwrapper, SlotsUnwrapper {
 		account.setAccountType(type);
 		account.setCommodity((CmdtyType) commodity);
 		account.setParent((ActType) parent);
-		getAccount().add(account);
+		getAllAccounts().add(account);
 		GCUtilJAXB.increment(getCountData(), GCUtilJAXB.GC_CD_ACCOUNT);
 		return account;
 	}
 
 	default Account getRootAccount() {
-		for (ActType account : getAccount()) {
+		for (ActType account : getAllAccounts()) {
 			if (Account.AccountTypes.ROOT == account.getAccountType() && null != account.getCommodity()) {
 				return account;
 			}
@@ -93,7 +95,7 @@ public interface BookJAXB extends Book, GuidUnwrapper, SlotsUnwrapper {
 	}
 
 	default Account getRootTemplate() {
-		for (ActType account : getAccount()) {
+		for (ActType account : getAllAccounts()) {
 			if (Account.AccountTypes.ROOT == account.getAccountType() && null == account.getCommodity()) {
 				return account;
 			}

@@ -7,7 +7,7 @@ import hu.keve.jgc.dao.Account;
 public final class AccountJDO extends GuidTypeJDO implements Account {
 	static final String NAME = "accounts";
 	static final int VERSION = 1;
-	
+
 	String name;
 	AccountTypes accountType;
 	CommodityJDO commodity;
@@ -22,81 +22,41 @@ public final class AccountJDO extends GuidTypeJDO implements Account {
 	Collection<SlotJDO> slots;
 	Collection<LotJDO> lots;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see hu.keve.jgc.dao.jdo.Account#getName()
-	 */
 	@Override
 	public String getName() {
 		return name;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see hu.keve.jgc.dao.jdo.Account#getAccountType()
-	 */
 	@Override
 	public AccountTypes getAccountType() {
 		return accountType;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see hu.keve.jgc.dao.jdo.Account#getCommodity()
-	 */
 	@Override
 	public CommodityJDO getCommodity() {
 		return commodity;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see hu.keve.jgc.dao.jdo.Account#getCommodityScu()
-	 */
 	@Override
 	public Long getCommodityScu() {
 		return (long) commodityScu;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see hu.keve.jgc.dao.jdo.Account#isNonStdScu()
-	 */
 	@Override
 	public boolean isSetNonStandardScu() {
 		return nonStdScu;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see hu.keve.jgc.dao.jdo.Account#getParent()
-	 */
 	@Override
 	public AccountJDO getParent() {
 		return parent;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see hu.keve.jgc.dao.jdo.Account#getCode()
-	 */
 	@Override
 	public String getCode() {
 		return code;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see hu.keve.jgc.dao.jdo.Account#getDescription()
-	 */
 	@Override
 	public String getDescription() {
 		return description;
@@ -110,19 +70,18 @@ public final class AccountJDO extends GuidTypeJDO implements Account {
 		return placeholder;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see hu.keve.jgc.dao.jdo.Account#getSlots()
-	 */
 	@Override
 	public Collection<SlotJDO> getSlots() {
 		return slots;
 	}
 
-/*** Setters ***/	
-	
-	
+	@Override
+	public Iterable<? extends Account> getChildren() {
+		return getPersistenceManager().newQuery(AccountJDO.class, "parent == :self").setParameters(this)
+				.executeList();
+	}
+
+	/*** Setters ***/
 	void setParent(AccountJDO parent) {
 		this.parent = parent;
 	}
@@ -134,7 +93,7 @@ public final class AccountJDO extends GuidTypeJDO implements Account {
 	void setAccountType(AccountTypes accountType) {
 		this.accountType = accountType;
 	}
-	
+
 	void setCommodity(CommodityJDO commodity) {
 		this.commodity = commodity;
 	}

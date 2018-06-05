@@ -1,7 +1,5 @@
 package hu.keve.jgc.util;
 
-import java.util.Objects;
-
 public class Fraction {
 	long num;
 	long denom;

@@ -2,7 +2,6 @@ package hu.keve.jgc.dao;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
-import java.util.Date;
 
 import hu.keve.jgc.util.Fraction;
 
