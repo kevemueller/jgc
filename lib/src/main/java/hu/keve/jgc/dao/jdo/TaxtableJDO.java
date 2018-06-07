@@ -4,16 +4,17 @@ import java.util.Collection;
 
 import hu.keve.jgc.dao.Taxtable;
 
-public class TaxtableJDO extends GuidTypeJDO implements Taxtable {
+public class TaxtableJDO extends AbstractGuidTypeJDO implements Taxtable {
 	String name;
 	long refcount;
 	boolean invisible;
 	TaxtableJDO parent;
-	
+
 	Collection<TaxtableEntryJDO> entries;
 
-
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see hu.keve.jgc.dao.jdo.Taxtable#getName()
 	 */
 	@Override
@@ -21,7 +22,9 @@ public class TaxtableJDO extends GuidTypeJDO implements Taxtable {
 		return name;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see hu.keve.jgc.dao.jdo.Taxtable#getRefcount()
 	 */
 	@Override
@@ -29,7 +32,9 @@ public class TaxtableJDO extends GuidTypeJDO implements Taxtable {
 		return refcount;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see hu.keve.jgc.dao.jdo.Taxtable#isInvisible()
 	 */
 	@Override
@@ -37,7 +42,9 @@ public class TaxtableJDO extends GuidTypeJDO implements Taxtable {
 		return invisible;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see hu.keve.jgc.dao.jdo.Taxtable#getParent()
 	 */
 	@Override
@@ -45,12 +52,14 @@ public class TaxtableJDO extends GuidTypeJDO implements Taxtable {
 		return parent;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see hu.keve.jgc.dao.jdo.Taxtable#getTaxtableEntries()
 	 */
 	@Override
 	public Collection<TaxtableEntryJDO> getEntries() {
 		return entries;
-	}		
-	
+	}
+
 }

@@ -5,6 +5,7 @@
 	xmlns:billterm="http://www.gnucash.org/XML/billterm"
 	xmlns:bt-days="http://www.gnucash.org/XML/bt-days"
 	xmlns:gnc="http://www.gnucash.org/XML/gnc"
+	xmlns:slot="http://www.gnucash.org/XML/slot"
 	xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
 	<xs:import schemaLocation="jgc.xsd" />
@@ -12,6 +13,8 @@
 		schemaLocation="jgc_bt-days.xsd" />
 	<xs:import namespace="http://www.gnucash.org/XML/gnc"
 		schemaLocation="jgc_gnc.xsd" />
+	<xs:import namespace="http://www.gnucash.org/XML/slot"
+		schemaLocation="jgc_slot.xsd" />
 
 
 	<xs:complexType name="billtermRefType">
@@ -36,6 +39,8 @@
 						type="billterm:billtermRefType" />
 					<xs:element name="days" type="bt-days:bt-daysType" />
 					<!-- cutoff? -->
+					<xs:element minOccurs="0" name="slots"
+						type="slot:slotsType" />
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>

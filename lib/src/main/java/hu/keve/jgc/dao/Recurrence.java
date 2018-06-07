@@ -12,7 +12,6 @@ public interface Recurrence {
 
 	WeekendAdjustTypes getWeekendAdjust();
 
-	
 	public static enum RecurrencePeriodTypes {
 		ONCE, DAY, WEEK, MONTH, END_OF_MONTH, NTH_WEEKDAY, LAST_WEEKDAY, YEAR;
 
@@ -31,7 +30,7 @@ public interface Recurrence {
 
 	public static enum WeekendAdjustTypes {
 		NONE, BACK, FORWARD;
-		
+
 		public String toValue() {
 			return name().toLowerCase();
 		}
@@ -43,7 +42,7 @@ public interface Recurrence {
 		public static WeekendAdjustTypes fromValue(String v) {
 			return null == v ? null : Enum.valueOf(WeekendAdjustTypes.class, v.toUpperCase());
 		}
-		
+
 	}
 
 }

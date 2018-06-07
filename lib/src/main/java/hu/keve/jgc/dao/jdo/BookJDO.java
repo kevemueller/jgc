@@ -1,20 +1,21 @@
 package hu.keve.jgc.dao.jdo;
 
-import java.util.Collection;
+import java.time.LocalDateTime;
 
 import javax.jdo.Extent;
 import javax.jdo.PersistenceManager;
+import javax.jdo.Query;
 
 import hu.keve.jgc.dao.Account;
 import hu.keve.jgc.dao.Account.AccountTypes;
 import hu.keve.jgc.dao.Book;
 import hu.keve.jgc.dao.Commodity;
+import hu.keve.jgc.dao.Transaction;
+import hu.keve.jgc.util.jdo.GCDateTimeLocalDateTimeConverter;
 
-public final class BookJDO extends GuidTypeJDO implements Book {
+public final class BookJDO extends AbstractGuidTypeJDO implements Book {
 	AccountJDO rootAccount;
 	AccountJDO rootTemplate;
-
-	Collection<SlotJDO> slots;
 
 	@Override
 	public AccountJDO getRootAccount() {
@@ -27,23 +28,46 @@ public final class BookJDO extends GuidTypeJDO implements Book {
 	}
 
 	@Override
-	public Collection<SlotJDO> getSlots() {
-		return slots;
-	}
-
-	
-	@Override
 	public Iterable<? extends Account> getAllAccounts() {
 		return getPersistenceManager().getExtent(AccountJDO.class);
 	}
-	
+
 	@Override
 	public Iterable<? extends Commodity> getAllCommodities() {
 		return getPersistenceManager().getExtent(CommodityJDO.class);
 	}
-	
-/** special setters **/
-		
+
+	@Override
+	public Iterable<? extends Transaction> getTransactionsBetween(LocalDateTime fromInclusive,
+			LocalDateTime toExclusive) {
+		String filter = "";
+		Object[] parameters;
+		if (null != fromInclusive) {
+			if (null != toExclusive) {
+				filter = "WHERE post_date BETWEEN ? AND ?";
+				parameters = new String[] { GCDateTimeLocalDateTimeConverter.INSTANCE.convertToDatastore(fromInclusive),
+						GCDateTimeLocalDateTimeConverter.INSTANCE.convertToDatastore(toExclusive) };
+			} else {
+				filter = "WHERE post_date >= ?";
+				parameters = new String[] {
+						GCDateTimeLocalDateTimeConverter.INSTANCE.convertToDatastore(fromInclusive) };
+			}
+		} else {
+			if (null != toExclusive) {
+				filter = "WHERE post_date < ?";
+				parameters = new String[] { GCDateTimeLocalDateTimeConverter.INSTANCE.convertToDatastore(toExclusive) };
+			} else {
+				return getPersistenceManager().getExtent(TransactionJDO.class);
+			}
+		}
+		Query<TransactionJDO> query = getPersistenceManager().newQuery("javax.jdo.query.SQL",
+				"SELECT guid FROM transactions " + filter);
+		query.setClass(TransactionJDO.class);
+		return query.setParameters(parameters).executeList();
+	}
+
+	/** special setters **/
+
 	void setRootAccount(AccountJDO rootAccount) {
 		this.rootAccount = rootAccount;
 	}
@@ -52,8 +76,8 @@ public final class BookJDO extends GuidTypeJDO implements Book {
 		this.rootTemplate = rootTemplate;
 	}
 
-/** creators **/	
-	
+	/** creators **/
+
 	@Override
 	public CommodityJDO createCommodity(String namespace, String mnemonic) {
 		PersistenceManager pm = getPersistenceManager();

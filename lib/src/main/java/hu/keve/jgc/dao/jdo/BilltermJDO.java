@@ -2,7 +2,7 @@ package hu.keve.jgc.dao.jdo;
 
 import hu.keve.jgc.dao.Billterm;
 
-public class BilltermJDO extends GuidTypeJDO implements Billterm {	
+public class BilltermJDO extends AbstractGuidTypeJDO implements Billterm {
 	String name;
 	String description;
 	int refcount;

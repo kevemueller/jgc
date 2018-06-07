@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public interface Commodity {
 	String getGuid();
-	
+
 	String getNamespace();
 
 	String getMnemonic();
@@ -22,5 +22,5 @@ public interface Commodity {
 	default boolean equalsUnique(Commodity other) {
 		return null != other && Objects.equals(getNamespace(), other.getNamespace())
 				&& Objects.equals(getMnemonic(), other.getMnemonic());
-	}	
+	}
 }

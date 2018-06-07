@@ -5,17 +5,18 @@ import java.time.LocalDate;
 import hu.keve.jgc.dao.Recurrence;
 
 public final class RecurrenceJDO implements Recurrence {
-//	int id;
+	// int id;
 
 	String obj;
 	int mult;
 
-	RecurrencePeriodTypes periodType;	
-	LocalDate periodStart;	
+	RecurrencePeriodTypes periodType;
+	LocalDate periodStart;
 	WeekendAdjustTypes weekendAdjust;
 
-
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see hu.keve.jgc.dao.jdo.Recurrence#getRecurrenceMult()
 	 */
 	@Override
@@ -23,7 +24,9 @@ public final class RecurrenceJDO implements Recurrence {
 		return mult;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see hu.keve.jgc.dao.jdo.Recurrence#getRecurrencePeriodType()
 	 */
 	@Override
@@ -31,7 +34,9 @@ public final class RecurrenceJDO implements Recurrence {
 		return periodType;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see hu.keve.jgc.dao.jdo.Recurrence#getRecurrencePeriodStart()
 	 */
 	@Override
@@ -39,7 +44,9 @@ public final class RecurrenceJDO implements Recurrence {
 		return periodStart;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see hu.keve.jgc.dao.jdo.Recurrence#getRecurrenceWeekendAdjust()
 	 */
 	@Override

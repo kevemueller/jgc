@@ -1,7 +1,5 @@
 package hu.keve.jgc.dao;
 
-import java.util.Collection;
-
 public interface Account extends GuidType {
 	String getName();
 
@@ -20,10 +18,8 @@ public interface Account extends GuidType {
 	String getDescription();
 
 	// boolean isPlaceholder();
-	
-	Iterable<? extends Account> getChildren();
 
-	Collection<? extends Slot> getSlots();
+	Iterable<? extends Account> getChildren();
 
 	public static enum AccountTypes {
 		NONE, BANK, CASH, CREDIT, ASSET, LIABILITY, STOCK, MUTUAL, CURRENCY, INCOME, EXPENSE, EQUITY, RECEIVABLE, PAYABLE, ROOT, TRADING, CHECKING, SAVINGS, MENYMRKT, CREDITLINE;

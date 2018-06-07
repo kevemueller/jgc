@@ -1,10 +1,6 @@
 package hu.keve.jgc.dao;
 
-import java.util.Collection;
-
-public interface Vendor {
-	String getGuid();
-	
+public interface Vendor extends GuidType {
 	String getName();
 
 	String getId();
@@ -24,6 +20,4 @@ public interface Vendor {
 	TaxIncludedTypes getTaxIncluded();
 
 	Taxtable getTaxtable();
-
-	Collection<? extends Slot> getSlots();
 }

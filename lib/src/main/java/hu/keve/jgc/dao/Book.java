@@ -1,22 +1,20 @@
 package hu.keve.jgc.dao;
 
-import java.util.Collection;
+import java.time.LocalDateTime;
 
 import hu.keve.jgc.JgcVisitor;
 import hu.keve.jgc.Visitable;
 import hu.keve.jgc.dao.Account.AccountTypes;
 
-public interface Book extends Visitable {
-	String getGuid();
-	
+public interface Book extends GuidType, Visitable {
 	Account getRootAccount();
 
 	Account getRootTemplate();
-	
+
 	@Override
 	default void visit(JgcVisitor visitor, Object context) {
 		for (Commodity commodity : getAllCommodities()) {
-			visitor.commodity(commodity, context);			
+			visitor.commodity(commodity, context);
 		}
 		for (Account account : getAllAccounts()) {
 			visitor.account(account, context);
@@ -27,7 +25,11 @@ public interface Book extends Visitable {
 
 	Iterable<? extends Account> getAllAccounts();
 
-	Collection<? extends Slot> getSlots();
+	default Iterable<? extends Transaction> getAllTransactions() {
+		return getTransactionsBetween(null, null);
+	}
+
+	Iterable<? extends Transaction> getTransactionsBetween(LocalDateTime fromInclusive, LocalDateTime toExclusive);
 
 	Commodity createCommodity(String space, String mnemonic);
 

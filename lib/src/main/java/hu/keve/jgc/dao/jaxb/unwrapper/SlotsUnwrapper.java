@@ -7,9 +7,10 @@ import org.gnucash.xml.slot.SlotsType;
 
 public interface SlotsUnwrapper {
 	void setWrappedSlots(SlotsType value);
+
 	SlotsType getWrappedSlots();
 
-	default Collection<SlotType> getSlots() {
+	default Collection<SlotType> getSlotsList() {
 		SlotsType wrappedSlots = getWrappedSlots();
 		if (null == wrappedSlots) {
 			wrappedSlots = new SlotsType();

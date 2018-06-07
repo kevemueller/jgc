@@ -1,12 +1,8 @@
 package hu.keve.jgc.dao;
 
-import java.util.Collection;
-
 import hu.keve.jgc.util.Fraction;
 
-public interface Employee {
-
-	String getGuid();
+public interface Employee extends GuidType {
 
 	String getUsername();
 
@@ -14,7 +10,7 @@ public interface Employee {
 
 	String getLanguage();
 
-//	String getAcl();
+	// String getAcl();
 
 	boolean isActive();
 
@@ -27,6 +23,4 @@ public interface Employee {
 	Fraction getRate();
 
 	Address getAddr();
-
-	Collection<? extends Slot> getSlots();
 }

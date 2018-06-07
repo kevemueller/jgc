@@ -8,7 +8,7 @@ import hu.keve.jgc.dao.Recurrence;
 
 public interface RecurrenceJAXB extends Recurrence {
 	GdateType getWrappedPeriodStart();
-	
+
 	@Override
 	default LocalDate getPeriodStart() {
 		GdateType gdate = getWrappedPeriodStart();

@@ -5,7 +5,7 @@ import java.util.Collection;
 
 import hu.keve.jgc.dao.Schedxaction;
 
-public final class SchedxactionJDO extends GuidTypeJDO implements Schedxaction {
+public final class SchedxactionJDO extends AbstractGuidTypeJDO implements Schedxaction {
 	String name;
 	boolean enabled;
 
@@ -21,7 +21,6 @@ public final class SchedxactionJDO extends GuidTypeJDO implements Schedxaction {
 	short instanceCount;
 	AccountJDO templateAccount;
 	Collection<RecurrenceJDO> recurrences;
-	Collection<SlotJDO> slots;
 
 	/*
 	 * (non-Javadoc)

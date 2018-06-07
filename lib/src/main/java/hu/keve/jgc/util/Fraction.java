@@ -31,6 +31,6 @@ public class Fraction {
 	}
 
 	public static String toValue(Fraction id) {
-		return null == id ? null : id.toString(); 
+		return null == id ? null : id.toString();
 	}
 }

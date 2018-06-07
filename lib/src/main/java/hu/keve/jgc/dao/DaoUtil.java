@@ -6,7 +6,7 @@ public final class DaoUtil {
 	private DaoUtil() {
 
 	}
-	
+
 	public static String makeGuid() {
 		return UUID.randomUUID().toString().replace("-", "");
 	}

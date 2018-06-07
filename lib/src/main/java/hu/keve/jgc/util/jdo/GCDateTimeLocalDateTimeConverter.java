@@ -16,6 +16,8 @@ public class GCDateTimeLocalDateTimeConverter implements AttributeConverter<Loca
 			.append(DateTimeFormatter.ISO_LOCAL_DATE).appendLiteral(' ').append(DateTimeFormatter.ISO_LOCAL_TIME)
 			.toFormatter(Locale.US);
 
+	public static final GCDateTimeLocalDateTimeConverter INSTANCE = new GCDateTimeLocalDateTimeConverter();
+
 	@Override
 	public String convertToDatastore(LocalDateTime attributeValue) {
 		return null == attributeValue ? null : GC_LOCAL_DATE_TIME.format(attributeValue);

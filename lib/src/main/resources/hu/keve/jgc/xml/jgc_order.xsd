@@ -4,12 +4,16 @@
 	targetNamespace="http://www.gnucash.org/XML/order"
 	xmlns:ts="http://www.gnucash.org/XML/ts"
 	xmlns:owner="http://www.gnucash.org/XML/owner"
+	xmlns:slot="http://www.gnucash.org/XML/slot"
 	xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
 	<xs:import schemaLocation="jgc.xsd" />
 
 	<xs:import schemaLocation="jgc_owner.xsd"
 		namespace="http://www.gnucash.org/XML/owner" />
+
+	<xs:import schemaLocation="jgc_slot.xsd"
+		namespace="http://www.gnucash.org/XML/slot" />
 
 	<xs:import schemaLocation="jgc_ts.xsd"
 		namespace="http://www.gnucash.org/XML/ts" />
@@ -34,6 +38,7 @@
 					<xs:element name="opened" type="ts:tsType" />
 					<xs:element name="closed" type="ts:tsType" />
 					<xs:element name="owner" type="owner:ownerType" />
+					<xs:element name="slots" type="slot:slotsType"/>
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>

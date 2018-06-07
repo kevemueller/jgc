@@ -4,7 +4,7 @@ import java.util.Collection;
 
 import hu.keve.jgc.dao.Account;
 
-public final class AccountJDO extends GuidTypeJDO implements Account {
+public final class AccountJDO extends AbstractGuidTypeJDO implements Account {
 	static final String NAME = "accounts";
 	static final int VERSION = 1;
 
@@ -19,7 +19,6 @@ public final class AccountJDO extends GuidTypeJDO implements Account {
 	Boolean hidden;
 	Boolean placeholder;
 
-	Collection<SlotJDO> slots;
 	Collection<LotJDO> lots;
 
 	@Override
@@ -71,14 +70,8 @@ public final class AccountJDO extends GuidTypeJDO implements Account {
 	}
 
 	@Override
-	public Collection<SlotJDO> getSlots() {
-		return slots;
-	}
-
-	@Override
 	public Iterable<? extends Account> getChildren() {
-		return getPersistenceManager().newQuery(AccountJDO.class, "parent == :self").setParameters(this)
-				.executeList();
+		return getPersistenceManager().newQuery(AccountJDO.class, "parent == :self").setParameters(this).executeList();
 	}
 
 	/*** Setters ***/

@@ -23,7 +23,6 @@
 	<xs:complexType name="custType">
 		<xs:complexContent>
 			<xs:extension base="versionedGuidType">
-
 				<xs:sequence>
 					<xs:element name="guid" type="idType" />
 					<xs:element name="name" type="xs:string" />

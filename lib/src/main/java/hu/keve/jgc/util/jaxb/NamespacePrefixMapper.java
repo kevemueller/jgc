@@ -35,17 +35,17 @@ public class NamespacePrefixMapper extends com.sun.xml.bind.marshaller.Namespace
 		return predeclaredSet.toArray(new String[predeclaredSet.size()]);
 	}
 
-//	@Override
-//	public String[] getPreDeclaredNamespaceUris2() {
-//		String[] predeclared = new String[2 * predeclaredSet.size()];
-//		int i = 0;
-//		for (Entry<String, String> mapping : prefixMap.entrySet()) {
-//			if (predeclaredSet.contains(mapping.getKey())) {
-//				predeclared[i++] = mapping.getValue();
-//				predeclared[i++] = mapping.getKey();
-//			}
-//		}
-//		return predeclared;
-//	}
+	// @Override
+	// public String[] getPreDeclaredNamespaceUris2() {
+	// String[] predeclared = new String[2 * predeclaredSet.size()];
+	// int i = 0;
+	// for (Entry<String, String> mapping : prefixMap.entrySet()) {
+	// if (predeclaredSet.contains(mapping.getKey())) {
+	// predeclared[i++] = mapping.getValue();
+	// predeclared[i++] = mapping.getKey();
+	// }
+	// }
+	// return predeclared;
+	// }
 
 }

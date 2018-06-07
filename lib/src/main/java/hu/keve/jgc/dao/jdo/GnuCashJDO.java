@@ -96,8 +96,9 @@ public class GnuCashJDO implements GnuCash {
 	public <T> T getById(Class<T> idType, Object id) {
 		for (TypeMetaData tmd : typeMetadata) {
 			if (idType.isAssignableFrom(tmd.daoInterface)) {
-//				Object oid = persistenceManager.newObjectIdInstance(tmd.jdoImplementation, id);
-//				return (T) persistenceManager.getObjectById(tmd.jdoImplementation, oid);
+				// Object oid = persistenceManager.newObjectIdInstance(tmd.jdoImplementation,
+				// id);
+				// return (T) persistenceManager.getObjectById(tmd.jdoImplementation, oid);
 				return (T) persistenceManager.getObjectById(tmd.jdoImplementation, id);
 			}
 		}

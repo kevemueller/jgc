@@ -5,7 +5,7 @@ import java.util.Collection;
 
 import hu.keve.jgc.dao.Transaction;
 
-public final class TransactionJDO extends GuidTypeJDO implements Transaction {
+public final class TransactionJDO extends AbstractGuidTypeJDO implements Transaction {
 	CommodityJDO currency;
 	String num;
 
@@ -13,7 +13,6 @@ public final class TransactionJDO extends GuidTypeJDO implements Transaction {
 	LocalDateTime enterDate;
 	String description;
 
-	Collection<SlotJDO> slots;
 	Collection<SplitJDO> splits;
 
 	@Override
@@ -39,11 +38,6 @@ public final class TransactionJDO extends GuidTypeJDO implements Transaction {
 	@Override
 	public String getDescription() {
 		return description;
-	}
-
-	@Override
-	public Collection<SlotJDO> getSlots() {
-		return slots;
 	}
 
 	public Collection<SplitJDO> getSplits() {

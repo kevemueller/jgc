@@ -4,15 +4,15 @@ import hu.keve.jgc.dao.Customer;
 import hu.keve.jgc.dao.TaxIncludedTypes;
 import hu.keve.jgc.util.Fraction;
 
-public class CustomerJDO extends GuidTypeJDO implements Customer {
+public class CustomerJDO extends AbstractGuidTypeJDO implements Customer {
 	String name;
 	String id;
 	String notes;
 	boolean active;
-	
-	Fraction discount;	
-	Fraction credit;	
-	
+
+	Fraction discount;
+	Fraction credit;
+
 	CommodityJDO currency;
 	boolean taxOverride;
 
@@ -22,98 +22,135 @@ public class CustomerJDO extends GuidTypeJDO implements Customer {
 	BilltermJDO terms;
 	TaxIncludedTypes taxIncluded;
 	TaxtableJDO taxtable;
-	
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see hu.keve.jgc.dao.jdo.Customer#getName()
 	 */
 	@Override
 	public String getName() {
 		return name;
 	}
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see hu.keve.jgc.dao.jdo.Customer#getId()
 	 */
 	@Override
 	public String getId() {
 		return id;
 	}
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see hu.keve.jgc.dao.jdo.Customer#getNotes()
 	 */
 	@Override
 	public String getNotes() {
 		return notes;
 	}
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see hu.keve.jgc.dao.jdo.Customer#isActive()
 	 */
 	@Override
 	public boolean isActive() {
 		return active;
 	}
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see hu.keve.jgc.dao.jdo.Customer#getDiscount()
 	 */
 	@Override
 	public Fraction getDiscount() {
 		return discount;
 	}
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see hu.keve.jgc.dao.jdo.Customer#getCredit()
 	 */
 	@Override
 	public Fraction getCredit() {
 		return credit;
 	}
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see hu.keve.jgc.dao.jdo.Customer#getCurrency()
 	 */
 	@Override
 	public CommodityJDO getCurrency() {
 		return currency;
 	}
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see hu.keve.jgc.dao.jdo.Customer#isTaxOverride()
 	 */
 	@Override
 	public boolean isTaxOverride() {
 		return taxOverride;
 	}
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see hu.keve.jgc.dao.jdo.Customer#getAddr()
 	 */
 	@Override
 	public AddressJDO getAddr() {
 		return addr;
 	}
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see hu.keve.jgc.dao.jdo.Customer#getShipaddr()
 	 */
 	@Override
 	public AddressJDO getShipaddr() {
 		return shipaddr;
 	}
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see hu.keve.jgc.dao.jdo.Customer#getTerms()
 	 */
 	@Override
 	public BilltermJDO getTerms() {
 		return terms;
 	}
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see hu.keve.jgc.dao.jdo.Customer#isTaxIncluded()
 	 */
 	@Override
 	public TaxIncludedTypes getTaxIncluded() {
 		return taxIncluded;
 	}
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see hu.keve.jgc.dao.jdo.Customer#getTaxtable()
 	 */
 	@Override
 	public TaxtableJDO getTaxtable() {
 		return taxtable;
 	}
-		
+
 }

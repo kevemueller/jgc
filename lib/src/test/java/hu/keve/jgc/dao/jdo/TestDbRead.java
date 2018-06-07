@@ -3,6 +3,7 @@ package hu.keve.jgc.dao.jdo;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
+import java.util.Map.Entry;
 
 import javax.jdo.Extent;
 import javax.jdo.PersistenceManager;
@@ -35,8 +36,8 @@ class TestDbRead {
 	void testJDO(String fileName) throws Exception {
 		File file = new File(fileName);
 		assertTrue(file.exists());
-		
-//		GnuCashJDO.fromPostgreSQL("u45002", "gcfull", "keve", "");
+
+		// GnuCashJDO.fromPostgreSQL("u45002", "gcfull", "keve", "");
 
 		try (GnuCash gc = GnuCashJDO.fromFile(file, true, false)) {
 			PersistenceManagerFactory pmf = ((GnuCashJDO) gc).getPersistenceManagerFactory();
@@ -46,8 +47,8 @@ class TestDbRead {
 				if (null != mcmd.getTable()) {
 					System.out.println(managedClass);
 					Extent<?> extent = pm.getExtent(managedClass, true);
-					for (Object slot : extent) {
-						System.out.println(slot);
+					for (Object o : extent) {
+						System.out.println(o);
 					}
 				}
 			}
@@ -63,16 +64,16 @@ class TestDbRead {
 
 			Account account = gc.getById(Account.class, ID);
 			System.out.println(account.getName());
-			for (Slot aslot : account.getSlots()) {
-				System.out.println(aslot);
+			for (Entry<String, Object> aslot : account.getSlots().entrySet()) {
+				System.out.println(aslot.getKey() + "=>" + aslot.getValue());
 			}
 
 			System.out.println("Slot with slots");
 			Slot slot = gc.getById(Slot.class, 1);
 			System.out.println(slot);
-			for (Slot xslot : slot.getSlots()) {
-				System.out.println(xslot);
-			}
+			// for (Slot xslot : slot.getSlots()) {
+			// System.out.println(xslot);
+			// }
 		}
 	}
 }

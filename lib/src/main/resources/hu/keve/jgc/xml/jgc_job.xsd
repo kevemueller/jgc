@@ -3,12 +3,16 @@
 	elementFormDefault="qualified"
 	targetNamespace="http://www.gnucash.org/XML/job"
 	xmlns:owner="http://www.gnucash.org/XML/owner"
+	xmlns:slot="http://www.gnucash.org/XML/slot"
 	xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
 	<xs:import schemaLocation="jgc.xsd" />
 
 	<xs:import schemaLocation="jgc_owner.xsd"
 		namespace="http://www.gnucash.org/XML/owner" />
+	
+	<xs:import schemaLocation="jgc_slot.xsd"
+		namespace="http://www.gnucash.org/XML/slot" />
 
 	<xs:complexType name="jobType">
 		<xs:complexContent>
@@ -19,7 +23,8 @@
 					<xs:element name="name" type="xs:string" />
 					<xs:element name="owner" type="owner:ownerType" />
 					<xs:element name="active" type="bool01" />
-					<xs:element name="reference" type="xs:string" />
+					<xs:element minOccurs="0" name="reference" type="xs:string" />
+					<xs:element minOccurs="0" name="slots" type="slot:slotsType"/>
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>

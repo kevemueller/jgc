@@ -58,11 +58,11 @@ public interface Entry {
 
 	public static enum DiscTypes {
 		VALUE, PERCENT;
-		
+
 		public static String toValue(DiscTypes v) {
 			return v.name();
 		}
-		
+
 		public static DiscTypes fromValue(String v) {
 			return Enum.valueOf(DiscTypes.class, v);
 		}
@@ -70,11 +70,11 @@ public interface Entry {
 
 	public static enum DiscHowTypes {
 		PRETAX, POSTTAX, SAMETIME;
-		
+
 		public static String toValue(DiscHowTypes v) {
 			return v.name();
 		}
-		
+
 		public static DiscHowTypes fromValue(String v) {
 			return Enum.valueOf(DiscHowTypes.class, v);
 		}
@@ -95,11 +95,11 @@ public interface Entry {
 		public int toIntValue() {
 			return intValue;
 		}
-		
+
 		public static String toValue(PayTypes v) {
 			return v.name();
 		}
-		
+
 		public static PayTypes fromValue(String v) {
 			return Enum.valueOf(PayTypes.class, v);
 		}

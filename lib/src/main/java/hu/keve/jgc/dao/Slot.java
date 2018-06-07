@@ -1,14 +1,12 @@
 package hu.keve.jgc.dao;
 
-import java.util.Collection;
-
 public interface Slot {
-
 	String getName();
 
-	
-	Collection<? extends Slot> getSlots();
-	
+	SlotType getType();
+
+	Object getValue();
+
 	public static enum SlotType {
 		INTEGER(1), DOUBLE(2), NUMERIC(3), STRING(4), GUID(5), TIMESPEC(6), LIST(-7), FRAME(9), GDATE(10), BINARY(-11);
 		private int intValue;
@@ -38,5 +36,5 @@ public interface Slot {
 			return null == xmlValue ? null : Enum.valueOf(SlotType.class, xmlValue.toUpperCase());
 		}
 	}
-	
+
 }

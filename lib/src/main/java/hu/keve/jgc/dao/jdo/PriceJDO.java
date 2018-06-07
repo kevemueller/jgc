@@ -5,16 +5,18 @@ import java.time.LocalDateTime;
 import hu.keve.jgc.dao.Price;
 import hu.keve.jgc.util.Fraction;
 
-public final class PriceJDO extends GuidTypeJDO implements Price {
+public final class PriceJDO extends AbstractGuidTypeJDO implements Price {
 	CommodityJDO commodity;
 	CommodityJDO currency;
 	LocalDateTime date;
 	String source;
-	
+
 	PriceTypes type;
 	Fraction value;
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see hu.keve.jgc.dao.jdo.Price#getCommodity()
 	 */
 	@Override
@@ -22,7 +24,9 @@ public final class PriceJDO extends GuidTypeJDO implements Price {
 		return commodity;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see hu.keve.jgc.dao.jdo.Price#getCurrency()
 	 */
 	@Override
@@ -30,7 +34,9 @@ public final class PriceJDO extends GuidTypeJDO implements Price {
 		return currency;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see hu.keve.jgc.dao.jdo.Price#getDate()
 	 */
 	@Override
@@ -38,7 +44,9 @@ public final class PriceJDO extends GuidTypeJDO implements Price {
 		return date;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see hu.keve.jgc.dao.jdo.Price#getSource()
 	 */
 	@Override
@@ -46,7 +54,9 @@ public final class PriceJDO extends GuidTypeJDO implements Price {
 		return source;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see hu.keve.jgc.dao.jdo.Price#getType()
 	 */
 	@Override
@@ -54,13 +64,14 @@ public final class PriceJDO extends GuidTypeJDO implements Price {
 		return type;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see hu.keve.jgc.dao.jdo.Price#getValue()
 	 */
 	@Override
 	public Fraction getValue() {
 		return value;
 	}
-	
-	
+
 }

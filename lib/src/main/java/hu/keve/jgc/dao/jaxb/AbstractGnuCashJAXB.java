@@ -28,10 +28,10 @@ public abstract class AbstractGnuCashJAXB implements GnuCash {
 	protected abstract void setBook(GncV2BookType value);
 
 	public abstract List<CountData> getCountData();
-	
+
 	@Override
 	public abstract BookJAXB getBook();
-	
+
 	@XmlTransient
 	protected File file;
 	@XmlTransient

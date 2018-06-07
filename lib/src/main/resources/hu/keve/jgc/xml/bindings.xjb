@@ -14,8 +14,7 @@
 	xmlns:recurrence="http://www.gnucash.org/XML/recurrence"
 
 	jaxb:extensionBindingPrefixes="xjc annox inheritance" version="2.1"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/jaxb http://java.sun.com/xml/ns/jaxb/bindingschema_2_0.xsd"
-	>
+	xsi:schemaLocation="http://java.sun.com/xml/ns/jaxb http://java.sun.com/xml/ns/jaxb/bindingschema_2_0.xsd">
 
 	<jaxb:globalBindings>
 		<jaxb:javaType name="java.time.LocalDate"
@@ -146,6 +145,9 @@
 			<jaxb:bindings node=".//xs:element[@name='guid']">
 				<jaxb:property name="wrappedGuid" />
 			</jaxb:bindings>
+			<jaxb:bindings node=".//xs:element[@name='slots']">
+				<jaxb:property name="wrappedSlots" />
+			</jaxb:bindings>
 			<jaxb:bindings node=".//xs:element[@name='desc']">
 				<jaxb:property name="description" />
 			</jaxb:bindings>
@@ -207,19 +209,20 @@
 
 	<jaxb:bindings schemaLocation="jgc_cust.xsd">
 		<jaxb:bindings node="//xs:complexType[@name='custType']">
-			<inheritance:implements>hu.keve.jgc.dao.Customer
+			<inheritance:implements>hu.keve.jgc.dao.jaxb.CustomerJAXB
 			</inheritance:implements>
 			<jaxb:bindings node=".//xs:element[@name='guid']">
 				<jaxb:property name="wrappedGuid" />
 			</jaxb:bindings>
-			<jaxb:bindings node=".//xs:element[@name='taxincluded']">
+			<jaxb:bindings
+				node=".//xs:element[@name='taxincluded']">
 				<jaxb:property name="taxIncluded" />
 			</jaxb:bindings>
 			<jaxb:bindings node=".//xs:element[@name='use-tt']">
 				<jaxb:property name="taxOverride" />
 			</jaxb:bindings>
 			<jaxb:bindings node=".//xs:element[@name='slots']">
-				<jaxb:property name="slotsWrapped" />
+				<jaxb:property name="wrappedSlots" />
 			</jaxb:bindings>
 		</jaxb:bindings>
 	</jaxb:bindings>
@@ -244,6 +247,9 @@
 			<inheritance:implements>hu.keve.jgc.dao.jaxb.EntryJAXB
 			</inheritance:implements>
 
+			<jaxb:bindings node=".//xs:element[@name='guid']">
+				<jaxb:property name="wrappedGuid" />
+			</jaxb:bindings>
 			<jaxb:bindings node=".//xs:element[@name='date']">
 				<jaxb:property name="wrappedDate" />
 			</jaxb:bindings>
@@ -256,6 +262,9 @@
 			<jaxb:bindings node=".//xs:element[@name='b-pay']">
 				<jaxb:property name="bPaytype" />
 			</jaxb:bindings>
+			<jaxb:bindings node=".//xs:element[@name='slots']">
+				<jaxb:property name="wrappedSlots" />
+			</jaxb:bindings>
 		</jaxb:bindings>
 	</jaxb:bindings>
 
@@ -267,7 +276,8 @@
 		</jaxb:bindings>
 		<jaxb:bindings
 			node="//xs:complexType[@name='gncV2BookType']">
-			<jaxb:bindings node="xs:complexContent/xs:extension/xs:sequence/xs:element[@name='account']">
+			<jaxb:bindings
+				node="xs:complexContent/xs:extension/xs:sequence/xs:element[@name='account']">
 				<jaxb:property name="allAccounts" />
 			</jaxb:bindings>
 			<jaxb:bindings node=".//xs:element[@name='commodity']">
@@ -333,6 +343,9 @@
 			<jaxb:bindings node=".//xs:element[@name='guid']">
 				<jaxb:property name="wrappedGuid" />
 			</jaxb:bindings>
+			<jaxb:bindings node=".//xs:element[@name='slots']">
+				<jaxb:property name="wrappedSlots" />
+			</jaxb:bindings>
 		</jaxb:bindings>
 	</jaxb:bindings>
 
@@ -366,6 +379,9 @@
 			<jaxb:bindings node=".//xs:element[@name='closed']">
 				<jaxb:property name="wrappedDateClosed" />
 			</jaxb:bindings>
+			<jaxb:bindings node=".//xs:element[@name='slots']">
+				<jaxb:property name="wrappedSlots" />
+			</jaxb:bindings>
 		</jaxb:bindings>
 	</jaxb:bindings>
 
@@ -388,6 +404,9 @@
 			<jaxb:bindings node=".//xs:element[@name='time']">
 				<jaxb:property name="wrappedDate" />
 			</jaxb:bindings>
+			<jaxb:bindings node=".//xs:element[@name='slots']">
+				<jaxb:property name="wrappedSlots" />
+			</jaxb:bindings>
 		</jaxb:bindings>
 	</jaxb:bindings>
 
@@ -399,7 +418,8 @@
 			<jaxb:bindings node=".//xs:element[@name='start']">
 				<jaxb:property name="wrappedPeriodStart" />
 			</jaxb:bindings>
-			<jaxb:bindings node=".//xs:element[@name='weekend_adj']">
+			<jaxb:bindings
+				node=".//xs:element[@name='weekend_adj']">
 				<jaxb:property name="weekendAdjust" />
 			</jaxb:bindings>
 		</jaxb:bindings>
@@ -442,6 +462,10 @@
 		<jaxb:bindings node="//xs:complexType[@name='sxType']">
 			<inheritance:implements>hu.keve.jgc.dao.jaxb.SchedxactionJAXB
 			</inheritance:implements>
+			<jaxb:bindings node=".//xs:element[@name='id']">
+				<jaxb:property name="wrappedGuid" />
+			</jaxb:bindings>
+
 			<jaxb:bindings node=".//xs:element[@name='templ-acct']">
 				<annox:annotate target="field">@hu.keve.jgc.util.jaxb.XmlIDREF2
 				</annox:annotate>
@@ -481,6 +505,9 @@
 			<jaxb:bindings node=".//xs:element[@name='entries']">
 				<jaxb:property name="wrappedEntries" />
 			</jaxb:bindings>
+			<jaxb:bindings node=".//xs:element[@name='slots']">
+				<jaxb:property name="wrappedSlots" />
+			</jaxb:bindings>
 		</jaxb:bindings>
 	</jaxb:bindings>
 
@@ -497,7 +524,8 @@
 				node=".//xs:element[@name='date-entered']">
 				<jaxb:property name="wrappedDateEntered" />
 			</jaxb:bindings>
-			<jaxb:bindings node=".//xs:element[@name='date-posted']">
+			<jaxb:bindings
+				node=".//xs:element[@name='date-posted']">
 				<jaxb:property name="wrappedDatePosted" />
 			</jaxb:bindings>
 			<jaxb:bindings node=".//xs:element[@name='splits']">
@@ -536,7 +564,8 @@
 			<jaxb:bindings node=".//xs:element[@name='use-tt']">
 				<jaxb:property name="taxOverride" />
 			</jaxb:bindings>
-			<jaxb:bindings node=".//xs:element[@name='taxincluded']">
+			<jaxb:bindings
+				node=".//xs:element[@name='taxincluded']">
 				<jaxb:property name="taxIncluded" />
 			</jaxb:bindings>
 			<jaxb:bindings node=".//xs:element[@name='slots']">

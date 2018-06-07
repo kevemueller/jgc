@@ -115,9 +115,9 @@
 	</xs:complexType>
 
 
-	<xs:complexType name="guidType" />
+	<xs:complexType name="guidType" abstract="true"/>
 
-	<xs:complexType name="versionedGuidType">
+	<xs:complexType name="versionedGuidType" abstract="true">
 		<xs:complexContent>
 			<xs:extension base="guidType">
 				<xs:attribute name="version" type="gnc:versionTypes"

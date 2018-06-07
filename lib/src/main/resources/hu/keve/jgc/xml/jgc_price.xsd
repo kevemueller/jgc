@@ -4,11 +4,18 @@
 	targetNamespace="http://www.gnucash.org/XML/price"
 	xmlns:cmdty="http://www.gnucash.org/XML/cmdty"
 	xmlns:price="http://www.gnucash.org/XML/price"
+	xmlns:slot="http://www.gnucash.org/XML/slot"
 	xmlns:ts="http://www.gnucash.org/XML/ts"
 	xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	
 	<xs:import schemaLocation="jgc.xsd" />
+	
 	<xs:import schemaLocation="jgc_cmdty.xsd"
 		namespace="http://www.gnucash.org/XML/cmdty" />
+
+	<xs:import schemaLocation="jgc_slot.xsd"
+		namespace="http://www.gnucash.org/XML/slot" />
+		
 	<xs:import schemaLocation="jgc_ts.xsd"
 		namespace="http://www.gnucash.org/XML/ts" />
 
@@ -36,6 +43,7 @@
 					<xs:element minOccurs="0" name="type"
 						type="price:priceTypeEnum" />
 					<xs:element name="value" type="numericType" />
+					<xs:element minOccurs="0" name="slots" type="slot:slotsType"/>
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>

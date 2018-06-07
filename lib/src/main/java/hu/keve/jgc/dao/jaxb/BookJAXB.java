@@ -1,31 +1,41 @@
 package hu.keve.jgc.dao.jaxb;
 
-import java.util.Collection;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.gnucash.xml.act.ActType;
 import org.gnucash.xml.cmdty.CmdtyType;
 import org.gnucash.xml.gnc.CountData;
-import org.gnucash.xml.slot.SlotType;
+import org.gnucash.xml.trn.TrnType;
 
 import hu.keve.jgc.dao.Account;
 import hu.keve.jgc.dao.Account.AccountTypes;
 import hu.keve.jgc.dao.Book;
 import hu.keve.jgc.dao.Commodity;
-import hu.keve.jgc.dao.jaxb.unwrapper.GuidUnwrapper;
-import hu.keve.jgc.dao.jaxb.unwrapper.SlotsUnwrapper;
 
-public interface BookJAXB extends Book, GuidUnwrapper, SlotsUnwrapper {
+public interface BookJAXB extends Book {
 	AbstractGnuCashJAXB getGuidRoot();
 
 	@Override
-	default String getGuid() {
-		return GuidUnwrapper.super.getGuid();
+	default Account getRootAccount() {
+		for (ActType account : getAllAccounts()) {
+			if (Account.AccountTypes.ROOT == account.getAccountType() && null != account.getCommodity()) {
+				return account;
+			}
+		}
+		throw new IllegalArgumentException("must have a ROOT account");
 	}
 
 	@Override
-	default Collection<SlotType> getSlots() {
-		return SlotsUnwrapper.super.getSlots();
+	default Account getRootTemplate() {
+		for (ActType account : getAllAccounts()) {
+			if (Account.AccountTypes.ROOT == account.getAccountType() && null == account.getCommodity()) {
+				return account;
+			}
+		}
+
+		ActType account = createAccount(null, "Template ROOT", Account.AccountTypes.ROOT, null);
+		return account;
 	}
 
 	@Override
@@ -34,7 +44,18 @@ public interface BookJAXB extends Book, GuidUnwrapper, SlotsUnwrapper {
 	@Override
 	List<CmdtyType> getAllCommodities();
 
+	@Override
+	default Iterable<TrnType> getTransactionsBetween(LocalDateTime fromInclusive, LocalDateTime toExclusive) {
+		return getTransaction().stream().filter(t -> {
+			LocalDateTime dp = t.getDatePosted();
+			return (null == fromInclusive || dp.isEqual(fromInclusive) || dp.isAfter(fromInclusive))
+					&& (null == toExclusive || dp.isBefore(toExclusive));
+		})::iterator;
+	}
+
 	List<CountData> getCountData();
+
+	List<TrnType> getTransaction();
 
 	default CmdtyType add(Commodity commodity) {
 		AbstractGnuCashJAXB root = getGuidRoot();
@@ -82,26 +103,6 @@ public interface BookJAXB extends Book, GuidUnwrapper, SlotsUnwrapper {
 		account.setParent((ActType) parent);
 		getAllAccounts().add(account);
 		GCUtilJAXB.increment(getCountData(), GCUtilJAXB.GC_CD_ACCOUNT);
-		return account;
-	}
-
-	default Account getRootAccount() {
-		for (ActType account : getAllAccounts()) {
-			if (Account.AccountTypes.ROOT == account.getAccountType() && null != account.getCommodity()) {
-				return account;
-			}
-		}
-		throw new IllegalArgumentException("must have a ROOT account");
-	}
-
-	default Account getRootTemplate() {
-		for (ActType account : getAllAccounts()) {
-			if (Account.AccountTypes.ROOT == account.getAccountType() && null == account.getCommodity()) {
-				return account;
-			}
-		}
-
-		ActType account = createAccount(null, "Template ROOT", Account.AccountTypes.ROOT, null);
 		return account;
 	}
 

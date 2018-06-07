@@ -3,12 +3,16 @@
 	elementFormDefault="qualified"
 	targetNamespace="http://www.gnucash.org/XML/taxtable"
 	xmlns:gnc="http://www.gnucash.org/XML/gnc"
+	xmlns:slot="http://www.gnucash.org/XML/slot"
 	xmlns:taxtable="http://www.gnucash.org/XML/taxtable"
 	xmlns:xs="http://www.w3.org/2001/XMLSchema">
 	<xs:import schemaLocation="jgc.xsd" />
 
 	<xs:import schemaLocation="jgc_gnc.xsd"
 		namespace="http://www.gnucash.org/XML/gnc" />
+
+	<xs:import schemaLocation="jgc_slot.xsd"
+		namespace="http://www.gnucash.org/XML/slot" />
 
 	<xs:complexType name="taxtableRefType">
 		<xs:complexContent>
@@ -31,6 +35,7 @@
 						type="taxtable:taxtableRefType" />
 					<xs:element name="entries"
 						type="gnc:gncTaxTableEntriesType" />
+					<xs:element name="slots" type="slot:slotsType" />
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>

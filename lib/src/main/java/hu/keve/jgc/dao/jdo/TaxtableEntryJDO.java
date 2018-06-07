@@ -4,14 +4,16 @@ import hu.keve.jgc.dao.TaxtableEntry;
 import hu.keve.jgc.util.Fraction;
 
 public class TaxtableEntryJDO implements TaxtableEntry {
-//	int id;
+	// int id;
 
-	TaxtableJDO taxtable;	
+	TaxtableJDO taxtable;
 	AccountJDO account;
 	Fraction amount;
 	TaxtableEntryType type;
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see hu.keve.jgc.dao.jdo.TaxtableEntry#getAccount()
 	 */
 	@Override
@@ -19,7 +21,9 @@ public class TaxtableEntryJDO implements TaxtableEntry {
 		return account;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see hu.keve.jgc.dao.jdo.TaxtableEntry#getAmount()
 	 */
 	@Override
@@ -27,13 +31,14 @@ public class TaxtableEntryJDO implements TaxtableEntry {
 		return amount;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see hu.keve.jgc.dao.jdo.TaxtableEntry#getType()
 	 */
 	@Override
 	public TaxtableEntryType getType() {
 		return type;
 	}
-	
-	
+
 }

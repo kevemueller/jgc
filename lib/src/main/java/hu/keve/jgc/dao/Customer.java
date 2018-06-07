@@ -4,7 +4,7 @@ import hu.keve.jgc.util.Fraction;
 
 public interface Customer {
 
-//	String getGuid();
+	// String getGuid();
 
 	String getName();
 

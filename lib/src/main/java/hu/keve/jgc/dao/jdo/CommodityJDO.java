@@ -1,13 +1,11 @@
 package hu.keve.jgc.dao.jdo;
 
-import java.util.Collection;
-
 import javax.jdo.annotations.PersistenceCapable;
 
 import hu.keve.jgc.dao.Commodity;
 
 @PersistenceCapable
-public final class CommodityJDO extends GuidTypeJDO implements Commodity  {
+public final class CommodityJDO extends AbstractGuidTypeJDO implements Commodity {
 	String namespace; // TODO: Enum
 	String mnemonic;
 	String fullname;
@@ -16,11 +14,10 @@ public final class CommodityJDO extends GuidTypeJDO implements Commodity  {
 	boolean quoteFlag;
 	String quoteSource;
 	String quoteTz;
-	
-	Collection<SlotJDO> slots;
 
-	
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see hu.keve.jgc.dao.jdo.Commodity#getNamespace()
 	 */
 	@Override
@@ -28,7 +25,9 @@ public final class CommodityJDO extends GuidTypeJDO implements Commodity  {
 		return namespace;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see hu.keve.jgc.dao.jdo.Commodity#getMnemonic()
 	 */
 	@Override
@@ -36,7 +35,9 @@ public final class CommodityJDO extends GuidTypeJDO implements Commodity  {
 		return mnemonic;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see hu.keve.jgc.dao.jdo.Commodity#getFullname()
 	 */
 	@Override
@@ -48,15 +49,19 @@ public final class CommodityJDO extends GuidTypeJDO implements Commodity  {
 		return cusip;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see hu.keve.jgc.dao.jdo.Commodity#getFraction()
 	 */
 	@Override
 	public Long getFraction() {
-		return (long)fraction;
+		return (long) fraction;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see hu.keve.jgc.dao.jdo.Commodity#isQuoteFlag()
 	 */
 	@Override
@@ -64,7 +69,9 @@ public final class CommodityJDO extends GuidTypeJDO implements Commodity  {
 		return quoteFlag;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see hu.keve.jgc.dao.jdo.Commodity#getQuoteSource()
 	 */
 	@Override
@@ -72,18 +79,20 @@ public final class CommodityJDO extends GuidTypeJDO implements Commodity  {
 		return quoteSource;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see hu.keve.jgc.dao.jdo.Commodity#getQuoteTz()
 	 */
 	@Override
 	public String getQuoteTz() {
 		return quoteTz;
 	}
-	
-	
+
 	void setNamespace(String namespace) {
 		this.namespace = namespace;
 	}
+
 	void setMnemonic(String mnemonic) {
 		this.mnemonic = mnemonic;
 	}

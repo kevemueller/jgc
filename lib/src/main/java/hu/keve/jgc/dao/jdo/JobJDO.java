@@ -2,7 +2,7 @@ package hu.keve.jgc.dao.jdo;
 
 import hu.keve.jgc.dao.Job;
 
-public class JobJDO extends GuidTypeJDO implements Job {
+public class JobJDO extends AbstractGuidTypeJDO implements Job {
 	String id;
 	String name;
 	String reference;

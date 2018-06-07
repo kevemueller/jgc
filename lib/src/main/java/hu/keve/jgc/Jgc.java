@@ -14,7 +14,8 @@ import hu.keve.jgc.dao.jdo.GnuCashJDO;
 public class Jgc {
 	private static byte[] SQLITE_HEADER = "SQLite format 3\0".getBytes();
 
-	//TODO: use StandardFileOpenOptions instead of boolean readOnly, boolean create (+ downstream)
+	// TODO: use StandardFileOpenOptions instead of boolean readOnly, boolean create
+	// (+ downstream)
 	public static GnuCash fromFile(File file, boolean readOnly) throws IOException, JAXBException {
 		byte[] header = new byte[16];
 

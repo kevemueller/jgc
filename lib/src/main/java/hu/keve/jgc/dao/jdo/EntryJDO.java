@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import hu.keve.jgc.dao.Entry;
 import hu.keve.jgc.util.Fraction;
 
-public class EntryJDO extends GuidTypeJDO implements Entry {
+public class EntryJDO extends AbstractGuidTypeJDO implements Entry {
 	LocalDateTime date;
 	LocalDateTime dateEntered;
 	String description;

@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import hu.keve.jgc.util.Fraction;
 
 public interface Price {
-	
+
 	String getGuid();
 
 	Commodity getCommodity();

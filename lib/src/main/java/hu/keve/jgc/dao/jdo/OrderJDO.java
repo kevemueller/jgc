@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 import hu.keve.jgc.dao.Order;
 
-public class OrderJDO extends GuidTypeJDO implements Order {
+public class OrderJDO extends AbstractGuidTypeJDO implements Order {
 	String id;
 	String notes;
 	String reference;
@@ -12,7 +12,6 @@ public class OrderJDO extends GuidTypeJDO implements Order {
 	LocalDateTime dateOpened;
 	LocalDateTime dateClosed;
 	OwnerJDO owner;
-
 
 	/*
 	 * (non-Javadoc)

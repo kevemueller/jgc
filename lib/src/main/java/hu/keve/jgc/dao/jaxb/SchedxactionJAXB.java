@@ -10,21 +10,23 @@ import hu.keve.jgc.dao.Schedxaction;
 import hu.keve.jgc.dao.jaxb.unwrapper.RecurrencesUnwrapper;
 
 public interface SchedxactionJAXB extends Schedxaction, RecurrencesUnwrapper {
-    GdateType getWrappedStartDate();
-    GdateType getWrappedEndDate();
-    GdateType getWrappedLastOccur();
+	GdateType getWrappedStartDate();
+
+	GdateType getWrappedEndDate();
+
+	GdateType getWrappedLastOccur();
 
 	@Override
 	default List<RecurrenceType> getRecurrences() {
 		return RecurrencesUnwrapper.super.getRecurrences();
 	}
-	
+
 	@Override
 	default LocalDate getStartDate() {
 		GdateType gdate = getWrappedStartDate();
 		return null == gdate ? null : gdate.getGdate();
 	}
-	
+
 	@Override
 	default LocalDate getEndDate() {
 		GdateType gdate = getWrappedEndDate();

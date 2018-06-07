@@ -15,8 +15,8 @@
 				value="datanucleus1" />
 			<property name="datanucleus.identifier.case"
 				value="lowercase" />
-			<property name="datanucleus.rdbms.allowColumnReuse"
-				value="true" />
+<!-- 			<property name="datanucleus.rdbms.allowColumnReuse"
+				value="true" />  -->
 		</properties>			
 	</persistence-unit>
 	

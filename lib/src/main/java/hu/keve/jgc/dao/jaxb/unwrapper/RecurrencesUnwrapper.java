@@ -5,8 +5,9 @@ import java.util.List;
 import org.gnucash.xml.gnc.RecurrencesType;
 import org.gnucash.xml.recurrence.RecurrenceType;
 
-public interface RecurrencesUnwrapper {	
+public interface RecurrencesUnwrapper {
 	void setWrappedRecurrences(RecurrencesType value);
+
 	RecurrencesType getWrappedRecurrences();
 
 	default List<RecurrenceType> getRecurrences() {
@@ -16,5 +17,5 @@ public interface RecurrencesUnwrapper {
 			setWrappedRecurrences(wrappedRecurrences);
 		}
 		return wrappedRecurrences.getRecurrence();
-	}	
+	}
 }

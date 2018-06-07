@@ -2,7 +2,7 @@ package hu.keve.jgc.dao;
 
 import java.util.Collection;
 
-public interface Budget {
+public interface Budget extends GuidType {
 
 	String getName();
 
@@ -13,6 +13,4 @@ public interface Budget {
 	Collection<? extends Recurrence> getRecurrence();
 
 	Collection<? extends BudgetAmount> getBudgetAmounts();
-
-	Collection<? extends Slot> getSlots();
 }

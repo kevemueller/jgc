@@ -1,21 +1,17 @@
 package hu.keve.jgc.dao;
 
 import java.time.LocalDateTime;
-import java.util.Collection;
 
 import hu.keve.jgc.util.Fraction;
 
-public interface Invoice {
-
-	String getGuid();
-
+public interface Invoice extends GuidType {
 	String getId();
 
 	LocalDateTime getDateOpened();
 
 	LocalDateTime getDatePosted();
 
-//	String getNotes();
+	// String getNotes();
 
 	boolean isActive();
 
@@ -36,7 +32,5 @@ public interface Invoice {
 	Owner getBillto();
 
 	Fraction getChargeAmt();
-
-	Collection<? extends Slot> getSlots();
 
 }

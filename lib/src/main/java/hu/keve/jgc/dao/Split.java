@@ -1,15 +1,11 @@
 package hu.keve.jgc.dao;
 
 import java.time.LocalDateTime;
-import java.util.Collection;
 
 import hu.keve.jgc.util.Fraction;
 
-public interface Split {
-
-	String getGuid();
-	
-//	Transaction getTx();
+public interface Split extends GuidType {
+	// Transaction getTx();
 
 	Account getAccount();
 
@@ -24,8 +20,6 @@ public interface Split {
 	Fraction getValue();
 
 	Fraction getQuantity();
-
-	Collection<? extends Slot> getSlots();
 
 	Lot getLot();
 

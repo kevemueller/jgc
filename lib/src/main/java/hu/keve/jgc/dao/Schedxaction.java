@@ -15,7 +15,7 @@ public interface Schedxaction {
 
 	LocalDate getLastOccur();
 
-//	int getNumOccur();
+	// int getNumOccur();
 
 	Integer getRemOccur();
 

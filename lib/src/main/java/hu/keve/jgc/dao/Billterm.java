@@ -13,10 +13,10 @@ public interface Billterm {
 
 	Billterm getParent();
 
-//	String getType();
+	// String getType();
 
 	BilltermDays getDays();
 
-//	int getCutoff();
+	// int getCutoff();
 
 }

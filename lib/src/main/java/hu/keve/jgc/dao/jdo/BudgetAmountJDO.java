@@ -4,16 +4,18 @@ import hu.keve.jgc.dao.BudgetAmount;
 import hu.keve.jgc.util.Fraction;
 
 public final class BudgetAmountJDO implements BudgetAmount {
-//	int id;
-	
+	// int id;
+
 	BudgetJDO budget;
-	
+
 	AccountJDO account;
 	int periodNum;
-	
+
 	Fraction amount;
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see hu.keve.jgc.dao.jdo.BudgetAmount#getAccount()
 	 */
 	@Override
@@ -21,7 +23,9 @@ public final class BudgetAmountJDO implements BudgetAmount {
 		return account;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see hu.keve.jgc.dao.jdo.BudgetAmount#getPeriodNum()
 	 */
 	@Override
@@ -29,11 +33,13 @@ public final class BudgetAmountJDO implements BudgetAmount {
 		return periodNum;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see hu.keve.jgc.dao.jdo.BudgetAmount#getAmount()
 	 */
 	@Override
 	public Fraction getAmount() {
 		return amount;
-	}			
+	}
 }

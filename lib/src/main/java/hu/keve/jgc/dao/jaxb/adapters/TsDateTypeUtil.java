@@ -16,7 +16,7 @@ import org.gnucash.xml.ts.TsType;
 public final class TsDateTypeUtil {
 	private static final DateTimeFormatter GC_LOCAL_DATE_TIME_OPT = new DateTimeFormatterBuilder()
 			.append(DateTimeFormatter.ISO_LOCAL_DATE).appendLiteral(' ').append(DateTimeFormatter.ISO_LOCAL_TIME)
-			.appendLiteral(' ').appendOffsetId().toFormatter(Locale.US);
+			.optionalStart().appendLiteral(' ').appendOffsetId().optionalEnd().toFormatter(Locale.US);
 
 	private TsDateTypeUtil() {
 	}
