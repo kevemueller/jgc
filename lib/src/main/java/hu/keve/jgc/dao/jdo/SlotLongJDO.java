@@ -4,8 +4,8 @@ public class SlotLongJDO extends SlotJDO {
 	Long int64Val;
 
 	@Override
-	public SlotType getType() {
-		return SlotType.INTEGER;
+	public SlotTypes getType() {
+		return SlotTypes.INTEGER;
 	}
 
 	@Override

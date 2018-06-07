@@ -7,6 +7,8 @@ import java.io.File;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Objects;
 import java.util.Set;
 
@@ -18,6 +20,7 @@ import hu.keve.jgc.util.Util;
 import hu.keve.jgc.util.junit.PathsSource;
 
 class TestSimple {
+	public String ID = "f3e24833be9744aab8d8d983b1a5ff6a";
 
 	@ParameterizedTest
 	@PathsSource(path = "src/test/resources", regexp = ".*Simple\\.(sqlite3|xml)\\.gnucash")
@@ -36,11 +39,11 @@ class TestSimple {
 		assertTrue(file.exists());
 		try (GnuCash gc = Jgc.fromFile(file, true)) {
 			Book book = gc.getBook();
-//			assertEquals(1, Util.size(book.getAllCommodities()));
-// TODO: how do we handle the spurious template/template commodity
-//			assertEquals(9, Util.size(book.getAllAccounts()));
-// TODO: how do we handle the root template mismatch
-			assertEquals(3, Util.size(book.getAllTransactions()));			
+			// assertEquals(1, Util.size(book.getAllCommodities()));
+			// TODO: how do we handle the spurious template/template commodity
+			// assertEquals(9, Util.size(book.getAllAccounts()));
+			// TODO: how do we handle the root template mismatch
+			assertEquals(3, Util.size(book.getAllTransactions()));
 		}
 	}
 
@@ -116,15 +119,40 @@ class TestSimple {
 			Book book = gc.getBook();
 			Iterable<? extends Transaction> tx = book.getAllTransactions();
 			assertEquals(3, Util.size(tx));
-			assertEquals(0, Util.size(book.getTransactionsBetween(LocalDateTime.parse("2017-01-01T00:00:00"), LocalDateTime.parse("2018-01-01T00:00:00"))));
+			assertEquals(0, Util.size(book.getTransactionsBetween(LocalDateTime.parse("2017-01-01T00:00:00"),
+					LocalDateTime.parse("2018-01-01T00:00:00"))));
 			assertEquals(0, Util.size(book.getTransactionsBetween(null, LocalDateTime.parse("2018-01-01T00:00:00"))));
-			
+
 			assertEquals(0, Util.size(book.getTransactionsBetween(LocalDateTime.parse("2018-05-01T00:00:00"), null)));
-			assertEquals(0, Util.size(book.getTransactionsBetween(LocalDateTime.parse("2017-01-01T00:00:00"), LocalDateTime.parse("2018-01-05T00:00:00"))));
-			assertEquals(1, Util.size(book.getTransactionsBetween(LocalDateTime.parse("2017-01-01T00:00:00"), LocalDateTime.parse("2018-01-06T00:00:00"))));
-			assertEquals(1, Util.size(book.getTransactionsBetween(LocalDateTime.parse("2018-01-05T00:00:00"), LocalDateTime.parse("2018-01-06T00:00:00"))));
-			assertEquals(2, Util.size(book.getTransactionsBetween(LocalDateTime.parse("2018-01-05T00:00:00"), LocalDateTime.parse("2018-01-08T00:00:00"))));
+			assertEquals(0, Util.size(book.getTransactionsBetween(LocalDateTime.parse("2017-01-01T00:00:00"),
+					LocalDateTime.parse("2018-01-05T00:00:00"))));
+			assertEquals(1, Util.size(book.getTransactionsBetween(LocalDateTime.parse("2017-01-01T00:00:00"),
+					LocalDateTime.parse("2018-01-06T00:00:00"))));
+			assertEquals(1, Util.size(book.getTransactionsBetween(LocalDateTime.parse("2018-01-05T00:00:00"),
+					LocalDateTime.parse("2018-01-06T00:00:00"))));
+			assertEquals(2, Util.size(book.getTransactionsBetween(LocalDateTime.parse("2018-01-05T00:00:00"),
+					LocalDateTime.parse("2018-01-08T00:00:00"))));
 		}
 	}
 
+	@ParameterizedTest
+	@PathsSource(path = "src/test/resources", regexp = ".*Simple\\.(sqlite3|xml)\\.gnucash")
+	void testSlot(final Path path) throws Exception {
+		File file = path.toFile();
+		assertTrue(file.exists());
+		try (GnuCash gc = Jgc.fromFile(file, true)) {
+			Book book = gc.getBook();
+			System.out.println("Account with slots");
+
+			Account account = gc.getById(Account.class, ID);
+			System.out.println(account.getName());
+			for (Entry<String, Object> aslot : account.getSlots().entrySet()) {
+				System.out.println(aslot.getKey() + "=>" + aslot.getValue());
+			}
+
+			System.out.println("Slot with slots");
+			Map<String, Object> slots = book.getSlots();
+			System.out.println(slots);
+		}
+	}
 }

@@ -6,8 +6,8 @@ public class SlotGDateJDO extends SlotJDO {
 	LocalDate gdateVal;
 
 	@Override
-	public SlotType getType() {
-		return SlotType.GDATE;
+	public SlotTypes getType() {
+		return SlotTypes.GDATE;
 	}
 
 	@Override

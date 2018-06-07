@@ -17,7 +17,7 @@
 	</xs:complexType>
 
 
-	<xs:simpleType name="valueTypeEnum">
+	<xs:simpleType name="slotTypeEnum">
 		<xs:restriction base="xs:NCName">
 			<xs:enumeration value="integer" />
 			<xs:enumeration value="double" />
@@ -33,19 +33,6 @@
 	</xs:simpleType>
 
 	<!-- Co-Occurence constraints -->
-
-	<xs:element name="value">
-		<xs:complexType mixed="true">
-			<xs:sequence minOccurs="0" maxOccurs="unbounded">
-				<xs:element minOccurs="0" ref="gdate" />
-				<xs:element minOccurs="0" name="slot"
-					type="slot:slotType" form="unqualified" />
-				<xs:element minOccurs="0" ref="ts:date" />
-			</xs:sequence>
-			<xs:attribute name="type" type="slot:valueTypeEnum"
-				use="required" />
-		</xs:complexType>
-	</xs:element>
 
 	<xs:complexType name="intSlotValue">
 		<xs:simpleContent>
@@ -73,11 +60,22 @@
 			fixed="frame" />
 	</xs:complexType>
 
+	<xs:complexType name="slotValueType" mixed="true">		
+			<xs:sequence minOccurs="0" maxOccurs="unbounded">
+				<xs:element minOccurs="0" ref="gdate" />
+				<xs:element minOccurs="0" name="slot"
+					type="slot:slotType" form="unqualified" />
+				<xs:element minOccurs="0" ref="ts:date" />
+			</xs:sequence>
+		<xs:attribute name="type" type="slot:slotTypeEnum"
+			use="required" />
+	</xs:complexType>
+
 
 	<xs:complexType name="slotType">
 		<xs:sequence>
 			<xs:element name="key" type="xs:string" />
-			<xs:element ref="slot:value" />
+			<xs:element name="value" type="slot:slotValueType" />
 		</xs:sequence>
 	</xs:complexType>
 

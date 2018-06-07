@@ -67,6 +67,11 @@
 			parseMethod="hu.keve.jgc.dao.Recurrence.WeekendAdjustTypes.fromValue"
 			printMethod="hu.keve.jgc.dao.Recurrence.WeekendAdjustTypes.toValue" />
 
+		<jaxb:javaType name="hu.keve.jgc.dao.Slot.SlotTypes"
+			xmlType="slot:slotTypeEnum"
+			parseMethod="hu.keve.jgc.dao.Slot.SlotTypes.fromValue"
+			printMethod="hu.keve.jgc.dao.Slot.SlotTypes.toValue" />
+
 		<jaxb:javaType
 			name="hu.keve.jgc.dao.Split.ReconciledStateTypes"
 			xmlType="split:reconciledStateEnum"
@@ -426,14 +431,17 @@
 	</jaxb:bindings>
 
 	<jaxb:bindings schemaLocation="jgc_slot.xsd">
-		<jaxb:bindings node="//xs:complexType[@name='slotType']">
-			<inheritance:implements>hu.keve.jgc.dao.jaxb.SlotJAXB
-			</inheritance:implements>
+		<jaxb:bindings
+			node=".//xs:complexType[@name='slotType']">
+			<inheritance:extends>hu.keve.jgc.dao.jaxb.AbstractSlotJAXB
+			</inheritance:extends>
 			<jaxb:bindings node=".//xs:element[@name='key']">
 				<jaxb:property name="name" />
 			</jaxb:bindings>
+			<jaxb:bindings node=".//xs:element[@name='value']">
+				<jaxb:property name="wrappedValue" />
+			</jaxb:bindings>
 		</jaxb:bindings>
-
 	</jaxb:bindings>
 
 	<jaxb:bindings schemaLocation="jgc_split.xsd">

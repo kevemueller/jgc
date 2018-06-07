@@ -1,10 +1,12 @@
 package hu.keve.jgc.dao.jaxb;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.xml.bind.annotation.XmlTransient;
 
 import org.gnucash.xml.IdType;
+import org.gnucash.xml.slot.SlotsType;
 
 import hu.keve.jgc.dao.GuidType;
 import hu.keve.jgc.dao.jaxb.unwrapper.GuidUnwrapper;
@@ -41,7 +43,13 @@ public abstract class AbstractGuidType implements GuidType, BookRef, SlotsUnwrap
 
 	@Override
 	public Map<String, Object> getSlots() {
-		// TODO Auto-generated method stub
-		return null;
+		HashMap<String, Object> slots = new HashMap<String, Object>();
+		SlotsType wrappedSlots = getWrappedSlots();
+		if (null != wrappedSlots) {
+			wrappedSlots.getSlot().forEach(slot -> {
+				slots.put(slot.getName(), slot.getValue());
+			});
+		}
+		return slots;
 	}
 }

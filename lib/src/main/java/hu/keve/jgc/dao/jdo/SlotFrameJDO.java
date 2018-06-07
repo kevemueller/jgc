@@ -11,8 +11,8 @@ public class SlotFrameJDO extends SlotJDO {
 	String guidVal;
 
 	@Override
-	public SlotType getType() {
-		return SlotType.FRAME;
+	public SlotTypes getType() {
+		return SlotTypes.FRAME;
 	}
 
 	@Override

@@ -4,8 +4,8 @@ public class SlotDoubleJDO extends SlotJDO {
 	Double doubleVal;
 
 	@Override
-	public SlotType getType() {
-		return SlotType.DOUBLE;
+	public SlotTypes getType() {
+		return SlotTypes.DOUBLE;
 	}
 
 	@Override

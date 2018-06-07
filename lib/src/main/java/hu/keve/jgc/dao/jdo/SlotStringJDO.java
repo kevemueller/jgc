@@ -4,8 +4,8 @@ public class SlotStringJDO extends SlotJDO {
 	String stringVal;
 
 	@Override
-	public SlotType getType() {
-		return SlotType.STRING;
+	public SlotTypes getType() {
+		return SlotTypes.STRING;
 	}
 
 	@Override

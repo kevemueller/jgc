@@ -3,15 +3,15 @@ package hu.keve.jgc.dao;
 public interface Slot {
 	String getName();
 
-	SlotType getType();
+	SlotTypes getType();
 
 	Object getValue();
 
-	public static enum SlotType {
+	public static enum SlotTypes {
 		INTEGER(1), DOUBLE(2), NUMERIC(3), STRING(4), GUID(5), TIMESPEC(6), LIST(-7), FRAME(9), GDATE(10), BINARY(-11);
 		private int intValue;
 
-		private SlotType(final int intValue) {
+		private SlotTypes(final int intValue) {
 			this.intValue = intValue;
 		}
 
@@ -23,8 +23,8 @@ public interface Slot {
 			return intValue;
 		}
 
-		public static SlotType fromValue(int dbValue) {
-			for (SlotType tte : values()) {
+		public static SlotTypes fromValue(int dbValue) {
+			for (SlotTypes tte : values()) {
 				if (dbValue == tte.intValue) {
 					return tte;
 				}
@@ -32,8 +32,12 @@ public interface Slot {
 			throw new IllegalArgumentException();
 		}
 
-		public static SlotType fromValue(String xmlValue) {
-			return null == xmlValue ? null : Enum.valueOf(SlotType.class, xmlValue.toUpperCase());
+		public static SlotTypes fromValue(String xmlValue) {
+			return null == xmlValue ? null : Enum.valueOf(SlotTypes.class, xmlValue.toUpperCase());
+		}
+		
+		public static String toValue(SlotTypes v) {
+			return v.toValue();
 		}
 	}
 

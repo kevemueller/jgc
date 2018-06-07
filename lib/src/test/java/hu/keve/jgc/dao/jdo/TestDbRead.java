@@ -3,7 +3,6 @@ package hu.keve.jgc.dao.jdo;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
-import java.util.Map.Entry;
 
 import javax.jdo.Extent;
 import javax.jdo.PersistenceManager;
@@ -11,18 +10,12 @@ import javax.jdo.PersistenceManagerFactory;
 import javax.jdo.metadata.TypeMetadata;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import hu.keve.jgc.GnuCash;
-import hu.keve.jgc.dao.Account;
-import hu.keve.jgc.dao.Slot;
 
 class TestDbRead {
-
-	public String ID = "19cf223f9aeb4238878eaab32affdf80";
-
 	/**
 	 * Open SQLite database file and go through all of the extents, throws Exception
 	 * if DAO maps incorrectly to the DB tables.
@@ -55,25 +48,5 @@ class TestDbRead {
 		}
 	}
 
-	@Test
-	void testJDOSlot() throws Exception {
-		File file = new File("src/test/resources/Full.sqlite3.gnucash");
-		assertTrue(file.exists());
-		try (GnuCash gc = GnuCashJDO.fromFile(file, true, false)) {
-			System.out.println("Account with slots");
-
-			Account account = gc.getById(Account.class, ID);
-			System.out.println(account.getName());
-			for (Entry<String, Object> aslot : account.getSlots().entrySet()) {
-				System.out.println(aslot.getKey() + "=>" + aslot.getValue());
-			}
-
-			System.out.println("Slot with slots");
-			Slot slot = gc.getById(Slot.class, 1);
-			System.out.println(slot);
-			// for (Slot xslot : slot.getSlots()) {
-			// System.out.println(xslot);
-			// }
-		}
-	}
+	
 }

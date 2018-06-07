@@ -6,8 +6,8 @@ public class SlotNumericJDO extends SlotJDO {
 	Fraction numericVal;
 
 	@Override
-	public SlotType getType() {
-		return SlotType.NUMERIC;
+	public SlotTypes getType() {
+		return SlotTypes.NUMERIC;
 	}
 
 	@Override

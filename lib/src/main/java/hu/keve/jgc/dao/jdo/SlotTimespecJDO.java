@@ -6,8 +6,8 @@ public class SlotTimespecJDO extends SlotJDO {
 	LocalDateTime timespecVal;
 
 	@Override
-	public SlotType getType() {
-		return SlotType.TIMESPEC;
+	public SlotTypes getType() {
+		return SlotTypes.TIMESPEC;
 	}
 
 	@Override
