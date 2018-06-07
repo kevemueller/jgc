@@ -7,7 +7,7 @@
 
 	<persistence-unit name="jgc">
 		<mapping-file>/hu/keve/jgc/dao/jdo/package.jdo</mapping-file>
-		<class>hu.keve.jgc.util.Fraction</class>
+		<mapping-file>/META-INF/package.jdo</mapping-file>
 
 		<exclude-unlisted-classes />
 		<properties>

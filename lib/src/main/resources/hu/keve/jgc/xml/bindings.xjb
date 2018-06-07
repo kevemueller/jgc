@@ -8,6 +8,9 @@
 	xmlns:inheritance="http://jaxb2-commons.dev.java.net/basic/inheritance"
 
 	xmlns:act="http://www.gnucash.org/XML/act"
+	xmlns:entry="http://www.gnucash.org/XML/entry"
+	xmlns:split="http://www.gnucash.org/XML/split"
+	xmlns:ts="http://www.gnucash.org/XML/ts"
 	xmlns:tte="http://www.gnucash.org/XML/tte"
 	xmlns:owner="http://www.gnucash.org/XML/owner"
 	xmlns:price="http://www.gnucash.org/XML/price"

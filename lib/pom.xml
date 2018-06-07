@@ -13,13 +13,16 @@
 		<javax.activation.version>1.2.0</javax.activation.version>
 		<jaxb.api.version>2.3.0</jaxb.api.version>
 		<datanucleus.version>5.1.9</datanucleus.version>
+		<datanucleus-maven-plugin.version>5.0.2</datanucleus-maven-plugin.version>
 		<jvnet_jaxb2_commons.version>
 			0.11.1
 		</jvnet_jaxb2_commons.version>
-		<jvnet_jaxb2_plugin.version>
-			0.14.0-SNAPSHOT
-		</jvnet_jaxb2_plugin.version>
-		<!-- 0.13.3 -->
+		<maven-jaxb2-plugin.version>
+			0.14.0
+		</maven-jaxb2-plugin.version>
+		<jvnet_jaxb2_annotate.version>
+			1.1.0
+		</jvnet_jaxb2_annotate.version>
 	</properties>
 
 	<build>
@@ -31,7 +34,7 @@
 			<plugin>
 				<groupId>org.jvnet.jaxb2.maven2</groupId>
 				<artifactId>maven-jaxb2-plugin</artifactId>
-				<version>${jvnet_jaxb2_plugin.version}</version>
+				<version>${maven-jaxb2-plugin.version}</version>
 				<executions>
 					<execution>
 						<goals>
@@ -58,7 +61,7 @@
 						<plugin>
 							<groupId>org.jvnet.jaxb2_commons</groupId>
 							<artifactId>jaxb2-basics-annotate</artifactId>
-							<version>1.0.5-SNAPSHOT</version>
+							<version>${jvnet_jaxb2_annotate.version}</version>
 						</plugin>
 						<plugin>
 							<groupId>hu.keve.jgc</groupId>
@@ -68,6 +71,40 @@
 					</plugins>
 				</configuration>
 			</plugin>
+
+	<plugin>
+				<groupId>org.datanucleus</groupId>
+				<artifactId>datanucleus-maven-plugin</artifactId>
+				<version>${datanucleus-maven-plugin.version}</version>
+				<configuration>
+					<api>JDO</api>
+					<persistenceUnitName>jgc</persistenceUnitName>
+					<fork>true</fork>
+					<verbose>true</verbose>
+					<log4jConfiguration>${basedir}/datanucleus-enhancer.log4j.properties</log4jConfiguration>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>compile</phase>
+						<goals>
+							<goal>enhance</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+
+			 <plugin>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>${maven-surefire-plugin.version}</version>
+            <dependencies>
+                <dependency>
+                    <groupId>org.junit.platform</groupId>
+                    <artifactId>junit-platform-surefire-provider</artifactId>
+                    <version>${junit-platform-surefire-provider.version}</version>
+                </dependency>
+            </dependencies>
+        </plugin>
 		</plugins>
 	</build>
 	<dependencies>
