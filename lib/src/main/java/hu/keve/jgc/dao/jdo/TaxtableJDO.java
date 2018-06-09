@@ -5,6 +5,9 @@ import java.util.Collection;
 import hu.keve.jgc.dao.Taxtable;
 
 public class TaxtableJDO extends AbstractGuidTypeJDO implements Taxtable {
+	public static final String NAME = "taxtables";
+	public static final int VERSION = 2;
+	
 	String name;
 	long refcount;
 	boolean invisible;

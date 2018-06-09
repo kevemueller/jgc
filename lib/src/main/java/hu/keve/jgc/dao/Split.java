@@ -5,6 +5,12 @@ import java.time.LocalDateTime;
 import hu.keve.jgc.util.Fraction;
 
 public interface Split extends GuidType {
+	@Override
+	default String getBusinessKey() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 	// Transaction getTx();
 
 	Account getAccount();

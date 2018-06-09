@@ -23,6 +23,7 @@
 		<jvnet_jaxb2_annotate.version>
 			1.1.0
 		</jvnet_jaxb2_annotate.version>
+		<nv-i18n.version>1.23</nv-i18n.version>
 	</properties>
 
 	<build>
@@ -67,12 +68,12 @@
 							<groupId>hu.keve.jgc</groupId>
 							<artifactId>jgc-util</artifactId>
 							<version>${jgc.version}</version>
-						</plugin>											
+						</plugin>
 					</plugins>
 				</configuration>
 			</plugin>
 
-	<plugin>
+			<plugin>
 				<groupId>org.datanucleus</groupId>
 				<artifactId>datanucleus-maven-plugin</artifactId>
 				<version>${datanucleus-maven-plugin.version}</version>
@@ -94,17 +95,17 @@
 			</plugin>
 
 
-			 <plugin>
-            <artifactId>maven-surefire-plugin</artifactId>
-            <version>${maven-surefire-plugin.version}</version>
-            <dependencies>
-                <dependency>
-                    <groupId>org.junit.platform</groupId>
-                    <artifactId>junit-platform-surefire-provider</artifactId>
-                    <version>${junit-platform-surefire-provider.version}</version>
-                </dependency>
-            </dependencies>
-        </plugin>
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>${maven-surefire-plugin.version}</version>
+				<dependencies>
+					<dependency>
+						<groupId>org.junit.platform</groupId>
+						<artifactId>junit-platform-surefire-provider</artifactId>
+						<version>${junit-platform-surefire-provider.version}</version>
+					</dependency>
+				</dependencies>
+			</plugin>
 		</plugins>
 	</build>
 	<dependencies>
@@ -180,6 +181,11 @@
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<version>42.2.2</version>
+		</dependency>
+		<dependency>
+			<groupId>com.neovisionaries</groupId>
+			<artifactId>nv-i18n</artifactId>
+			<version>${nv-i18n.version}</version>
 		</dependency>
 	</dependencies>
 </project>

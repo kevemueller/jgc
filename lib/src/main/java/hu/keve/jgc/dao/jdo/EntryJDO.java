@@ -6,6 +6,9 @@ import hu.keve.jgc.dao.Entry;
 import hu.keve.jgc.util.Fraction;
 
 public class EntryJDO extends AbstractGuidTypeJDO implements Entry {
+	public static final String NAME = "entries";
+	public static final int VERSION = 4;
+	
 	LocalDateTime date;
 	LocalDateTime dateEntered;
 	String description;

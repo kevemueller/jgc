@@ -6,6 +6,9 @@ import hu.keve.jgc.dao.Commodity;
 
 @PersistenceCapable
 public final class CommodityJDO extends AbstractGuidTypeJDO implements Commodity {
+	public static final String NAME = "commodities";
+	public static final int VERSION = 1;
+
 	String namespace; // TODO: Enum
 	String mnemonic;
 	String fullname;
@@ -15,85 +18,85 @@ public final class CommodityJDO extends AbstractGuidTypeJDO implements Commodity
 	String quoteSource;
 	String quoteTz;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see hu.keve.jgc.dao.jdo.Commodity#getNamespace()
-	 */
+	/** getters **/
+
 	@Override
 	public String getNamespace() {
 		return namespace;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see hu.keve.jgc.dao.jdo.Commodity#getMnemonic()
-	 */
 	@Override
 	public String getMnemonic() {
 		return mnemonic;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see hu.keve.jgc.dao.jdo.Commodity#getFullname()
-	 */
 	@Override
 	public String getFullname() {
 		return fullname;
 	}
 
+	@Override
 	public String getCusip() {
 		return cusip;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see hu.keve.jgc.dao.jdo.Commodity#getFraction()
-	 */
 	@Override
-	public Long getFraction() {
-		return (long) fraction;
+	public long getFraction() {
+		return fraction;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see hu.keve.jgc.dao.jdo.Commodity#isQuoteFlag()
-	 */
 	@Override
 	public boolean isSetQuoteFlag() {
 		return quoteFlag;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see hu.keve.jgc.dao.jdo.Commodity#getQuoteSource()
-	 */
 	@Override
 	public String getQuoteSource() {
 		return quoteSource;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see hu.keve.jgc.dao.jdo.Commodity#getQuoteTz()
-	 */
 	@Override
 	public String getQuoteTz() {
 		return quoteTz;
 	}
 
+	/** restricted setters **/
 	void setNamespace(String namespace) {
 		this.namespace = namespace;
 	}
 
 	void setMnemonic(String mnemonic) {
 		this.mnemonic = mnemonic;
+	}
+
+	/** setters */
+	@Override
+	public void setFullname(String fullname) {
+		this.fullname = fullname;
+	}
+
+	@Override
+	public void setCusip(String cusip) {
+		this.cusip = cusip;
+	}
+
+	@Override
+	public void setFraction(long fraction) {
+		this.fraction = (int) fraction;
+	}
+
+	@Override
+	public void setQuoteFlag(boolean quoteFlag) {
+		this.quoteFlag = quoteFlag;
+	}
+
+	@Override
+	public void setQuoteSource(String quoteSource) {
+		this.quoteSource = quoteSource;
+	}
+
+	@Override
+	public void setQuoteTz(String quoteTz) {
+		this.quoteTz = quoteTz;
 	}
 }

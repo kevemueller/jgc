@@ -5,6 +5,9 @@ import hu.keve.jgc.dao.TaxIncludedTypes;
 import hu.keve.jgc.util.Fraction;
 
 public class CustomerJDO extends AbstractGuidTypeJDO implements Customer {
+	public static final String NAME = "customers";
+	public static final int VERSION = 2;
+	
 	String name;
 	String id;
 	String notes;

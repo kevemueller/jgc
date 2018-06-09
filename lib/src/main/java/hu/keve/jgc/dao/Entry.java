@@ -4,7 +4,13 @@ import java.time.LocalDateTime;
 
 import hu.keve.jgc.util.Fraction;
 
-public interface Entry {
+public interface Entry extends GuidType {
+	@Override
+	default String getBusinessKey() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 
 	LocalDateTime getDate();
 

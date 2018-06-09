@@ -1,11 +1,11 @@
 package hu.keve.jgc.dao.jaxb;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
@@ -35,14 +35,13 @@ public class TestJaxb {
 		schema = GnuCashXMLSource.getSchema();
 	}
 
-	@ParameterizedTest(name = "{index} => file=''{0}''")
-	@ValueSource(strings = { "CJ.xml", "PhA.xml", "Simple.xml" })
-	// @ValueSource(strings = { "Simple.xml" })
-	void jaxbLoadFile(String fileName) throws SAXException, IOException, JAXBException {
-		File file = new File(fileName);
-		assertTrue(file.exists());
+	@ParameterizedTest
+	@ValueSource(strings = { "Simple.xml.gnucash", "Full.xml.gnucash" })
+	void jaxbLoadFile(String resourceName) throws SAXException, IOException, JAXBException {
+		URL resource = getClass().getClassLoader().getResource(resourceName);
+		assertNotNull(resource);
 
-		InputStream in = GnuCashXMLSource.openStream(file);
+		InputStream in = GnuCashXMLSource.openStream(resource);
 		Unmarshaller unmarshaller = GCUtilJAXB.getUnmarshaller();
 		GncV2Type gncv2 = ((JAXBElement<GncV2Type>) unmarshaller.unmarshal(in)).getValue();
 
@@ -61,17 +60,17 @@ public class TestJaxb {
 		// System.out.println(gncv2);
 	}
 
-	@ParameterizedTest(name = "{index} => file=''{0}''")
-	@ValueSource(strings = { "CJ.xml", "PhA.xml", "Simple.xml" })
-	void jaxbWriteFile(String fileName) throws SAXException, IOException, JAXBException {
-		File file = new File(fileName);
-		assertTrue(file.exists());
+	@ParameterizedTest
+	@ValueSource(strings = { "Simple.xml.gnucash", "Full.xml.gnucash" })
+	void jaxbWriteFile(String resourceName) throws SAXException, IOException, JAXBException {
+		URL resource = getClass().getClassLoader().getResource(resourceName);
+		assertNotNull(resource);
 
-		InputStream in = GnuCashXMLSource.openStream(file);
+		InputStream in = GnuCashXMLSource.openStream(resource);
 		Unmarshaller unmarshaller = GCUtilJAXB.getUnmarshaller();
 		GncV2Type gncv2 = ((JAXBElement<GncV2Type>) unmarshaller.unmarshal(in)).getValue();
 
-		FileOutputStream out = new FileOutputStream(fileName.replace(".xml", ".out.xml"));
+		FileOutputStream out = new FileOutputStream(resourceName.replace(".xml", ".out.xml"));
 
 		Marshaller marshaller = GCUtilJAXB.getMarshaller();
 

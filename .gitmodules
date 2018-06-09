@@ -2,3 +2,4 @@
 	path = lib/lib/Gnucash
 	url = https://github.com/Gnucash/gnucash.git
 	shallow = true
+	branch = maint

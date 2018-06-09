@@ -3,6 +3,9 @@ package hu.keve.jgc.dao.jdo;
 import hu.keve.jgc.dao.Job;
 
 public class JobJDO extends AbstractGuidTypeJDO implements Job {
+	public static final String NAME = "jobs";
+	public static final int VERSION = 1;
+	
 	String id;
 	String name;
 	String reference;

@@ -1,6 +1,7 @@
 package hu.keve.jgc.dao.jdo;
 
 import java.time.LocalDateTime;
+import java.util.Currency;
 
 import javax.jdo.Extent;
 import javax.jdo.PersistenceManager;
@@ -14,6 +15,9 @@ import hu.keve.jgc.dao.Transaction;
 import hu.keve.jgc.util.jdo.GCDateTimeLocalDateTimeConverter;
 
 public final class BookJDO extends AbstractGuidTypeJDO implements Book {
+	public static final String NAME = "books";
+	public static final int VERSION = 1;
+
 	AccountJDO rootAccount;
 	AccountJDO rootTemplate;
 
@@ -79,19 +83,35 @@ public final class BookJDO extends AbstractGuidTypeJDO implements Book {
 	/** creators **/
 
 	@Override
-	public CommodityJDO createCommodity(String namespace, String mnemonic) {
-		PersistenceManager pm = getPersistenceManager();
+	public CommodityJDO createCommodity(Currency currency) {
 		CommodityJDO commodity = new CommodityJDO();
-		commodity.setNamespace(namespace);
-		commodity.setMnemonic(mnemonic);
+		commodity.newGuid();
+		commodity.setNamespace("CURRENCY");
+		commodity.setMnemonic(currency.getCurrencyCode());
+		commodity.setCurrency(currency);
+		return mergeCommodity(commodity);
+	}
+
+	private CommodityJDO mergeCommodity(CommodityJDO commodity) {
+		String bk = commodity.getBusinessKey();
+		PersistenceManager pm = getPersistenceManager();
 		Extent<CommodityJDO> commodities = pm.getExtent(CommodityJDO.class);
 		for (CommodityJDO c : commodities) {
-			if (c.equalsUnique(commodity)) {
+			if (c.getBusinessKey().equals(bk)) {
+				// merge callback
 				return c;
 			}
 		}
-		commodity.newGuid();
 		return pm.makePersistent(commodity);
+	}
+
+	@Override
+	public CommodityJDO createCommodity(String namespace, String mnemonic) {
+		CommodityJDO commodity = new CommodityJDO();
+		commodity.newGuid();
+		commodity.setNamespace(namespace);
+		commodity.setMnemonic(mnemonic);
+		return mergeCommodity(commodity);
 	}
 
 	@Override
@@ -101,6 +121,7 @@ public final class BookJDO extends AbstractGuidTypeJDO implements Book {
 		account.newGuid();
 		// account.setParent(parent);
 		account.setName(name);
+		account.setAccountType(type);
 		account.setCommodity((CommodityJDO) commodity);
 		return pm.makePersistent(account);
 	}

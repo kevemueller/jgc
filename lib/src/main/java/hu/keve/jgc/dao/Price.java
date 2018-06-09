@@ -4,9 +4,12 @@ import java.time.LocalDateTime;
 
 import hu.keve.jgc.util.Fraction;
 
-public interface Price {
-
-	String getGuid();
+public interface Price extends GuidType {
+	@Override
+	default String getBusinessKey() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	Commodity getCommodity();
 

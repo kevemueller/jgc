@@ -1,6 +1,7 @@
 package hu.keve.jgc.dao.jaxb;
 
 import java.time.LocalDateTime;
+import java.util.Currency;
 import java.util.List;
 
 import org.gnucash.xml.act.ActType;
@@ -65,8 +66,9 @@ public interface BookJAXB extends Book {
 		if (null != cmdty) {
 			return cmdty;
 		}
+		String bk = commodity.getBusinessKey();
 		for (CmdtyType existingCmdty : getAllCommodities()) {
-			if (existingCmdty.equalsUnique(commodity)) {
+			if (existingCmdty.getBusinessKey().equals(bk)) {
 				// merge
 				return existingCmdty;
 			}
@@ -85,6 +87,17 @@ public interface BookJAXB extends Book {
 		return cmdty;
 	}
 
+	@Override
+	default CmdtyType createCommodity(Currency currency) {
+		CmdtyType cmdtyType = GCUtilJAXB.cmdtyObjectFactory.createCmdtyType();
+		cmdtyType.setVersion(GCUtilJAXB.GC_VERSION);
+		cmdtyType.setNamespace("CURRENCY");
+		cmdtyType.setMnemonic(currency.getCurrencyCode());
+		cmdtyType.setCurrency(currency);
+		return add(cmdtyType);
+	}
+
+	@Override
 	default CmdtyType createCommodity(String space, String mnemonic) {
 		CmdtyType cmdtyType = GCUtilJAXB.cmdtyObjectFactory.createCmdtyType();
 		cmdtyType.setVersion(GCUtilJAXB.GC_VERSION);
@@ -93,6 +106,7 @@ public interface BookJAXB extends Book {
 		return add(cmdtyType);
 	}
 
+	@Override
 	default ActType createAccount(Account parent, String name, AccountTypes type, Commodity commodity) {
 		ActType account = GCUtilJAXB.actObjectFactory.createActType();
 		account.setWrappedGuid(GCUtilJAXB.createGuid());

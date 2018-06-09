@@ -4,6 +4,9 @@ import hu.keve.jgc.dao.TaxIncludedTypes;
 import hu.keve.jgc.dao.Vendor;
 
 public final class VendorJDO extends AbstractGuidTypeJDO implements Vendor {
+	public static final String NAME = "vendors";
+	public static final int VERSION = 1;
+	
 	String name;
 	String id;
 	String notes;

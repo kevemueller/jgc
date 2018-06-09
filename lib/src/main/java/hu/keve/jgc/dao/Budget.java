@@ -1,8 +1,11 @@
 package hu.keve.jgc.dao;
 
-import java.util.Collection;
-
 public interface Budget extends GuidType {
+	@Override
+	default String getBusinessKey() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	String getName();
 
@@ -10,7 +13,7 @@ public interface Budget extends GuidType {
 
 	int getNumPeriods();
 
-	Collection<? extends Recurrence> getRecurrence();
+//TODO:	Collection<? extends Recurrence> getRecurrence();
 
-	Collection<? extends BudgetAmount> getBudgetAmounts();
+//TODO:	Collection<? extends BudgetAmount> getBudgetAmounts();
 }

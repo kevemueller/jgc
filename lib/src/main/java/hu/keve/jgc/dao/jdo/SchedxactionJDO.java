@@ -6,6 +6,9 @@ import java.util.Collection;
 import hu.keve.jgc.dao.Schedxaction;
 
 public final class SchedxactionJDO extends AbstractGuidTypeJDO implements Schedxaction {
+	public static final String NAME = "schedxactions";
+	public static final int VERSION = 1;
+	
 	String name;
 	boolean enabled;
 

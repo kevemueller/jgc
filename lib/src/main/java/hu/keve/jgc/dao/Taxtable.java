@@ -2,9 +2,12 @@ package hu.keve.jgc.dao;
 
 import java.util.Collection;
 
-public interface Taxtable {
-
-	String getGuid();
+public interface Taxtable extends GuidType {
+	@Override
+	default String getBusinessKey() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	String getName();
 

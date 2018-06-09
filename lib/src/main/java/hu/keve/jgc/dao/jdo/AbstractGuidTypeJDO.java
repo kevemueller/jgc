@@ -21,8 +21,9 @@ public abstract class AbstractGuidTypeJDO implements GuidType {
 
 	@Override
 	public final Object getSlotValue(String key) {
-		return getPersistenceManager().newQuery(SlotJDO.class).filter("objGuid == :guid && name == :key")
+		SlotJDO slot = getPersistenceManager().newQuery(SlotJDO.class).filter("objGuid == :guid && name == :key")
 				.setParameters(guid, key).executeUnique();
+		return null == slot ? null : slot.getValue();
 	}
 
 	@Override

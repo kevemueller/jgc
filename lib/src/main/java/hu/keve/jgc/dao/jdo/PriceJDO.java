@@ -6,6 +6,9 @@ import hu.keve.jgc.dao.Price;
 import hu.keve.jgc.util.Fraction;
 
 public final class PriceJDO extends AbstractGuidTypeJDO implements Price {
+	public static final String NAME = "prices";
+	public static final int VERSION = 3;
+	
 	CommodityJDO commodity;
 	CommodityJDO currency;
 	LocalDateTime date;

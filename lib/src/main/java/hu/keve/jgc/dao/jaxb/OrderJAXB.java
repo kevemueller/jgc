@@ -13,6 +13,12 @@ public interface OrderJAXB extends Order, GuidUnwrapper {
 
 	TsType getWrappedDateClosed();
 
+
+	@Override
+	default String getGuid() {
+		return GuidUnwrapper.super.getGuid();
+	}
+
 	@Override
 	default LocalDateTime getDateOpened() {
 		return TsDateTypeUtil.unwrap(getWrappedDateOpened());

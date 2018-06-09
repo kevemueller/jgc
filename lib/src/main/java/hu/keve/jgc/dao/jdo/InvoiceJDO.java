@@ -6,6 +6,10 @@ import hu.keve.jgc.dao.Invoice;
 import hu.keve.jgc.util.Fraction;
 
 public final class InvoiceJDO extends AbstractGuidTypeJDO implements Invoice {
+	public static final String NAME = "invoices";
+	public static final int VERSION = 4;
+
+	
 	String id;
 
 	LocalDateTime dateOpened;

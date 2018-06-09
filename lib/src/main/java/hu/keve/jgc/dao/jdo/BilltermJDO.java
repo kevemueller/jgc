@@ -3,6 +3,9 @@ package hu.keve.jgc.dao.jdo;
 import hu.keve.jgc.dao.Billterm;
 
 public class BilltermJDO extends AbstractGuidTypeJDO implements Billterm {
+	public static final String NAME = "billterms";
+	public static final int VERSION = 2;
+	
 	String name;
 	String description;
 	int refcount;

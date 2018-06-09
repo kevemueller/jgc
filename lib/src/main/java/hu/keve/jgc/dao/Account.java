@@ -1,6 +1,14 @@
 package hu.keve.jgc.dao;
 
 public interface Account extends GuidType {
+
+	@Override
+	default String getBusinessKey() {
+		Account parentAccount = getParent();
+		return null == parentAccount ? getName() : String.join("/", parentAccount.getBusinessKey(), getName());
+	}
+
+	/** getters **/
 	String getName();
 
 	AccountTypes getAccountType();
@@ -17,7 +25,7 @@ public interface Account extends GuidType {
 
 	String getDescription();
 
-	// boolean isPlaceholder();
+	boolean isPlaceholder();
 
 	Iterable<? extends Account> getChildren();
 

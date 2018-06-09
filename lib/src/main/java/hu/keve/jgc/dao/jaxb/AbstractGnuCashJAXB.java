@@ -3,6 +3,7 @@ package hu.keve.jgc.dao.jaxb;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Currency;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,13 +41,15 @@ public abstract class AbstractGnuCashJAXB implements GnuCash {
 	private Map<String, AbstractGuidType> guidMap = new HashMap<String, AbstractGuidType>();
 
 	@Override
-	public Book createBook(String rootCommoditySpace, String rootCommodityMnemonic) {
-		assert (null == getBook());
+	public Book createBook(Currency rootCurrency) {
+		if (null != getBook()) {
+			throw new IllegalArgumentException("can store only one book");
+		}
 		GncV2BookType book = GCUtilJAXB.gncObjectFactory.createGncV2BookType();
 		book.setWrappedGuid(book.getInternalGuid());
 		book.setVersion(GCUtilJAXB.GC_VERSION);
 		register(book);
-		CmdtyType commodity = book.createCommodity(rootCommoditySpace, rootCommodityMnemonic);
+		CmdtyType commodity = book.createCommodity(rootCurrency);
 		book.createAccount(null, "Root account", AccountTypes.ROOT, commodity);
 		GCUtilJAXB.increment(getCountData(), GCUtilJAXB.GC_CD_BOOK);
 		setBook(book);
@@ -74,6 +77,9 @@ public abstract class AbstractGnuCashJAXB implements GnuCash {
 	@Override
 	public void close() throws Exception {
 		// TODO: remove lock file
+		if (null == getBook()) {
+			throw new IllegalArgumentException("must have a book");
+		}
 	}
 
 	@Override

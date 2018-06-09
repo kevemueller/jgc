@@ -144,7 +144,20 @@
 		</jaxb:bindings>
 	</jaxb:bindings>
 
-	<!-- TODO: bgt -->
+	<jaxb:bindings schemaLocation="jgc_bgt.xsd">
+		<jaxb:bindings node="//xs:complexType[@name='bgtType']">
+			<inheritance:implements>hu.keve.jgc.dao.Budget
+			</inheritance:implements>
+			<jaxb:bindings node=".//xs:element[@name='id']">
+				<jaxb:property name="wrappedGuid" />
+			</jaxb:bindings>
+			<jaxb:bindings node=".//xs:element[@name='slots']">
+				<jaxb:property name="wrappedSlots" />
+			</jaxb:bindings>
+		</jaxb:bindings>
+	</jaxb:bindings>
+
+
 	<jaxb:bindings schemaLocation="jgc_billterm.xsd">
 		<jaxb:bindings
 			node="//xs:complexType[@name='billtermType']">
@@ -204,6 +217,9 @@
 			</jaxb:bindings>
 			<jaxb:bindings node=".//xs:element[@name='name']">
 				<jaxb:property name="fullname" />
+			</jaxb:bindings>
+			<jaxb:bindings node=".//xs:element[@name='fraction']">
+				<jaxb:property name="fractionOrDefault" />
 			</jaxb:bindings>
 			<jaxb:bindings node=".//xs:element[@name='get_quotes']">
 				<jaxb:property generateIsSetMethod="true"

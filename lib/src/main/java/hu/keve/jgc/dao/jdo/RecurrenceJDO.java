@@ -5,7 +5,8 @@ import java.time.LocalDate;
 import hu.keve.jgc.dao.Recurrence;
 
 public final class RecurrenceJDO implements Recurrence {
-	// int id;
+	public static final String NAME = "recurrences";
+	public static final int VERSION = 2;
 
 	String obj;
 	int mult;

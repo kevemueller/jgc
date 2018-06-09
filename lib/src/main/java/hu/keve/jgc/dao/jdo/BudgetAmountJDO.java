@@ -4,8 +4,9 @@ import hu.keve.jgc.dao.BudgetAmount;
 import hu.keve.jgc.util.Fraction;
 
 public final class BudgetAmountJDO implements BudgetAmount {
-	// int id;
-
+	public static final String NAME = "budget_amounts";
+	public static final int VERSION = 1;
+	
 	BudgetJDO budget;
 
 	AccountJDO account;

@@ -5,6 +5,10 @@ import java.util.Collection;
 import hu.keve.jgc.dao.Budget;
 
 public final class BudgetJDO extends AbstractGuidTypeJDO implements Budget {
+	public static final String NAME = "budgets";
+	public static final int VERSION = 1;
+
+	
 	String name;
 	String description;
 	int numPeriods;
@@ -27,12 +31,12 @@ public final class BudgetJDO extends AbstractGuidTypeJDO implements Budget {
 		return numPeriods;
 	}
 
-	@Override
+//TODO:	@Override
 	public Collection<RecurrenceJDO> getRecurrence() {
 		return recurrences;
 	}
 
-	@Override
+//TODO:	@Override
 	public Collection<BudgetAmountJDO> getBudgetAmounts() {
 		return budgetAmounts;
 	}

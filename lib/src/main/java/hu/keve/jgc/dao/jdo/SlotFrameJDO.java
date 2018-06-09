@@ -20,8 +20,15 @@ public class SlotFrameJDO extends SlotJDO {
 		PersistenceManager pm = (PersistenceManager) ((Persistable) (Object) this).dnGetExecutionContext().getOwner();
 		List<SlotJDO> slots = pm.newQuery(SlotJDO.class, "objGuid == :guidVal").setParameters(guidVal).executeList();
 		HashMap<String, Object> slotMap = new HashMap<String, Object>();
+		String prefix = getName()+"/";
 		slots.forEach(slot -> {
-			slotMap.put(slot.getName(), slot.getValue());
+			String slotName = slot.getName();
+			if (slotName.startsWith(prefix)) {
+				slotName = slotName.substring(prefix.length());
+			} else {
+				System.err.println("Expected slotname to start with parent prefix");
+			}
+			slotMap.put(slotName, slot.getValue());
 		});
 		return slotMap;
 	}

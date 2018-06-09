@@ -35,7 +35,7 @@
 						type="taxtable:taxtableRefType" />
 					<xs:element name="entries"
 						type="gnc:gncTaxTableEntriesType" />
-					<xs:element name="slots" type="slot:slotsType" />
+					<xs:element minOccurs="0" name="slots" type="slot:slotsType" />
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>

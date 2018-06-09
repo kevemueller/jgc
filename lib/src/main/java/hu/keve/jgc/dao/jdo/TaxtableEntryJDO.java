@@ -4,7 +4,8 @@ import hu.keve.jgc.dao.TaxtableEntry;
 import hu.keve.jgc.util.Fraction;
 
 public class TaxtableEntryJDO implements TaxtableEntry {
-	// int id;
+	public static final String NAME = "taxtable_entries";
+	public static final int VERSION = 3;
 
 	TaxtableJDO taxtable;
 	AccountJDO account;

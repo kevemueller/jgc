@@ -5,6 +5,9 @@ import java.time.LocalDateTime;
 import hu.keve.jgc.dao.Order;
 
 public class OrderJDO extends AbstractGuidTypeJDO implements Order {
+	public static final String NAME = "orders";
+	public static final int VERSION = 1;
+	
 	String id;
 	String notes;
 	String reference;

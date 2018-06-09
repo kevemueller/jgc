@@ -6,6 +6,9 @@ import java.util.Collection;
 import hu.keve.jgc.dao.Transaction;
 
 public final class TransactionJDO extends AbstractGuidTypeJDO implements Transaction {
+	public static final String NAME = "transactions";
+	public static final int VERSION = 4;
+	
 	CommodityJDO currency;
 	String num;
 

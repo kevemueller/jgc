@@ -16,18 +16,19 @@
 		schemaLocation="jgc_slot.xsd" />
 
 	<xs:complexType name="bgtType">
-		<xs:sequence>
-			<xs:element name="id" type="idType" />
-			<xs:element name="name" type="xs:string" />
-			<xs:element name="description" type="xs:string" />
-			<xs:element name="num-periods" type="xs:unsignedInt" />
-			<xs:element name="recurrence"
-				type="recurrence:recurrenceType" />
-
-			<!-- budgetAmounts?? -->
-			<xs:element name="slots" type="slot:slotsType" />
-		</xs:sequence>
-		<xs:attribute name="version" type="gnc:versionTypes"
-			use="required" />
+		<xs:complexContent>
+			<xs:extension base="versionedGuidType">
+				<xs:sequence>
+					<xs:element name="id" type="idType" />
+					<xs:element name="name" type="xs:string" />
+					<xs:element name="description" type="xs:string" />
+					<xs:element name="num-periods" type="xs:int" />
+					<xs:element name="recurrence"
+						type="recurrence:recurrenceType" />
+					<!-- budgetAmounts?? -->
+					<xs:element name="slots" type="slot:slotsType" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
 	</xs:complexType>
 </xs:schema>

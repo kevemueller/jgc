@@ -6,6 +6,9 @@ import hu.keve.jgc.dao.Split;
 import hu.keve.jgc.util.Fraction;
 
 public class SplitJDO extends AbstractGuidTypeJDO implements Split {
+	public static final String NAME = "splits";
+	public static final int VERSION = 4;
+	
 	TransactionJDO tx;
 	AccountJDO account;
 

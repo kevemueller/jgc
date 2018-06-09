@@ -2,9 +2,12 @@ package hu.keve.jgc.dao;
 
 import hu.keve.jgc.util.Fraction;
 
-public interface Customer {
-
-	// String getGuid();
+public interface Customer extends GuidType {
+	@Override
+	default String getBusinessKey() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	String getName();
 

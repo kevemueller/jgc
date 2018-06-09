@@ -1,8 +1,12 @@
 package hu.keve.jgc.dao;
 
-public interface Billterm {
-	String getGuid();
+public interface Billterm extends GuidType {
+	@Override
+	default String getBusinessKey() {
+		return getName();
+	}
 
+	/** getters **/
 	String getName();
 
 	String getDescription();

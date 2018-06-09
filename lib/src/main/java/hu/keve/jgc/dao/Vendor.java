@@ -1,6 +1,12 @@
 package hu.keve.jgc.dao;
 
 public interface Vendor extends GuidType {
+	@Override
+	default String getBusinessKey() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 	String getName();
 
 	String getId();

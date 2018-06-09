@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.io.File;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -141,18 +142,25 @@ class TestSimple {
 		File file = path.toFile();
 		assertTrue(file.exists());
 		try (GnuCash gc = Jgc.fromFile(file, true)) {
-			Book book = gc.getBook();
-			System.out.println("Account with slots");
-
 			Account account = gc.getById(Account.class, ID);
-			System.out.println(account.getName());
-			for (Entry<String, Object> aslot : account.getSlots().entrySet()) {
-				System.out.println(aslot.getKey() + "=>" + aslot.getValue());
-			}
+			assertEquals("Assets", account.getName());
+			assertEquals("true", account.getSlotValue("placeholder"));
+			assertEquals(1, account.getSlots().size());
+			Entry<String, Object> slotEntry = account.getSlots().entrySet().iterator().next();
+			assertEquals("placeholder", slotEntry.getKey());
+			assertEquals("true", slotEntry.getValue());
 
-			System.out.println("Slot with slots");
-			Map<String, Object> slots = book.getSlots();
-			System.out.println(slots);
+			Book book = gc.getBook();
+
+			assertTrue(book.getSlotValue("options") instanceof Map);
+			assertEquals(1, book.getSlots().size());
+			slotEntry = book.getSlots().entrySet().iterator().next();
+			assertEquals("options", slotEntry.getKey());
+			Map<String, Object> frame = (Map<String, Object>) slotEntry.getValue();
+			assertEquals(1, frame.size());
+			Entry<String, Object> frameEntry = frame.entrySet().iterator().next();
+			assertEquals("Budgeting", frameEntry.getKey());
+			assertEquals(Collections.emptyMap(), frameEntry.getValue());
 		}
 	}
 }

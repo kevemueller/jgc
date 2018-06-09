@@ -4,6 +4,9 @@ import hu.keve.jgc.dao.Employee;
 import hu.keve.jgc.util.Fraction;
 
 public final class EmployeeJDO extends AbstractGuidTypeJDO implements Employee {
+	public static final String NAME = "employees";
+	public static final int VERSION = 2;
+
 	String username;
 	String id;
 	String language;
