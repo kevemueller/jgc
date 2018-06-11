@@ -2,6 +2,8 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/jdo/jdo" version="3.1">
 
+<!-- Investigate: SQLite picks up embedded column characteristicts if specified on the embedded only, MySQL and PostgreSQL require them to be re-specified. -->
+
 	<package name="hu.keve.jgc.dao.jdo">
 		<class name="AbstractGuidTypeJDO" identity-type="application">
 			<inheritance strategy="complete-table" />
@@ -248,56 +250,56 @@
 			<field name="addr">
 				<embedded>
 					<field name="name">
-						<column name="addr_name" position="11" />
+						<column name="addr_name" length="1024" position="11" />
 					</field>
 					<field name="addr1">
-						<column name="addr_addr1" position="12" />
+						<column name="addr_addr1" length="1024" position="12" />
 					</field>
 					<field name="addr2">
-						<column name="addr_addr2" position="13" />
+						<column name="addr_addr2" length="1024" position="13" />
 					</field>
 					<field name="addr3">
-						<column name="addr_addr3" position="14" />
+						<column name="addr_addr3" length="1024" position="14" />
 					</field>
 					<field name="addr4">
-						<column name="addr_addr4" position="15" />
+						<column name="addr_addr4" length="1024" position="15" />
 					</field>
 					<field name="phone">
-						<column name="addr_phone" position="16" />
+						<column name="addr_phone" length="128" position="16" />
 					</field>
 					<field name="fax">
-						<column name="addr_fax" position="17" />
+						<column name="addr_fax" length="128" position="17" />
 					</field>
 					<field name="email">
-						<column name="addr_email" position="18" />
+						<column name="addr_email" length="256" position="18" />
 					</field>
 				</embedded>
 			</field>
 			<field name="shipaddr">
 				<embedded>
 					<field name="name">
-						<column name="shipaddr_name" position="19" />
+						<column name="shipaddr_name" length="1024" position="19" />
 					</field>
 					<field name="addr1">
-						<column name="shipaddr_addr1" position="20" />
+						<column name="shipaddr_addr1" length="1024" position="20" />
 					</field>
 					<field name="addr2">
-						<column name="shipaddr_addr2" position="21" />
+						<column name="shipaddr_addr2" length="1024" position="21" />
 					</field>
 					<field name="addr3">
-						<column name="shipaddr_addr3" position="22" />
+						<column name="shipaddr_addr3"  length="1024" position="22" />
 					</field>
 					<field name="addr4">
-						<column name="shipaddr_addr4" position="23" />
+						<column name="shipaddr_addr4" length="1024" position="23" />
 					</field>
 					<field name="phone">
-						<column name="shipaddr_phone" position="24" />
+						<column name="shipaddr_phone"  length="128" position="24" />
 					</field>
 					<field name="fax">
-						<column name="shipaddr_fax" position="25" />
+						<column name="shipaddr_fax"  length="128" position="25" />
 					</field>
 					<field name="email">
-						<column name="shipaddr_email" position="26" />
+						<column name="shipaddr_email"  length="256" position="26" />
 					</field>
 				</embedded>
 			</field>
@@ -360,38 +362,36 @@
 			<field name="addr">
 				<embedded>
 					<field name="name">
-						<column name="addr_name" position="12" />
+						<column name="addr_name"  length="1024" position="12" />
 					</field>
 					<field name="addr1">
-						<column name="addr_addr1" position="13" />
+						<column name="addr_addr1"  length="1024" position="13" />
 					</field>
 					<field name="addr2">
-						<column name="addr_addr2" position="14" />
+						<column name="addr_addr2"  length="1024" position="14" />
 					</field>
 					<field name="addr3">
-						<column name="addr_addr3" position="15" />
+						<column name="addr_addr3"  length="1024" position="15" />
 					</field>
 					<field name="addr4">
-						<column name="addr_addr4" position="16" />
+						<column name="addr_addr4"  length="1024" position="16" />
 					</field>
 					<field name="phone">
-						<column name="addr_phone" position="17" />
+						<column name="addr_phone"  length="128" position="17" />
 					</field>
 					<field name="fax">
-						<column name="addr_fax" position="18" />
+						<column name="addr_fax"  length="128" position="18" />
 					</field>
 					<field name="email">
-						<column name="addr_email" position="19" />
+						<column name="addr_email"  length="256" position="19" />
 					</field>
 				</embedded>
 			</field>
 		</class>
 
 		<class name="EntryJDO" table="entries">
-			<field name="date"
-				converter="hu.keve.jgc.util.jdo.GCDateTimeLocalDateTimeConverter">
-				<column jdbc-type="varchar" length="19" allows-null="false"
-					position="1" />
+			<field name="date">
+				<column allows-null="false" position="1" />
 			</field>
 			<field name="dateEntered"
 				converter="hu.keve.jgc.util.jdo.GCDateTimeLocalDateTimeConverter">
@@ -498,7 +498,7 @@
 							position="28" />
 					</field>
 					<field name="guid">
-						<column name="billto_guid" position="29" />
+						<column name="billto_guid" length="32" position="29" />
 					</field>
 				</embedded>
 			</field>
@@ -547,7 +547,7 @@
 						<column name="owner_type" position="7" />
 					</field>
 					<field name="guid">
-						<column name="owner_guid" position="8" />
+						<column name="owner_guid" length="32" position="8" />
 					</field>
 				</embedded>
 			</field>
@@ -574,7 +574,7 @@
 						<column name="billto_type" position="14" />
 					</field>
 					<field name="guid">
-						<column name="billto_guid" position="15" />
+						<column name="billto_guid" length="32" position="15" />
 					</field>
 				</embedded>
 			</field>
@@ -609,7 +609,7 @@
 						<column jdbc-type="INTEGER" name="owner_type" position="5" />
 					</field>
 					<field name="guid">
-						<column name="owner_guid" position="6" />
+						<column name="owner_guid" length="32" position="6" />
 					</field>
 				</embedded>
 			</field>
@@ -653,7 +653,7 @@
 						<column name="owner_type" position="7" />
 					</field>
 					<field name="guid">
-						<column name="owner_guid" position="8" />
+						<column name="owner_guid" length="32" position="8" />
 					</field>
 				</embedded>
 			</field>
@@ -663,6 +663,9 @@
 			<field name="type">
 				<extension vendor-name="datanucleus"
 					key="enum-value-getter" value="toIntValue" />
+			</field>
+			<field name="guid">
+				<column length="32"/>
 			</field>
 		</class>
 
@@ -810,7 +813,7 @@
 		<class name="SlotJDO" table="slots">
 			<inheritance strategy="new-table">
 				<discriminator strategy="value-map">
-					<column name="slot_type" allows-null="false" position="3"/>
+					<column name="slot_type" allows-null="false" position="3" />
 				</discriminator>
 			</inheritance>
 			<datastore-identity strategy="identity">
@@ -823,13 +826,8 @@
 			<field name="name">
 				<column length="4096" allows-null="false" position="2" />
 			</field>
-			<!-- 
-			<field name="slotType">
-				<extension vendor-name="datanucleus"
-					key="enum-value-getter" value="toIntValue" />
-				<column allows-null="false" position="3" />
-			</field>
-			 -->
+			<!-- <field name="slotType"> <extension vendor-name="datanucleus" key="enum-value-getter" 
+				value="toIntValue" /> <column allows-null="false" position="3" /> </field> -->
 		</class>
 		<class name="SlotLongJDO">
 			<inheritance strategy="superclass-table">
@@ -1014,28 +1012,28 @@
 			<field name="addr">
 				<embedded>
 					<field name="name">
-						<column name="addr_name" position="7" />
+						<column name="addr_name"  length="1024" position="7" />
 					</field>
 					<field name="addr1">
-						<column name="addr_addr1" position="8" />
+						<column name="addr_addr1"  length="1024" position="8" />
 					</field>
 					<field name="addr2">
-						<column name="addr_addr2" position="9" />
+						<column name="addr_addr2"  length="1024" position="9" />
 					</field>
 					<field name="addr3">
-						<column name="addr_addr3" position="10" />
+						<column name="addr_addr3"  length="1024" position="10" />
 					</field>
 					<field name="addr4">
-						<column name="addr_addr4" position="11" />
+						<column name="addr_addr4"  length="1024" position="11" />
 					</field>
 					<field name="phone">
-						<column name="addr_phone" position="12" />
+						<column name="addr_phone"  length="128" position="12" />
 					</field>
 					<field name="fax">
-						<column name="addr_fax" position="13" />
+						<column name="addr_fax"  length="128" position="13" />
 					</field>
 					<field name="email">
-						<column name="addr_email" position="14" />
+						<column name="addr_email"  length="256" position="14" />
 					</field>
 				</embedded>
 			</field>

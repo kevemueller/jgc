@@ -7,8 +7,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Currency;
+import java.util.Properties;
 
 import javax.xml.bind.JAXBException;
 
@@ -21,10 +24,19 @@ import hu.keve.jgc.dao.jaxb.AbstractGnuCashJAXB;
 import hu.keve.jgc.dao.jdo.GnuCashJDO;
 
 class TestCreate {
+	static Properties testProperties = new Properties();
+
 	File file;
 
 	@BeforeEach
-	void removeFile() {
+	void loadProps() throws IOException {
+		File propsFile = new File("test.properties");
+		if (propsFile.exists()) {
+			testProperties.load(new FileInputStream(propsFile));
+		}
+	}
+
+	private void removeFile() {
 		file = new File("test.gnucash");
 		if (file.exists()) {
 			file.delete();
@@ -33,12 +45,25 @@ class TestCreate {
 	}
 
 	GnuCash create(GnuCash.Backends mode) throws IOException, JAXBException {
-		assumeTrue(mode.isLocal());
 		switch (mode) {
 		case XML:
+			removeFile();
 			return AbstractGnuCashJAXB.fromFile(file, false, true);
 		case SQLITE:
+			removeFile();
 			return GnuCashJDO.fromFile(file, false, true);
+		case MYSQL:
+		case PGSQL:
+			String host = testProperties.getProperty("host." + mode, testProperties.getProperty("host", "localhost"));
+			String db = testProperties.getProperty("db." + mode, testProperties.getProperty("db"));
+			String username = testProperties.getProperty("user." + mode, testProperties.getProperty("user"));
+			String password = testProperties.getProperty("password." + mode,
+					testProperties.getProperty("password", ""));
+			if (null != db) {
+				return GnuCashJDO.fromDB(mode, host, db, username, password, false, true);
+			}
+			assumeTrue(false, "PostgreSQL not configured.");
+			return null;
 		default:
 			throw new IllegalArgumentException();
 		}
@@ -51,7 +76,9 @@ class TestCreate {
 			Book book = gc.createBook(Currency.getInstance("JPY"));
 			gc.commit();
 		}
-		assertTrue(file.exists());
+		if (mode.isLocal()) {
+			assertTrue(file.exists());
+		}
 	}
 
 	@ParameterizedTest

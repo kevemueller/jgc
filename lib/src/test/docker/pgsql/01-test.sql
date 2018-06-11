@@ -1,0 +1,1 @@
+CREATE TABLE test01 (mycol int);

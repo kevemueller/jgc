@@ -251,16 +251,35 @@ public class GnuCashJDO implements GnuCash {
 		return new GnuCashJDO(file, JDOHelper.getPersistenceManagerFactory(properties, "jgc"), readOnly);
 	}
 
-	public static GnuCash fromPostgreSQL(String host, String db, String username, String password) {
+	public static GnuCash fromDB(Backends backend, String host, String db, String username, String password,
+			boolean readOnly, boolean create) {
 		Properties properties = new Properties();
-		String url = "jdbc:postgresql://" + host + ":5432/" + db;
-		properties.setProperty("javax.jdo.option.ConnectionDriverName", "org.postgresql.Driver");
-		properties.setProperty("javax.jdo.option.Mapping", "postgresql");
+		String url;
+		switch (backend) {
+		case PGSQL:
+			url = "jdbc:postgresql://" + host + ":5432/" + db;
+			properties.setProperty("javax.jdo.option.ConnectionDriverName", "org.postgresql.Driver");
+			properties.setProperty("javax.jdo.option.Mapping", "postgresql");
+			break;
+		case MYSQL:
+			url = "jdbc:mysql://" + host + ":3306/" + db;
+//			properties.setProperty("javax.jdo.option.ConnectionDriverName", "com.mysql.cj.jdbc.Driver");
+			properties.setProperty("javax.jdo.option.Mapping", "mysql");
+//			properties.setProperty("datanucleus.mapping.Catalog", db);
+			break;
+		default:
+			throw new IllegalArgumentException();
+		}
 		properties.setProperty("javax.jdo.option.ConnectionURL", url);
 		properties.setProperty("javax.jdo.option.ConnectionUserName", username);
 		properties.setProperty("javax.jdo.option.ConnectionPassword", password);
-		properties.setProperty("datanucleus.readOnlyDatastore", "true");
-		return new GnuCashJDO(null, JDOHelper.getPersistenceManagerFactory(properties, "jgc"), true);
+		if (readOnly) {
+			properties.setProperty("datanucleus.readOnlyDatastore", "true");
+		}
+		if (create) {
+			properties.setProperty("datanucleus.generateSchema.database.mode", "drop-and-create");
+		}
+		return new GnuCashJDO(null, JDOHelper.getPersistenceManagerFactory(properties, "jgc"), readOnly);
 	}
 
 	public static GnuCash fromMySQL(String host, String db, String username, String password) {

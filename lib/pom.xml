@@ -23,7 +23,12 @@
 		<jvnet_jaxb2_annotate.version>
 			1.1.0
 		</jvnet_jaxb2_annotate.version>
+		<postgresql.version>42.2.2</postgresql.version>
+		<mysql-connector-java.version>5.1.46</mysql-connector-java.version>
+		<!-- <mysql-connector-java.version>8.0.11</mysql-connector-java.version> -->
 		<nv-i18n.version>1.23</nv-i18n.version>
+		<docker-maven-plugin.version>0.26.0</docker-maven-plugin.version>
+		<maven-failsafe-plugin.version>2.21.0</maven-failsafe-plugin.version>
 	</properties>
 
 	<build>
@@ -106,6 +111,100 @@
 					</dependency>
 				</dependencies>
 			</plugin>
+
+			<plugin>
+				<groupId>io.fabric8</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<version>${docker-maven-plugin.version}</version>
+				<executions>
+					<execution>
+						<id>prepare-it-database</id>
+						<phase>pre-integration-test</phase>
+						<goals>
+							<goal>build</goal>
+							<goal>start</goal>
+						</goals>
+						<configuration>
+							<verbose>true</verbose>
+							<images>
+								<image>
+									<name>%g/pgsql:0.1</name>
+									<alias>it-pgsql</alias>
+									<build>
+										<dockerFileDir>${project.basedir}/src/test/docker/pgsql</dockerFileDir>
+										<assembly>
+											<mode>dir</mode>
+											<inline
+												xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+												xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2"
+												xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2 http://maven.apache.org/xsd/assembly-1.1.2.xsd">
+												<id>pgsql-sql</id>
+												<fileSets>
+													<fileSet>
+														<directory>${project.basedir}/src/test/resources</directory>
+														<outputDirectory>.</outputDirectory>
+														<includes>
+															<include>*pgsql*.sql</include>
+														</includes>
+													</fileSet>
+												</fileSets>
+											</inline>
+										</assembly>
+									</build>
+									<run>
+										<ports>
+											<port>it-pgsql.port:5432</port>
+										</ports>
+										<wait>
+											<log>database system is ready to accept connections</log>
+											<time>20000</time>
+										</wait>
+									</run>
+								</image>
+								<!-- <image> <name>mysql:8</name> <alias>it-mysql</alias> <run> <env> 
+									<MYSQL_ROOT_PASSWORD>mysql%root</MYSQL_ROOT_PASSWORD> </env> <ports> <port>it-mysql.port:3306</port> 
+									</ports> <wait> <log>mysqld: ready for connections.</log> <time>20000</time> 
+									</wait> </run> </image> -->
+							</images>
+						</configuration>
+					</execution>
+					<execution>
+						<id>remove-it-database</id>
+						<phase>post-integration-test</phase>
+						<goals>
+							<goal>stop</goal>
+							<goal>remove</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-failsafe-plugin</artifactId>
+				<version>${maven-failsafe-plugin.version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>integration-test</goal>
+							<goal>verify</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<environmentVariables>
+						<it-pgsql.port>${it-pgsql.port}</it-pgsql.port>
+						<it-mysql.port>${it-mysql.port}</it-mysql.port>
+					</environmentVariables>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>org.junit.platform</groupId>
+						<artifactId>junit-platform-surefire-provider</artifactId>
+						<version>${junit-platform-surefire-provider.version}</version>
+					</dependency>
+				</dependencies>
+			</plugin>
 		</plugins>
 	</build>
 	<dependencies>
@@ -114,7 +213,6 @@
 			<artifactId>jgc-util</artifactId>
 			<version>${jgc.version}</version>
 		</dependency>
-
 
 		<dependency>
 			<groupId>org.jvnet.jaxb2_commons</groupId>
@@ -180,7 +278,13 @@
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
-			<version>42.2.2</version>
+			<version>${postgresql.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>${mysql-connector-java.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.neovisionaries</groupId>

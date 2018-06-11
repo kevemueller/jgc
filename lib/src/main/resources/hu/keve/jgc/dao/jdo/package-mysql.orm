@@ -6,15 +6,7 @@
 
 	<package name="hu.keve.jgc.dao.jdo">
 
-		<!-- place for SQLite customizations -->
-
-		<class name="EntryJDO" table="entries">
-			<field name="date"
-				converter="hu.keve.jgc.util.jdo.GCDateTimeLocalDateTimeConverter">
-				<column jdbc-type="varchar" length="19" allows-null="false"
-					position="1" />
-			</field>
-		</class>
+		<!-- place for MySQL customizations -->
 
 	</package>
 

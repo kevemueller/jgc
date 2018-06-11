@@ -6,7 +6,17 @@
 
 	<package name="hu.keve.jgc.dao.jdo">
 
-<!-- place for PostgreSQL customizations -->
+		<!-- place for PostgreSQL customizations -->
+
+		<!-- PostgreSQL supports native boolean JDO maps by default to this, there 
+			is JDO glue for a mapping to SMALLINT, but GC defines the column as INT -->
+
+		<class name="EntryJDO" table="entries">
+			<field name="date">
+				<column sql-type="TIMESTAMP" allows-null="false" position="1" />
+			</field>
+		</class>
+
 
 	</package>
 
